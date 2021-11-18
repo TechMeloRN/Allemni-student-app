@@ -90,10 +90,22 @@ const index = ({ navigation, route }) => {
 
 
                 <ScrollView >
+                    {/* Image Slider */}
                     <View style={styles.sliderView}>
                         <Image style={{ height: '100%', width: '100%', borderRadius: 15 }} source={homeSliderPic1} />
                     </View>
+                    
+                    <Text style={styles.contentText}> نوع التعلیم </Text>
+                    <View style={styles.eduTypesView}>
+                    <View style={styles.eduTypesBtn}>
+                        <Text style={{color:COLORS.white}}> عن بعد </Text>
+                    </View>
 
+                    <View style={styles.eduTypesBtn}>
+                        <Text style={{color:COLORS.white}}> حضوری </Text>
+                    </View>
+
+                    </View>
                 </ScrollView>
             </View>
 
@@ -210,7 +222,30 @@ const styles = StyleSheet.create({
         width: '94%', alignSelf: 'center', marginTop: hp(2), 
         borderRadius: 15
     },
-    
+    contentText:{
+        color:COLORS.black,
+        height:Platform.OS==='ios'?hp(5):hp(4),
+        width:'98%',
+        textAlign:'right',
+        marginTop:hp(1),
+        fontSize:15
+    },
+    eduTypesView:{
+       // backgroundColor:'grey',
+        height:hp(7),
+        alignItems:'center',
+        justifyContent:'space-evenly',
+        flexDirection:'row'
+    },
+    eduTypesBtn:{
+        height:'100%',
+        width:'45%',
+        backgroundColor:COLORS.purple,
+        borderRadius:25,
+        justifyContent:'center',
+        alignItems:'center',
+        elevation:10
+    },
     bottomTabView: {
         backgroundColor: COLORS.white,
         height: hp(8),
