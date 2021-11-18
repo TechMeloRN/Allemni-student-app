@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "903419903540",
+    "firebase_url": "https://allemniapp-fd6f8-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "allemniapp-fd6f8",
+    "storage_bucket": "allemniapp-fd6f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903419903540:android:39141a6539f92f90025461",
+        "android_client_info": {
+          "package_name": "com.allemniapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903419903540-calocoleg8a00t6iqj4oqevpgqvuh5pv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.allemniapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "903419903540-ufvq0qnn6bfknshgl5gt81spv7uvpep0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgeJgSz-vKvkFhoX8PPChHFr5p9WgCKoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903419903540-ufvq0qnn6bfknshgl5gt81spv7uvpep0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903419903540-88e1h3jhi82r03o2b0lbkpund8b6ohf9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.AllemniApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
