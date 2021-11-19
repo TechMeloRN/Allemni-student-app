@@ -31,7 +31,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SplashScreen">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomeScreen">
         
         <Stack.Screen name="SplashScreen"  component={SplashScreen} />
         <Stack.Screen name="NewInitialScreen"  component={NewInitialScreen} />
