@@ -32,7 +32,6 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomeScreen">
-        
         <Stack.Screen name="SplashScreen"  component={SplashScreen} />
         <Stack.Screen name="NewInitialScreen"  component={NewInitialScreen} />
         <Stack.Screen name="NewLoginScreen"  component={NewLoginScreen} />
@@ -47,7 +46,6 @@ function App() {
         
         {/* Phase III */}
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-
 
         <Stack.Screen name="HomeScreen_Test" component={HomeScreen_Test} />
         <Stack.Screen name="Profile_Test" component={Profile_Test} />
