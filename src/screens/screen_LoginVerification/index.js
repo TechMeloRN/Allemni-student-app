@@ -66,8 +66,8 @@ const index = ({ navigation,route }) => {
         }
     }
     const SignUp = () => {
-        var crypto = '';
-        var val = crypto.randomBytes(5).toString("hex") + "@gamil.com";
+       // var crypto = '';
+        var val = fname+lname+ Math.floor(Math.random()*99999*3)+1 + "@gamil.com";
         
 
         setloaded(true)

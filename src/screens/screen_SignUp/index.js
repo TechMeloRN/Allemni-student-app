@@ -82,7 +82,7 @@ const index = ({ navigation }) => {
                 })
                 
         } else {
-            alert('Invalid Phone Number')
+            alert('Invalid Phone Number \n'+'Phone number must include country code.')
         }
    
 
@@ -193,7 +193,7 @@ const index = ({ navigation }) => {
                     </View>
 
                     <TextInput
-                        placeholder='  رقم الجوال لکی یتم التحقق'
+                        placeholder='  رقم الجوال '
                         placeholderTextColor='#fff'
                         style={styles.emailInputText}
                         onChangeText={(val) => setphoneNo(val)}

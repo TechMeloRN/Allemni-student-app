@@ -37,9 +37,11 @@ import twitterIcon from '../../assets/Images/icons/twitterIcon.png'
 const index = ({ navigation }) => {
 
     const [hide, sethide] = useState(true);
-    const [email, setemail] = useState('Muhammadsabit@gmail.com');
+    const [email, setemail] = useState('Allemni1030591@gamil.com');
     const [password, setPassword] = useState('112233');
     const [loaded, setloaded] = useState(false);
+
+    const [phoneNo, setphoneNo] = useState('+923463804151')
 
 
 
@@ -123,6 +125,16 @@ const index = ({ navigation }) => {
                             value={password}
                         />
                     </View>
+
+                    {/* Login with PhoneNo verification */}
+
+                    {/* <TextInput
+                        placeholder='  رقم الجوال '
+                        placeholderTextColor='#fff'
+                        style={styles.emailInputText}
+                        onChangeText={(val) => setphoneNo(val)}
+                        value={phoneNo}
+                    /> */}
 
                     <Pressable onPress={() => alert('نسیت کلمة المرور')} style={styles.forgetPasswordBtn}>
                         <Text style={[styles.btnText]}> نسیت کلمة المرور؟ </Text>

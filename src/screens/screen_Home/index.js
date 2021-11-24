@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import {
     StyleSheet,
@@ -14,7 +13,6 @@ import {
     Platform,
     FlatList,
     Modal,
-
 } from 'react-native';
 
 import {
@@ -64,21 +62,51 @@ import { TextInput } from 'react-native-gesture-handler';
 const index = ({ navigation, route }) => {
 
     const [orientation, setorientation] = useState('');
-    
+
     //EducationTypes
-    const [onSite,setonSite] = useState('radio-button-checked');
+    const [onSite, setonSite] = useState('radio-button-checked');
     const [online, setonline] = useState('radio-button-unchecked');
     const [eduType, seteduType] = useState('onSite');
 
     //Education Stages
-
-    const [course,setcourse] = useState(courseFalseIcon);
+    const [course, setcourse] = useState(courseFalseIcon);
     const [university, setuniversity] = useState(universityFalseIcon);
     const [general, setgeneral] = useState(generalTrueIcon);
     const [eduStage, seteduStage] = useState('general');
-    const [subjectOptionModal,setsubjectOptionModal] =useState(false)
- 
+    const [subjectOptionModal, setsubjectOptionModal] = useState(false)
+    const [selectedSubject, setselectedSubject] = useState('المادة')
 
+    const [subjects, setsubjects] = useState([
+        {
+            id: 1,
+            Title: 'Introduction to Computer'
+        },
+        {
+            id: 2,
+            Title: 'System Programing'
+        },
+        {
+            id: 3,
+            Title: 'Virtual Programing'
+        },
+        {
+            id: 4,
+            Title: 'Programing Fundamental'
+        },
+        {
+            id: 5,
+            Title: 'Object oriented Programing'
+        },
+        {
+            id: 6,
+            Title: 'Modren Programing Language'
+        }, 
+        {
+            id: 7,
+            Title: 'Software Engneering'
+        }
+
+    ])
     const [teacherData, setteacherData] = useState([{
         id: 1,
         name: 'عبید عبداللہ المدوانی',
@@ -91,14 +119,14 @@ const index = ({ navigation, route }) => {
         name: 'رشاد محمود الحلوانی',
         image: teacherIcon,
         status: 'مقتش عام',
-        stars: 3
+        stars: 3.5
     },
     {
         id: 3,
         name: 'عبید عبداللہ المدوانی',
         image: teacherIcon,
         status: 'مدرس ابتدائی',
-        stars: 2
+        stars: 2.5
     },
     {
         id: 4,
@@ -127,34 +155,37 @@ const index = ({ navigation, route }) => {
             seteduType('onSite')
             setonline('radio-button-unchecked')
             setonSite('radio-button-checked')
-           // console.log("onSite");
+            // console.log("onSite");
         }
     }
 
-  //EducationType Handling 
-  const checkEduStage = (check) => {
-    if (check === 'course') {
-        //console.log("online");
-        seteduStage('course')
-        setcourse(courseTrueIcon)
-        setuniversity(universityFalseIcon)
-        setgeneral(generalFalseIcon)
+    const ratingStars =(stars)=>{
+        // Stars code
     }
-    else if (check === 'university') {
-        //console.log("online");
-        seteduStage('university')
-        setcourse(courseFalseIcon)
-        setuniversity(universityTrueIcon)
-        setgeneral(generalFalseIcon)
+
+    //EducationType Handling 
+    const checkEduStage = (check) => {
+        if (check === 'course') {
+            //console.log("online");
+            seteduStage('course')
+            setcourse(courseTrueIcon)
+            setuniversity(universityFalseIcon)
+            setgeneral(generalFalseIcon)
+        }
+        else if (check === 'university') {
+            //console.log("online");
+            seteduStage('university')
+            setcourse(courseFalseIcon)
+            setuniversity(universityTrueIcon)
+            setgeneral(generalFalseIcon)
+        }
+        else {
+            seteduStage('general')
+            setcourse(courseFalseIcon)
+            setuniversity(universityFalseIcon)
+            setgeneral(generalTrueIcon)
+        }
     }
-    else
-    {
-        seteduStage('general')
-        setcourse(courseFalseIcon)
-        setuniversity(universityFalseIcon)
-        setgeneral(generalTrueIcon)
-    }
-}
 
     //Screen Orientation 
     const getOrientation = () => {
@@ -167,24 +198,41 @@ const index = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
-         {/* ////////////////////////////////////////////
-    ///////// QR-Code Model ////////////////
+
+    {/* ////////////////////////////////////////////
+    ///////// Subjects List Model ////////////////
     //////////////////////////////////////////// */}
-    <Modal
-          transparent={true}
-          visible={subjectOptionModal}
+            <Modal
+                transparent={true}
+                visible={subjectOptionModal}
+            >
+                <View style={styles.mainModelView}>
+                    <View style={styles.modalItemContainer}>
+                        <Pressable
+                            onPress={() => setsubjectOptionModal(false)}
+                            style={styles.modalCancelBtn}>
+                            <Text style={{ color: COLORS.white }}> إلغاء </Text>
+                        </Pressable>
+                        <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
+                            <FlatList
+                                data={subjects}
+                                renderItem={({ item, index }) => (
+                                    <Pressable
+                                        onPress={() => {
+                                            setselectedSubject(item.Title)
+                                            setsubjectOptionModal(false)
+                                        }}
+                                        style={styles.subjectsListBtn}>
+                                        <Text style={styles.subjectsListText}>{item.Title}</Text>
+                                    </Pressable>
 
-        >
-          <View style={styles.mainModelView}>
-            <View style={[styles.modalItemContainer, { justifyContent: 'space-evenly', alignItems: 'center' }]}>
-
-              
-            <Text> Hello </Text>
-
-              
-            </View>
-          </View>
-        </Modal>
+                                )}
+                                keyExtractor={(item) => item.id}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
 
 
             <StatusBar barStyle={'light-content'} backgroundColor={COLORS.purple} />
@@ -227,17 +275,17 @@ const index = ({ navigation, route }) => {
 
 
                     <View style={styles.eduTypesView}>
-                        <Pressable onPress={()=>checkEduType('online')} style={[styles.eduTypesBtn, { backgroundColor:eduType=='online'? COLORS.purple :COLORS.white }]}>
-                            <CheckBox name={online} size={hp(3)} color={eduType=='online'? COLORS.white :COLORS.purple} />
-                            <Text style={[styles.eduTypeText,{color:eduType=='online'? COLORS.white :COLORS.black}]}> عن بعد </Text>
-                            <ScreenIcon name='screen-desktop' size={hp(3)} color={eduType=='online'? COLORS.white :COLORS.purple} />
+                        <Pressable onPress={() => checkEduType('online')} style={[styles.eduTypesBtn, { backgroundColor: eduType == 'online' ? COLORS.purple : COLORS.white }]}>
+                            <CheckBox name={online} size={hp(3)} color={eduType == 'online' ? COLORS.white : COLORS.purple} />
+                            <Text style={[styles.eduTypeText, { color: eduType == 'online' ? COLORS.white : COLORS.black }]}> عن بعد </Text>
+                            <ScreenIcon name='screen-desktop' size={hp(3)} color={eduType == 'online' ? COLORS.white : COLORS.purple} />
                         </Pressable>
 
-                        <Pressable onPress={()=>checkEduType('onSite')} style={[styles.eduTypesBtn, { backgroundColor: eduType=='onSite'? COLORS.purple :COLORS.white  }]}>
-                            <CheckBox name={onSite} size={hp(3)} color={eduType=='onSite'? COLORS.white :COLORS.purple} />
-                            <Text style={[styles.eduTypeText, { color: eduType=='onSite'? COLORS.white :COLORS.black }]}> حضوری </Text>
+                        <Pressable onPress={() => checkEduType('onSite')} style={[styles.eduTypesBtn, { backgroundColor: eduType == 'onSite' ? COLORS.purple : COLORS.white }]}>
+                            <CheckBox name={onSite} size={hp(3)} color={eduType == 'onSite' ? COLORS.white : COLORS.purple} />
+                            <Text style={[styles.eduTypeText, { color: eduType == 'onSite' ? COLORS.white : COLORS.black }]}> حضوری </Text>
                             <View style={{ height: hp(3), width: wp(6) }}>
-                                <Image style={{ height: '100%', width: '100%' }} source={eduType=='onSite'?onSiteFalse:onSiteTrue} />
+                                <Image style={{ height: '100%', width: '100%' }} source={eduType == 'onSite' ? onSiteFalse : onSiteTrue} />
                             </View>
 
                         </Pressable>
@@ -249,56 +297,56 @@ const index = ({ navigation, route }) => {
                     </View>
 
                     <View style={styles.eduStagesView}>
-                        <Pressable onPress={()=>checkEduStage('course')} style={[styles.eduStagesBtn, { backgroundColor:eduStage=='course'? COLORS.purple :COLORS.white }]}>
+                        <Pressable onPress={() => checkEduStage('course')} style={[styles.eduStagesBtn, { backgroundColor: eduStage == 'course' ? COLORS.purple : COLORS.white }]}>
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={course} />
                             </View>
-                            <Text style={{ color:eduStage=='course'?COLORS.white: COLORS.black }}> دورات </Text>
+                            <Text style={{ color: eduStage == 'course' ? COLORS.white : COLORS.black }}> دورات </Text>
 
-                            {eduStage=='course'&&
-                            <View style={styles.eduStagesCheckBtn}>
-                                <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
-                            </View>
+                            {eduStage == 'course' &&
+                                <View style={styles.eduStagesCheckBtn}>
+                                    <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
+                                </View>
                             }
                         </Pressable>
 
-                        <Pressable onPress={()=>checkEduStage('university')} style={[styles.eduStagesBtn, {  backgroundColor:eduStage=='university'? COLORS.purple :COLORS.white }]}>
+                        <Pressable onPress={() => checkEduStage('university')} style={[styles.eduStagesBtn, { backgroundColor: eduStage == 'university' ? COLORS.purple : COLORS.white }]}>
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={university} />
                             </View>
-                            <Text style={{ color:eduStage=='university'?COLORS.white: COLORS.black  }}> جامعی </Text>
+                            <Text style={{ color: eduStage == 'university' ? COLORS.white : COLORS.black }}> جامعی </Text>
 
-                            {eduStage=='university'&&
-                            <View style={styles.eduStagesCheckBtn}>
-                                <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
-                            </View>
+                            {eduStage == 'university' &&
+                                <View style={styles.eduStagesCheckBtn}>
+                                    <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
+                                </View>
                             }
                         </Pressable>
 
-                        <Pressable onPress={()=>checkEduStage('general')} style={[styles.eduStagesBtn,{backgroundColor:eduStage=='general'? COLORS.purple :COLORS.white}]}>
+                        <Pressable onPress={() => checkEduStage('general')} style={[styles.eduStagesBtn, { backgroundColor: eduStage == 'general' ? COLORS.purple : COLORS.white }]}>
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={general} />
                             </View>
-                            <Text style={{ color:eduStage=='general'?COLORS.white: COLORS.black }}> عام </Text>
-                            {eduStage=='general'&&
-                            <View style={styles.eduStagesCheckBtn}>
-                                <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
-                            </View>
+                            <Text style={{ color: eduStage == 'general' ? COLORS.white : COLORS.black }}> عام </Text>
+                            {eduStage == 'general' &&
+                                <View style={styles.eduStagesCheckBtn}>
+                                    <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
+                                </View>
                             }
                         </Pressable>
                     </View>
 
                     <View style={styles.locationMainView}>
-                        <Pressable onPress={()=>alert("الموقع")} style={[styles.locationBtn]}>
+                        <Pressable onPress={() => alert("الموقع")} style={[styles.locationBtn]}>
                             <View style={{ height: Platform.OS === 'android' ? hp(2.2) : hp(2.1), width: wp(3) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={locationIcon} />
                             </View>
                             <Text style={{ color: COLORS.black, width: '55%', textAlign: 'right' }}> الموقع </Text>
                         </Pressable>
 
-                        <Pressable onPress={()=>setsubjectOptionModal(true)} style={styles.locationBtn}>
+                        <Pressable onPress={() => setsubjectOptionModal(true)} style={styles.locationBtn}>
                             <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.purple} />
-                            <Text style={{ color: COLORS.black, width: '55%', textAlign: 'right' }}> المادة </Text>
+                            <Text style={{ color: COLORS.black, width: '55%', textAlign: 'right' }}> {selectedSubject} </Text>
                         </Pressable>
 
                     </View>
@@ -319,29 +367,29 @@ const index = ({ navigation, route }) => {
                             horizontal={true}
                             renderItem={({ item, index }) => (
                                 <View style={styles.teacherInfoSubView}>
-                                    <View style={{ height: hp(7), width: wp(14)}}>
+                                    <View style={{ height: hp(7), width: wp(14) }}>
                                         <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
                                     </View>
                                     <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.name}</Text>
 
-                                    <View style={{flexDirection:'row'}}>
-                                        <View style={{ height: hp(3), width: wp(6),marginRight:wp(-1)  }}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
                                             <MaterialCommunity name='star' size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
-                                        <View style={{ height: hp(3), width: wp(6),marginRight:wp(-1)  }}>
+                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
                                             <MaterialCommunity name='star' size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
-                                        <View style={{ height: hp(3), width: wp(6),marginRight:wp(-1)  }}>
+                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
                                             <MaterialCommunity name='star-half-full' size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
-                                        <View style={{ height: hp(3), width: wp(6),marginRight:wp(-1)  }}>
+                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             {/* <Image style={{ height: '100%', width: '100%' }} source={halfStarIcon} /> */}
                                             <MaterialCommunity name='star-outline' size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
-                                        <View style={{ height: hp(3), width: wp(6),marginRight:wp(-1)  }}>
+                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             {/* <Image style={{ height: '100%', width: '100%' }} source={starFalseIcon} /> */}
                                             <MaterialCommunity name='star-outline' size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
@@ -567,6 +615,7 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.white,
         backgroundColor: COLORS.white,
         borderRadius: 20,
+       
         position: 'absolute',
         top: hp(11.5)
     },
@@ -603,8 +652,8 @@ const styles = StyleSheet.create({
     },
     teacherInfoSubView: {
         backgroundColor: 'white',
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: hp(18),
         width: wp(31),
         marginTop: hp(2),
@@ -620,6 +669,50 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 9.62,
     },
+    mainModelView: {
+        flex: 1,
+        width: wp(100),
+        height: hp(100),
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+
+
+    },
+    modalItemContainer: {
+        width: wp(100),
+        height: hp(40),
+        backgroundColor: COLORS.ashewhite,
+        borderTopLeftRadius:50,
+        borderTopRightRadius:50,
+        paddingVertical: 15,
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
+    modalCancelBtn: {
+        height: hp(5),
+        width: '40%',
+        backgroundColor: COLORS.purple,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10
+    },
+    subjectsListBtn: {
+        width: '70%',
+        height: hp(5),
+        borderBottomWidth: 1,
+        borderColor: COLORS.lightgrey,
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    subjectsListText: {
+        color: COLORS.black,
+        textAlign: 'center',
+
+    },
+
+
+
     bottomTabView: {
         backgroundColor: COLORS.white,
         height: hp(8),
