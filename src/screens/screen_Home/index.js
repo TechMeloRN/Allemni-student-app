@@ -214,7 +214,7 @@ const index = ({ navigation, route }) => {
                         <Pressable
                             onPress={() => setsubjectOptionModal(false)}
                             style={styles.modalCancelBtn}>
-                            <Text style={{ color: COLORS.white }}> إلغاء </Text>
+                            <Text style={{ color: COLORS.purple }}> إلغاء </Text>
                         </Pressable>
                         <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
                             <FlatList
@@ -690,10 +690,18 @@ const styles = StyleSheet.create({
     modalCancelBtn: {
         height: hp(5),
         width: '40%',
-        backgroundColor: COLORS.purple,
+        backgroundColor: COLORS.white,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 20,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 2.62,
     },
     subjectsListBtn: {
         width: '70%',

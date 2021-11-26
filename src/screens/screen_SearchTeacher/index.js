@@ -10,7 +10,8 @@ import {
     ImageBackground,
     Platform,
     Image,
-    Dimensions
+    Dimensions,
+    Modal
 } from 'react-native';
 import Axios from 'react-native-axios'
 import {
@@ -41,7 +42,33 @@ const index = ({ navigation, route }) => {
 
     const [orientation, setorientation] = useState('');
     const [chkDetail, setchkDetail] = useState(false);
+    const [orderByModal,setorderByModal] = useState(false)
+    const [selectedId, setselectedId] = useState(null);
+    const [selectedOrder, setselectedOrder] = useState('ترتیب حسب')
+    const [rating, setrating] = useState('0')
 
+
+
+    const [orderBy, setorderBy] = useState([
+        {
+            id: 1,
+            Title: 'Name'
+        },
+        {
+            id: 2,
+            Title: 'Course Rate'
+        },
+        {
+            id: 3,
+            Title: 'Rating'
+        },
+        {
+            id: 4,
+            Title: 'Status'
+        },
+        
+
+    ])
     const [teacherData, setteacherData] = useState([
         {
             id: 1,
@@ -105,6 +132,41 @@ const index = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
+         {/* ////////////////////////////////////////////
+    ///////// OrderBy Model ////////////////
+    //////////////////////////////////////////// */}
+
+    <Modal
+                transparent={true}
+                visible={orderByModal}
+            >
+                <View style={styles.mainModelView}>
+                    <View style={styles.modalItemContainer}>
+                        <Pressable
+                            onPress={() => setorderByModal(false)}
+                            style={styles.modalCancelBtn}>
+                            <Text style={{ color: COLORS.purple }}> إلغاء </Text>
+                        </Pressable>
+                        <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
+                            <FlatList
+                                data={orderBy}
+                                renderItem={({ item, index }) => (
+                                    <Pressable
+                                        onPress={() => {
+                                            setselectedOrder(item.Title)
+                                            setorderByModal(false)
+                                        }}
+                                        style={styles.orderByListBtn}>
+                                        <Text style={styles.orderByListText}>{item.Title}</Text>
+                                    </Pressable>
+                                )}
+                                keyExtractor={(item) => item.id}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
             <StatusBar barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'} backgroundColor={COLORS.purple} />
 
             {/* Header code*/}
@@ -129,83 +191,79 @@ const index = ({ navigation, route }) => {
             <View style={styles.mainContent}>
 
                 <View style={styles.headingView}>
-                    <View style={styles.orderByView}>
+                    <Pressable onPress={()=>setorderByModal(true)} style={styles.orderByView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.purple} />
-                        <Text style={{ color: COLORS.purple }}> ترتیب حسب </Text>
-                    </View>
+                        <Text style={{ color: COLORS.purple }}> {selectedOrder} </Text>
+                    </Pressable>
                     <Text style={{ color: COLORS.purple }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
                 </View>
 
+                {/* Teacher detail */}
                 <View style={{ flex: 1 }}>
-
-
                     <FlatList
                         data={teacherData}
-                        //  horizontal={true}
                         renderItem={({ item, index }) => (
-                            <View style={styles.teacherInfoSubView}>
-                                <View style={{ height: hp(15), width: '95%', flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: COLORS.ashewhite }}>
-                                    <View style={{ width: '30%', borderTopLeftRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
-                                        <View style={{ height: hp(4.8), width: '80%', justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.ashewhite, borderRadius: 20 }}>
+                            <View style={styles.teacherInfoView}>
+                                <View style={styles.teacherInfoSubView}>
+                                    <View style={styles.courseRateView}>
+                                        <View style={styles.courseRateSubView}>
                                             <Text style={{ color: COLORS.purple }}> {item.courseRate + " " + "ر۔س"}</Text>
                                         </View>
                                     </View>
-                                    <View style={{ width: '40%', justifyContent: 'center', alignItems: 'flex-end' }}>
-                                        <Text style={{ color: COLORS.black, textAlign: 'center', marginRight: wp(4) }}>{item.name}</Text>
+                                    <View style={styles.teacherBasicInfo}>
+                                        <Text style={styles.teacherNameText}>{item.name}</Text>
 
                                         <Pressable onPress={() => ratingStar(item.stars)} style={{ flexDirection: 'row', marginRight: wp(4) }}>
-                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                            <View style={styles.starsView}>
                                                 <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
-                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                            <View style={styles.starsView}>
                                                 <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
-                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                            <View style={styles.starsView}>
                                                 <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
-                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                            <View style={styles.starsView}>
                                                 <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
-                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                            <View style={styles.starsView}>
                                                 <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
                                         </Pressable>
-                                        <Text style={{ color: COLORS.purple, textAlign: 'center', marginRight: wp(4) }}>{item.status}</Text>
+                                        <Text style={[styles.teacherNameText,{ color: COLORS.purple}]}>{item.status}</Text>
                                     </View>
-                                    <View style={{ width: '30%', borderTopRightRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View style={styles.teacherImageView}>
                                         <View style={{ height: hp(12), width: wp(24) }}>
                                             <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
                                         </View>
                                     </View>
                                 </View>
-                                {!chkDetail ?
-                                    <Pressable onPress={() => setchkDetail(true)} style={styles.moreDetailView}>
+                                {selectedId!== item.id ?
+                                    <Pressable 
+                                        onPress={() => {
+                                            setchkDetail(true)
+                                            setselectedId(item.id)
+                                            }}
+                                        style={styles.moreDetailView}>
                                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
                                         <Text style={{ color: COLORS.white }}> تفاصیل </Text>
                                     </Pressable>
                                     :
-                                    <View style={{
-                                        height: hp(10),
-                                        width: '90%',
-                                       // backgroundColor: COLORS.purple,
-                                        borderBottomLeftRadius: 20,
-                                        borderBottomRightRadius: 20,
-                                        justifyContent: 'center',
-                                        alignItems:'flex-end',
-                                        //flexDirection: 'row'
-                                    }}>
-                                        <Text style={{textAlign:'right'}}> {item.detail} </Text>
+                                    <View style={styles.teacherDetailView}>
+                                        <Text style={styles.teacherDetailText}> {item.detail} </Text>
+                                        <Material 
+                                            name='keyboard-arrow-up'
+                                            onPress={()=>setselectedId(null)} 
+                                            size={hp(3)} 
+                                            color={COLORS.purple} 
+                                            style={{alignSelf:'center'}} />
                                     </View>}
                             </View>
-
                         )}
                         keyExtractor={(item) => item.id}
+                        extraData={selectedId}
                     />
-
-
                 </View>
-
-
             </View>
 
             <View style={styles.bottomTabView}>
@@ -238,10 +296,6 @@ const index = ({ navigation, route }) => {
                     <Text style={{ color: COLORS.black }}>الرئیسیة </Text>
                 </Pressable>
             </View>
-
-
-
-
         </SafeAreaView>
     )
 }
@@ -249,7 +303,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: COLORS.ashewhite
-
     },
     headerView: {
         width: '100%',
@@ -266,7 +319,6 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         flex: 1,
-        // alignItems: 'center'
 
     },
     headingView: {
@@ -289,13 +341,11 @@ const styles = StyleSheet.create({
     },
 
 
-    teacherInfoSubView: {
+    teacherInfoView: {
         backgroundColor: 'white',
-        // flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        // height: hp(18),
         width: '95%',
         marginTop: hp(1),
         marginLeft: wp(1),
@@ -310,7 +360,60 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 9.62,
     },
-
+    teacherInfoSubView:{ 
+        height: hp(15), 
+        width: '95%', 
+        flexDirection: 'row', 
+        borderBottomWidth: 1, 
+        borderBottomColor: COLORS.ashewhite 
+    },
+    courseRateView:{ 
+        width: '30%', 
+        borderTopLeftRadius: 20, 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    courseRateSubView:{ 
+        height: hp(4.8), 
+        width: '80%', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        backgroundColor: COLORS.ashewhite, 
+        borderRadius: 20 
+    },
+    teacherBasicInfo:{ 
+        width: '40%', 
+        justifyContent: 'center', 
+        alignItems: 'flex-end' 
+    },
+    teacherNameText:{ 
+        color: COLORS.black, 
+        textAlign: 'center', 
+        marginRight: wp(4) 
+    },
+    starsView:{ 
+        height: hp(3), 
+        width: wp(6), 
+        marginRight: wp(-1) 
+    },
+    teacherImageView:{
+        width: '30%', 
+        borderTopRightRadius: 20, 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    teacherDetailView:{
+        height: hp(10),
+        width: '90%',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        alignItems:'flex-end',
+    },
+    teacherDetailText:{
+        textAlign:'right',
+        color:COLORS.black
+    },
     backButtonView: {
         height: hp(10),
         marginTop: Platform.OS === 'ios' ? hp(4) : hp(2)
@@ -335,6 +438,56 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
+    mainModelView: {
+        flex: 1,
+        width: wp(100),
+        height: hp(100),
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+
+
+    },
+    modalItemContainer: {
+        width: wp(100),
+        height: hp(31),
+        backgroundColor: COLORS.ashewhite,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        paddingVertical: 15,
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
+    modalCancelBtn: {
+        height: hp(5),
+        width: '40%',
+        backgroundColor: COLORS.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 2.62,
+    },
+    orderByListBtn: {
+        width: '70%',
+        height: hp(5),
+        borderBottomWidth: 1,
+        borderColor: COLORS.lightgrey,
+        justifyContent: 'center',
+        alignSelf: 'center'
+    },
+    orderByListText: {
+        color: COLORS.black,
+        textAlign: 'center',
+
+    },
+
     bottomTabView: {
         backgroundColor: COLORS.white,
         height: Platform.OS === 'ios' ? hp(9) : hp(8),
@@ -357,6 +510,7 @@ const styles = StyleSheet.create({
         height: hp(4),
         width: Platform.OS === 'ios' ? wp(9.5) : wp(8.5),
     },
+
     teacherImage: {
         height: Platform.OS === 'android' ? hp(9) : hp(8.5),
         width: wp(18.5),
