@@ -19,6 +19,7 @@ import LoginVerification from './src/screens/screen_LoginVerification'
 
 //Phase III 
 import HomeScreen from './src/screens/screen_Home'
+import SearchTeacher from './src/screens/screen_SearchTeacher'
 
 
 
@@ -46,6 +47,7 @@ function App() {
         
         {/* Phase III */}
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="SearchTeacher" component={SearchTeacher} />
 
         <Stack.Screen name="HomeScreen_Test" component={HomeScreen_Test} />
         <Stack.Screen name="Profile_Test" component={Profile_Test} />

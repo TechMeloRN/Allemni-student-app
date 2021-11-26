@@ -75,6 +75,9 @@ const index = ({ navigation, route }) => {
     const [eduStage, seteduStage] = useState('general');
     const [subjectOptionModal, setsubjectOptionModal] = useState(false)
     const [selectedSubject, setselectedSubject] = useState('المادة')
+    const [rating,setrating] =useState('0')
+
+   
 
     const [subjects, setsubjects] = useState([
         {
@@ -107,19 +110,20 @@ const index = ({ navigation, route }) => {
         }
 
     ])
-    const [teacherData, setteacherData] = useState([{
+    const [teacherData, setteacherData] = useState([
+    {
         id: 1,
         name: 'عبید عبداللہ المدوانی',
         image: teacherIcon,
         status: 'مدرس ابتدائی',
-        stars: 4
+        stars: 0
     },
     {
         id: 2,
         name: 'رشاد محمود الحلوانی',
         image: teacherIcon,
         status: 'مقتش عام',
-        stars: 3.5
+        stars: 1.5
     },
     {
         id: 3,
@@ -134,8 +138,7 @@ const index = ({ navigation, route }) => {
         image: teacherIcon,
         status: 'مقتش عام',
         stars: 1
-    },
-
+    }
     ]);
 
     useEffect(() => {
@@ -159,9 +162,7 @@ const index = ({ navigation, route }) => {
         }
     }
 
-    const ratingStars =(stars)=>{
-        // Stars code
-    }
+ 
 
     //EducationType Handling 
     const checkEduStage = (check) => {
@@ -196,12 +197,14 @@ const index = ({ navigation, route }) => {
         }
     };
 
+   
     return (
         <SafeAreaView style={styles.mainContainer}>
 
     {/* ////////////////////////////////////////////
     ///////// Subjects List Model ////////////////
     //////////////////////////////////////////// */}
+
             <Modal
                 transparent={true}
                 visible={subjectOptionModal}
@@ -225,7 +228,6 @@ const index = ({ navigation, route }) => {
                                         style={styles.subjectsListBtn}>
                                         <Text style={styles.subjectsListText}>{item.Title}</Text>
                                     </Pressable>
-
                                 )}
                                 keyExtractor={(item) => item.id}
                             />
@@ -242,8 +244,7 @@ const index = ({ navigation, route }) => {
                     <Image style={styles.backButton} source={notificationIcon} />
                 </Pressable>
 
-                {/* <Text style={[styles.headerText,{width: orientation == 'portrait' ? wp(30) : '60%',textAlign:'right' }]}> القائمة </Text> */}
-
+               
                 <Image style={orientation == 'portrait' ? styles.portraitLogo : styles.landscapeLogo} source={landscapeLogo} />
 
             </ImageBackground>
@@ -352,7 +353,7 @@ const index = ({ navigation, route }) => {
                     </View>
 
                     <View style={styles.searchTeacherBtnView}>
-                        <Pressable style={[styles.locationBtn, { backgroundColor: COLORS.purple }]}>
+                        <Pressable onPress={()=>navigation.navigate('SearchTeacher')} style={[styles.locationBtn, { backgroundColor: COLORS.purple }]}>
                             <Text style={{ color: COLORS.white }}> ابحث عن معلمک </Text>
                         </Pressable>
                     </View>
@@ -372,28 +373,23 @@ const index = ({ navigation, route }) => {
                                     </View>
                                     <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.name}</Text>
 
-                                    <View style={{ flexDirection: 'row' }}>
+                                    <Pressable onPress={()=>ratingStar(item.stars)} style={{ flexDirection: 'row' }}>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
-                                            <MaterialCommunity name='star' size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
-                                            <MaterialCommunity name='star' size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={ 'star'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            {/* <Image style={{ height: '100%', width: '100%' }} source={starTrueIcon} /> */}
-                                            <MaterialCommunity name='star-half-full' size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            {/* <Image style={{ height: '100%', width: '100%' }} source={halfStarIcon} /> */}
-                                            <MaterialCommunity name='star-outline' size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            {/* <Image style={{ height: '100%', width: '100%' }} source={starFalseIcon} /> */}
-                                            <MaterialCommunity name='star-outline' size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
-                                    </View>
+                                    </Pressable>
                                     <Text style={{ color: COLORS.purple, textAlign: 'center' }}>{item.status}</Text>
                                 </View>
 

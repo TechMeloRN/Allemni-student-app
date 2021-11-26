@@ -37,52 +37,120 @@ import twitterIcon from '../../assets/Images/icons/twitterIcon.png'
 const index = ({ navigation }) => {
 
     const [hide, sethide] = useState(true);
-    const [email, setemail] = useState('Allemni1030591@gamil.com');
-    const [password, setPassword] = useState('112233');
     const [loaded, setloaded] = useState(false);
 
     const [phoneNo, setphoneNo] = useState('+923463804151')
+    const [confirmResult, setconfirmResult] = useState(null)
+
+    const validatePhoneNumber = () => {
+        var regexp = /^\+[0-9]?()[0-9](\s|\S)(\d[0-9]{8,15})$/
+        return regexp.test(phoneNo)
+    }
+
+    const handleSendCode = () => {
+        // Request to send OTP
+        
+        if (validatePhoneNumber()) {
+            firebase.auth().signInWithPhoneNumber(phoneNo)
+                .then(val => {
+                    setconfirmResult(val)
+               
+                    navigation.navigate('LoginVerification',{confirmResult:val,phoneNo,type:'login'})
+
+                })
+                .catch(error => {
+                    alert(error.message)
+
+                    console.log(error)
+                })
+                
+        } else {
+            alert('Invalid Phone Number \n'+'Phone number must include country code.')
+        }
+   
 
 
+    }
+    const userCheck = () => {
+        
+        setloaded(true)
+        if(phoneNo && validatePhoneNumber()){
+        
+            Axios.post(Url.baseUrl + "/user-check", {
+            email: 'check@gmail.com',   //Line will remove.
+            mobileNumber: phoneNo,
+        })
+            .then(function (response) {
+                console.log(JSON.stringify(response));
+
+                if(response.data==='Email already exists'){
+                    alert("Email already exists!");
+                    setloaded(false)
+                }
+                else if(response.data==='Mobile number already exists'){
+                    alert("Phone number already exists!");
+                    setloaded(false)
+                }
+                else if(response.data==='Email already existsMobile number already exists'){
+                    alert("Phone number and email already used!");
+                    setloaded(false)
+                }
+                else{       
+                    AsyncStorage.setItem('mobileNo',(response.data.mobileNumber?response.data.mobileNumber:''))
+                    handleSendCode()
+                    setloaded(false)
+                }
+
+            })
+            .catch(function (error) {
+                console.log(error);
+                setloaded(false)
+             //   alert("Database error");
+            });
+        }else{
+            alert("Enter all fields.")
+            setloaded(false)
+        }
+    }
 
     //Login Api Func
     // const baseURL = 'https://test.nadvertex.com/allemni/api';
-    const verifyLogin = () => {
-        setloaded(true)
-        Axios.post(Url.baseUrl+"/user-login", {
-            email: email,
-            password: password,
-          })
-            .then(function (response) {
-              console.log(JSON.stringify(response));
-              if (response.data === "Invalid user") {
-                alert("incoreect passord or user name");
-                setloaded(false)
-              }else if(response.data==='Account deactivated'){
-                alert("Account is deactivated!");
-                setloaded(false)
+    // const verifyLogin = () => {
+    //     setloaded(true)
+    //     Axios.post(Url.baseUrl+"/user-login", {
+    //         email: email,
+    //         password: password,
+    //       })
+    //         .then(function (response) {
+    //           console.log(JSON.stringify(response));
+    //           if (response.data === "Invalid user") {
+    //             alert("incoreect passord or user name");
+    //             setloaded(false)
+    //           }else if(response.data==='Account deactivated'){
+    //             alert("Account is deactivated!");
+    //             setloaded(false)
                
-               } else {
-                  if(response.data.roleId==="3"){
-                navigation.navigate('HomeScreen',{data:response.data})
-                setloaded(false)
-                AsyncStorage.setItem('fName',(response.data.firstName?response.data.firstName:''))
-                AsyncStorage.setItem('lName',(response.data.lastName?response.data.lastName:''))
-                AsyncStorage.setItem('mobileNo',(response.data.mobileNumber?response.data.mobileNumber:''))
-                AsyncStorage.setItem('email',(response.data.email?response.data.email:''))
-                //AsyncStorage.setItem('userid',(JSON.stringify(response.data.id)))
-                  }else{
-                    alert("incoreect passord or user name!");
-                    setloaded(false)
-                  }
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-              setloaded(false)
-              alert("Network error!");
-            });
-    }
+    //            } else {
+    //               if(response.data.roleId==="3"){
+    //             navigation.navigate('HomeScreen',{data:response.data})
+    //             setloaded(false)
+    //             AsyncStorage.setItem('fName',(response.data.firstName?response.data.firstName:''))
+    //             AsyncStorage.setItem('lName',(response.data.lastName?response.data.lastName:''))
+    //             AsyncStorage.setItem('mobileNo',(response.data.mobileNumber?response.data.mobileNumber:''))
+    //             AsyncStorage.setItem('email',(response.data.email?response.data.email:''))
+    //             //AsyncStorage.setItem('userid',(JSON.stringify(response.data.id)))
+    //               }else{
+    //                 alert("incoreect passord or user name!");
+    //                 setloaded(false)
+    //               }
+    //           }
+    //         })
+    //         .catch(function (error) {
+    //           console.log(error);
+    //           setloaded(false)
+    //           alert("Network error!");
+    //         });
+    // }
   
 
     return (
@@ -101,7 +169,7 @@ const index = ({ navigation }) => {
                     <Text style={[styles.btnText, { fontSize: hp(2) }]}> مرحبا </Text>
                     <Text style={styles.btnText}> یرجی الدخول اِلی الحساب الشخصی </Text>
 
-                    <TextInput
+                    {/* <TextInput
                         placeholder='البرید الالکترونی'
                         placeholderTextColor={COLORS.white}
                         style={styles.emailInputText}
@@ -110,7 +178,7 @@ const index = ({ navigation }) => {
                     />
 
                     <View style={styles.passwordInputTextView}>
-                        <Pressable onPress={() => sethide(!hide)} style={[styles.eyeButton, { height: hide ? hp(2) : hp(3), }]}  >
+                        <Pressable onPress={() => sethide(!hide)} style={[styles.eyeButton, { height: hide ? hp(2) : hp(3) }]}  >
                             <Image
                                 source={hide ? eyeTrueIcon : eyeFalseIcon}
                                 style={{ height: hide ? hp(2.5) : hp(3), width: wp(9.2) }}
@@ -124,17 +192,17 @@ const index = ({ navigation }) => {
                             onChangeText={(val) => setPassword(val)}
                             value={password}
                         />
-                    </View>
+                    </View> */}
 
                     {/* Login with PhoneNo verification */}
 
-                    {/* <TextInput
+                    <TextInput
                         placeholder='  رقم الجوال '
                         placeholderTextColor='#fff'
                         style={styles.emailInputText}
                         onChangeText={(val) => setphoneNo(val)}
                         value={phoneNo}
-                    /> */}
+                    />
 
                     <Pressable onPress={() => alert('نسیت کلمة المرور')} style={styles.forgetPasswordBtn}>
                         <Text style={[styles.btnText]}> نسیت کلمة المرور؟ </Text>
@@ -146,7 +214,7 @@ const index = ({ navigation }) => {
                             btnText='انشائ حساب'
                             backgroundColor={COLORS.yellow}
                             textColor={COLORS.white}
-                            onPress={() => verifyLogin()}
+                            onPress={() => userCheck()}
                         />
                         :
                         <CustomActivityIndicator
