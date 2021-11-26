@@ -38,7 +38,7 @@ const index = ({ navigation,route }) => {
     const sixthTextInputRef = useRef(null);
 
     const [otpCode, setotpCode] = useState('');
-    const {confirmResult,phoneNo,type} =route.params;
+    const {confirmResult,phoneNo,fname,lname,gender} =route.params;
     const [userId,setuserId] = useState('');
     const [loaded,setloaded] = useState('');
 
@@ -46,11 +46,12 @@ const index = ({ navigation,route }) => {
         if (otpCode.length == 6) {
             confirmResult.confirm(otpCode)
                 .then(user => {
+              
                     setuserId(user.uid)
-                    getUserData()
+                    SignUp()
                 })
                 .catch(error => {
-                  //  alert('Invalid Code!')
+                    alert('Invalid Code!')
                     console.log(error.message)
                 })
         } else {
@@ -64,32 +65,51 @@ const index = ({ navigation,route }) => {
             setotpCode(otpCode.slice(0, -1))
         }
     }
-    const getUserData = () => {
+    const SignUp = () => {
      
+        var val = fname+lname+ Math.floor(Math.random()*99999*3)+1 + "@gamil.com";
+        
+
         setloaded(true)
-        Axios.post(Url.baseUrl + "/userByNumber", {
+        Axios.post(Url.baseUrl + "/user-register", {
+            firstName: fname,
+            lastName: lname,
             mobileNumber: phoneNo,
+            email: val,
+            gender: gender,
+            password: '112233',
+            image:' ',
+            roleTitle:'Student'
+
         })
             .then(function (response) {
                 console.log(JSON.stringify(response));
-                if (response.data !== "user not found") {
+                if (response.data !== "student already exists") {
                     navigation.navigate('HomeScreen')
                     AsyncStorage.setItem('fName',(response.data.firstName?response.data.firstName:''))
                     AsyncStorage.setItem('lName',(response.data.lastName?response.data.lastName:''))
                     AsyncStorage.setItem('mobileNo',(response.data.mobileNumber?response.data.mobileNumber:''))
+                   // AsyncStorage.setItem('email',(response.data.email?response.data.email:''))
                     setloaded(false)
                 } else {
-                    alert("student not exit!");
+                    alert("student already exists!");
                     setloaded(false)
                 }
             })
             .catch(function (error) {
                 console.log(error);
                 setloaded(false)
-                alert("User Data :" + error.message);
+              //  alert("Database error");
             });
     }
-   
+    console.log('OTP' + otpCode)
+    console.log("confirmResult"+ confirmResult);
+    console.log("First Name : ",fname)
+    console.log("Last Name : ",lname)
+    console.log("Mobile No : ",phoneNo)
+    //console.log("email : ",email)
+    console.log("gender : ",gender)
+   // console.log("password : ",password)
     return (
         <ImageBackground style={styles.container} source={backgroundImage}>
 
@@ -107,7 +127,8 @@ const index = ({ navigation,route }) => {
 
                 <View style={styles.contentView}>
                     <Text style={[styles.btnText,{fontSize:hp(2)}]}> من فضلک </Text>
-                    <Text style={styles.btnText}> "رمز التاکید"  </Text>
+                    <Text style={styles.btnText}> اٗدخل رمز التحقق الذی اٗرسل اِلی جوالک </Text>
+
                     <View style={styles.verficationView}>
                     <View style={styles.verficationSubView}>
                         <TextInput
@@ -200,7 +221,7 @@ const index = ({ navigation,route }) => {
                 
                     {!loaded ?
                         <CustomButton 
-                    btnText= 'ارسال'
+                    btnText='ارسال' 
                     backgroundColor={COLORS.yellow} 
                     textColor={COLORS.white} 
                     onPress={() => handleVerifyCode()}
@@ -218,6 +239,7 @@ const index = ({ navigation,route }) => {
     )
 }
 
+export default index
 
 const styles = StyleSheet.create({
     container: {
@@ -280,6 +302,3 @@ const styles = StyleSheet.create({
 
 
 })
-
-
-export default index;

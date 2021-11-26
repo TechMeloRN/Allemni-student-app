@@ -16,6 +16,7 @@ import ChatMessage from './src/screens/screen_ChatMessage'
 import NewClassroom from './src/screens/screen_Classroom'
 import PersonalProfile from './src/screens/screen_PersonalProfile'
 import LoginVerification from './src/screens/screen_LoginVerification'
+import SignupVerification from './src/screens/screen_SignupVerification'
 
 //Phase III 
 import HomeScreen from './src/screens/screen_Home'
@@ -32,13 +33,14 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="SplashScreen">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomeScreen">
         <Stack.Screen name="SplashScreen"  component={SplashScreen} />
         <Stack.Screen name="NewInitialScreen"  component={NewInitialScreen} />
         <Stack.Screen name="NewLoginScreen"  component={NewLoginScreen} />
         <Stack.Screen name="LoginVerification"  component={LoginVerification} />
 
         <Stack.Screen name="SignUpScreen"  component={SignUpScreen} />
+        <Stack.Screen name="SignupVerification"  component={SignupVerification} />
         <Stack.Screen name="MenuScreen"  component={MenuScreen} />
         <Stack.Screen name="ChatTeacherList"  component={ChatTeacherList} />
         <Stack.Screen name="ChatMessage"  component={ChatMessage} />

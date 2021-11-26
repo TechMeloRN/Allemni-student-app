@@ -75,9 +75,9 @@ const index = ({ navigation, route }) => {
     const [eduStage, seteduStage] = useState('general');
     const [subjectOptionModal, setsubjectOptionModal] = useState(false)
     const [selectedSubject, setselectedSubject] = useState('المادة')
-    const [rating,setrating] =useState('0')
+    const [rating, setrating] = useState('0')
 
-   
+
 
     const [subjects, setsubjects] = useState([
         {
@@ -103,7 +103,7 @@ const index = ({ navigation, route }) => {
         {
             id: 6,
             Title: 'Modren Programing Language'
-        }, 
+        },
         {
             id: 7,
             Title: 'Software Engneering'
@@ -111,34 +111,34 @@ const index = ({ navigation, route }) => {
 
     ])
     const [teacherData, setteacherData] = useState([
-    {
-        id: 1,
-        name: 'عبید عبداللہ المدوانی',
-        image: teacherIcon,
-        status: 'مدرس ابتدائی',
-        stars: 0
-    },
-    {
-        id: 2,
-        name: 'رشاد محمود الحلوانی',
-        image: teacherIcon,
-        status: 'مقتش عام',
-        stars: 1.5
-    },
-    {
-        id: 3,
-        name: 'عبید عبداللہ المدوانی',
-        image: teacherIcon,
-        status: 'مدرس ابتدائی',
-        stars: 2.5
-    },
-    {
-        id: 4,
-        name: 'رشاد محمود الحلوانی',
-        image: teacherIcon,
-        status: 'مقتش عام',
-        stars: 1
-    }
+        {
+            id: 1,
+            name: 'عبید عبداللہ المدوانی',
+            image: teacherIcon,
+            status: 'مدرس ابتدائی',
+            stars: 0
+        },
+        {
+            id: 2,
+            name: 'رشاد محمود الحلوانی',
+            image: teacherIcon,
+            status: 'مقتش عام',
+            stars: 1.5
+        },
+        {
+            id: 3,
+            name: 'عبید عبداللہ المدوانی',
+            image: teacherIcon,
+            status: 'مدرس ابتدائی',
+            stars: 2.5
+        },
+        {
+            id: 4,
+            name: 'رشاد محمود الحلوانی',
+            image: teacherIcon,
+            status: 'مقتش عام',
+            stars: 1
+        }
     ]);
 
     useEffect(() => {
@@ -162,7 +162,7 @@ const index = ({ navigation, route }) => {
         }
     }
 
- 
+
 
     //EducationType Handling 
     const checkEduStage = (check) => {
@@ -197,11 +197,11 @@ const index = ({ navigation, route }) => {
         }
     };
 
-   
+
     return (
         <SafeAreaView style={styles.mainContainer}>
 
-    {/* ////////////////////////////////////////////
+            {/* ////////////////////////////////////////////
     ///////// Subjects List Model ////////////////
     //////////////////////////////////////////// */}
 
@@ -244,7 +244,7 @@ const index = ({ navigation, route }) => {
                     <Image style={styles.backButton} source={notificationIcon} />
                 </Pressable>
 
-               
+
                 <Image style={orientation == 'portrait' ? styles.portraitLogo : styles.landscapeLogo} source={landscapeLogo} />
 
             </ImageBackground>
@@ -353,7 +353,7 @@ const index = ({ navigation, route }) => {
                     </View>
 
                     <View style={styles.searchTeacherBtnView}>
-                        <Pressable onPress={()=>navigation.navigate('SearchTeacher')} style={[styles.locationBtn, { backgroundColor: COLORS.purple }]}>
+                        <Pressable onPress={() => navigation.navigate('SearchTeacher')} style={[styles.locationBtn, { backgroundColor: COLORS.purple }]}>
                             <Text style={{ color: COLORS.white }}> ابحث عن معلمک </Text>
                         </Pressable>
                     </View>
@@ -373,12 +373,14 @@ const index = ({ navigation, route }) => {
                                     </View>
                                     <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.name}</Text>
 
-                                    <Pressable onPress={()=>ratingStar(item.stars)} style={{ flexDirection: 'row' }}>
+                                    <Pressable
+                                        // onPress={()=>ratingStar(item.stars)}
+                                        style={{ flexDirection: 'row' }}>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={ 'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
                                         </View>
                                         <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
                                             <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
@@ -611,7 +613,7 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.white,
         backgroundColor: COLORS.white,
         borderRadius: 20,
-       
+
         position: 'absolute',
         top: hp(11.5)
     },
@@ -679,8 +681,8 @@ const styles = StyleSheet.create({
         width: wp(100),
         height: hp(40),
         backgroundColor: COLORS.ashewhite,
-        borderTopLeftRadius:50,
-        borderTopRightRadius:50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
         paddingVertical: 15,
         justifyContent: 'space-evenly',
         alignItems: 'center'

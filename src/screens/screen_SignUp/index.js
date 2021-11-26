@@ -44,8 +44,8 @@ const index = ({ navigation }) => {
 
     const [loaded, setloaded] = useState(false)
     const [hide, sethide] = useState(true);
-    const [email, setemail] = useState('');
-    const [password, setPassword] = useState('');
+    // const [email, setemail] = useState('');
+    // const [password, setPassword] = useState('');
     const [fname, setfname] = useState('');
     const [lname, setlname] = useState('');
     const [phoneNo, setphoneNo] = useState('');
@@ -72,7 +72,7 @@ const index = ({ navigation }) => {
                 .then(val => {
                     setconfirmResult(val)
                
-                    navigation.navigate('LoginVerification',{confirmResult:val,phoneNo,fname,lname,gender})
+                    navigation.navigate('SignupVerification',{confirmResult:val,phoneNo,fname,lname,gender})
 
                 })
                 .catch(error => {
@@ -152,9 +152,9 @@ const index = ({ navigation }) => {
     console.log("First Name : ",fname)
     console.log("Last Name : ",lname)
     console.log("Mobile No : ",phoneNo)
-    console.log("email : ",email)
+  //  console.log("email : ",email)
     console.log("gender : ",gender)
-    console.log("password : ",password)
+  //  console.log("password : ",password)
     return (
         <ImageBackground style={styles.container} source={backgroundImage}>
 
@@ -195,14 +195,14 @@ const index = ({ navigation }) => {
                     <TextInput
                         placeholder='  رقم الجوال '
                         placeholderTextColor='#fff'
-                        style={styles.emailInputText}
+                        style={styles.phoneInputText}
                         onChangeText={(val) => setphoneNo(val)}
                         value={phoneNo}
                     />
                     {/* <TextInput
                         placeholder='البرید الالکترونی'
                         placeholderTextColor='#fff'
-                        style={styles.emailInputText}
+                        style={styles.phoneInputText}
                         onChangeText={(val) => setemail(val)}
                         value={email}
                     /> */}
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
         marginTop: Platform.OS === 'ios' ? hp(1) : hp(3),
         alignSelf: 'center'
     },
-    emailInputText: {
+    phoneInputText: {
         height: hp(7),
         width: wp(80),
         borderBottomWidth: 1,

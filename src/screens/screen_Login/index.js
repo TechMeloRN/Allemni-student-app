@@ -23,12 +23,14 @@ import CustomActivityIndicator from '../../components/CustomActivityIndicator.js
 import Axios from 'react-native-axios'
 import AsyncStorage from '@react-native-community/async-storage';
 
+//Fireabse
+import auth from '@react-native-firebase/auth';
+import firebase from '@react-native-firebase/app'
+
 //Icons Assests
 import backgroundImage from '../../assets/Images/background/backgroundImage.png'
 import logo from '../../assets/Images/logo/logo.png'
 import backBtnIcon from '../../assets/Images/icons/btnIcon.png'
-import eyeTrueIcon from '../../assets/Images/icons/eyeTrue.png'
-import eyeFalseIcon from '../../assets/Images/icons/eyeFalse.png'
 import gmailIcon from '../../assets/Images/icons/gmailIcon.png'
 import appleIcon from '../../assets/Images/icons/appleIcon.png'
 import facebookIcon from '../../assets/Images/icons/facebookIcon.png'
@@ -54,14 +56,13 @@ const index = ({ navigation }) => {
             firebase.auth().signInWithPhoneNumber(phoneNo)
                 .then(val => {
                     setconfirmResult(val)
-               
-                    navigation.navigate('LoginVerification',{confirmResult:val,phoneNo,type:'login'})
+                    navigation.navigate('LoginVerification',{confirmResult:val,phoneNo})
 
                 })
                 .catch(error => {
-                    alert(error.message)
+                    alert('Please try again! \n'+ error.message)
 
-                    console.log(error)
+                    console.log("Firebase error: "+ error)
                 })
                 
         } else {
@@ -74,41 +75,35 @@ const index = ({ navigation }) => {
     const userCheck = () => {
         
         setloaded(true)
-        if(phoneNo && validatePhoneNumber()){
+        if(validatePhoneNumber()){
         
             Axios.post(Url.baseUrl + "/user-check", {
             email: 'check@gmail.com',   //Line will remove.
             mobileNumber: phoneNo,
         })
             .then(function (response) {
-                console.log(JSON.stringify(response));
+                console.log("checkData"+JSON.stringify(response));
 
-                if(response.data==='Email already exists'){
-                    alert("Email already exists!");
-                    setloaded(false)
-                }
-                else if(response.data==='Mobile number already exists'){
-                    alert("Phone number already exists!");
-                    setloaded(false)
-                }
-                else if(response.data==='Email already existsMobile number already exists'){
-                    alert("Phone number and email already used!");
-                    setloaded(false)
-                }
-                else{       
+                if(response.data==='Mobile number already exists'){
                     AsyncStorage.setItem('mobileNo',(response.data.mobileNumber?response.data.mobileNumber:''))
                     handleSendCode()
+                    setloaded(false)
+                    
+                }
+
+                else{       
+                    alert("Account not exists!");
                     setloaded(false)
                 }
 
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.message);
                 setloaded(false)
              //   alert("Database error");
             });
         }else{
-            alert("Enter all fields.")
+            alert("Enter Valid Number.")
             setloaded(false)
         }
     }

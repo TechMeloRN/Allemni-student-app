@@ -40,6 +40,7 @@ import classFalseIcon from '../../assets/Images/icons/classFalseIcon.png'
 const index = ({ navigation, route }) => {
 
     const [orientation, setorientation] = useState('');
+    const [chkDetail, setchkDetail] = useState(false);
 
     const [teacherData, setteacherData] = useState([
         {
@@ -48,6 +49,7 @@ const index = ({ navigation, route }) => {
             image: teacherIcon,
             status: 'مدرس ابتدائی',
             stars: 0,
+            courseRate: 140,
             detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
         },
         {
@@ -56,6 +58,7 @@ const index = ({ navigation, route }) => {
             image: teacherIcon,
             status: 'مقتش عام',
             stars: 1.5,
+            courseRate: 150,
             detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
 
         },
@@ -65,6 +68,7 @@ const index = ({ navigation, route }) => {
             image: teacherIcon,
             status: 'مدرس ابتدائی',
             stars: 2.5,
+            courseRate: 130,
             detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
 
         },
@@ -74,6 +78,7 @@ const index = ({ navigation, route }) => {
             image: teacherIcon,
             status: 'مقتش عام',
             stars: 1,
+            courseRate: 160,
             detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
 
         }
@@ -131,7 +136,7 @@ const index = ({ navigation, route }) => {
                     <Text style={{ color: COLORS.purple }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
                 </View>
 
-                <View style={{ flex: 1}}>
+                <View style={{ flex: 1 }}>
 
 
                     <FlatList
@@ -139,30 +144,58 @@ const index = ({ navigation, route }) => {
                         //  horizontal={true}
                         renderItem={({ item, index }) => (
                             <View style={styles.teacherInfoSubView}>
-                                <View style={{ height: hp(7), width: wp(14) }}>
-                                    <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
-                                </View>
-                                <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.name}</Text>
+                                <View style={{ height: hp(15), width: '95%', flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: COLORS.ashewhite }}>
+                                    <View style={{ width: '30%', borderTopLeftRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                                        <View style={{ height: hp(4.8), width: '80%', justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.ashewhite, borderRadius: 20 }}>
+                                            <Text style={{ color: COLORS.purple }}> {item.courseRate + " " + "ر۔س"}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ width: '40%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                                        <Text style={{ color: COLORS.black, textAlign: 'center', marginRight: wp(4) }}>{item.name}</Text>
 
-                                <Pressable onPress={() => ratingStar(item.stars)} style={{ flexDirection: 'row' }}>
-                                    <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                        <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                        <Pressable onPress={() => ratingStar(item.stars)} style={{ flexDirection: 'row', marginRight: wp(4) }}>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                        </Pressable>
+                                        <Text style={{ color: COLORS.purple, textAlign: 'center', marginRight: wp(4) }}>{item.status}</Text>
                                     </View>
-                                    <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                        <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                    <View style={{ width: '30%', borderTopRightRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                                        <View style={{ height: hp(12), width: wp(24) }}>
+                                            <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
+                                        </View>
                                     </View>
-                                    <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                        <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
-                                    </View>
-                                    <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                        <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
-                                    </View>
-                                    <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                        <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
-                                    </View>
-                                </Pressable>
-                                <Text style={{ color: COLORS.purple, textAlign: 'center' }}>{item.status}</Text>
-                                <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.detail}</Text>
+                                </View>
+                                {!chkDetail ?
+                                    <Pressable onPress={() => setchkDetail(true)} style={styles.moreDetailView}>
+                                        <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
+                                        <Text style={{ color: COLORS.white }}> تفاصیل </Text>
+                                    </Pressable>
+                                    :
+                                    <View style={{
+                                        height: hp(10),
+                                        width: '90%',
+                                       // backgroundColor: COLORS.purple,
+                                        borderBottomLeftRadius: 20,
+                                        borderBottomRightRadius: 20,
+                                        justifyContent: 'center',
+                                        alignItems:'flex-end',
+                                        //flexDirection: 'row'
+                                    }}>
+                                        <Text style={{textAlign:'right'}}> {item.detail} </Text>
+                                    </View>}
                             </View>
 
                         )}
@@ -233,7 +266,7 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         flex: 1,
-       // alignItems: 'center'
+        // alignItems: 'center'
 
     },
     headingView: {
@@ -258,10 +291,11 @@ const styles = StyleSheet.create({
 
     teacherInfoSubView: {
         backgroundColor: 'white',
+        // flexDirection:'row',
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf:'center',
-       // height: hp(18),
+        alignSelf: 'center',
+        // height: hp(18),
         width: '95%',
         marginTop: hp(1),
         marginLeft: wp(1),
@@ -290,9 +324,20 @@ const styles = StyleSheet.create({
         height: hp(5),
         width: Platform.OS === 'ios' ? wp(30.2) : wp(30.2),
     },
+    moreDetailView: {
+        height: hp(6),
+        width: '100%',
+        backgroundColor: COLORS.purple,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+
     bottomTabView: {
         backgroundColor: COLORS.white,
-        height:Platform.OS==='ios'? hp(9):hp(8),
+        height: Platform.OS === 'ios' ? hp(9) : hp(8),
         borderTopLeftRadius: hp(3),
         borderTopRightRadius: hp(3),
         elevation: 5,
