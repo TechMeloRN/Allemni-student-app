@@ -251,11 +251,11 @@ const index = ({ navigation, route }) => {
 
             <View style={[styles.mainContent, { marginTop: orientation == 'portrait' ? Platform.OS === 'ios' ? hp(13) : hp(18) : Platform.OS === 'ios' ? hp(12) : hp(8) }]}>
                 <View style={styles.searchMainView}>
-                    <View style={styles.searchSubView}>
+                    <Pressable onPress={()=>navigation.navigate("TextualSearch")} style={styles.searchSubView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
                         <Text style={{ color: COLORS.white }}> فلتر </Text>
                         <MaterialCommunity name='filter' size={hp(2)} color={COLORS.white} />
-                    </View>
+                    </Pressable>
                     <View style={[styles.searchSubView, { width: '65%', backgroundColor: COLORS.white }]}>
                         <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%' }} />
                         <Material name='search' size={hp(3)} color={COLORS.purple} />

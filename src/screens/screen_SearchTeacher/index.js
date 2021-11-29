@@ -47,8 +47,6 @@ const index = ({ navigation, route }) => {
     const [selectedOrder, setselectedOrder] = useState('ترتیب حسب')
     const [rating, setrating] = useState('0')
 
-
-
     const [orderBy, setorderBy] = useState([
         {
             id: 1,
@@ -67,8 +65,8 @@ const index = ({ navigation, route }) => {
             Title: 'Status'
         },
         
-
     ])
+
     const [teacherData, setteacherData] = useState([
         {
             id: 1,
@@ -132,7 +130,8 @@ const index = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
-         {/* ////////////////////////////////////////////
+        
+    {/* ////////////////////////////////////////////
     ///////// OrderBy Model ////////////////
     //////////////////////////////////////////// */}
 
@@ -445,9 +444,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.3)',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
-
-
     },
+
     modalItemContainer: {
         width: wp(100),
         height: hp(31),
@@ -458,6 +456,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center'
     },
+
     modalCancelBtn: {
         height: hp(5),
         width: '40%',
@@ -474,6 +473,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 2.62,
     },
+
     orderByListBtn: {
         width: '70%',
         height: hp(5),
@@ -482,6 +482,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center'
     },
+
     orderByListText: {
         color: COLORS.black,
         textAlign: 'center',
@@ -499,6 +500,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
+
     bottomTabButton: {
         backgroundColor: COLORS.white,
         width: wp(25),
@@ -506,6 +508,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     bottomIcon: {
         height: hp(4),
         width: Platform.OS === 'ios' ? wp(9.5) : wp(8.5),
