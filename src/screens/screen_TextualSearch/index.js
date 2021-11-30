@@ -12,7 +12,7 @@ import {
     Dimensions,
     Platform,
     FlatList,
-    Modal,
+    TextInput
 } from 'react-native';
 
 import {
@@ -22,32 +22,102 @@ import {
 
 import { COLORS } from '../../assets/Styles/color.js'
 
-
 import Material from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 //Header
 import homeHeader from '../../assets/Images/background/homeHeader.png'
-import homeSliderPic1 from '../../assets/Images/Image/homeSliderPic1.png'
 import notificationIcon from '../../assets/Images/icons/notificationIcon.png'
 import landscapeLogo from '../../assets/Images/logo/landscapeIcon.png'
+import backButton from '../../assets/Images/icons/btnIcon.png'
+import teacherIcon from '../../assets/Images/Image/teacherIcon.png'
 
+//Screens Icons
+import onSite from '../../assets/Images/icons/onSiteTrue.png'
+import bookPurpleIcon from '../../assets/Images/icons/bookPurpleIcon.png'
+import bookWhiteIcon from "../../assets/Images/icons/bookWhiteIcon.png"
+import subjectsAvatar from '../../assets/Images/Image/subjectsAvatar.png'
 
 //BottomTab Icons 
 import moreFalseIcon from '../../assets/Images/icons/moreFalseIcon.png'
 import homeTrueIcon from '../../assets/Images/icons/homeTrueIcon.png'
 import messagesFalseIcon from '../../assets/Images/icons/messagesFalseIcon.png'
 import classFalseIcon from '../../assets/Images/icons/classFalseIcon.png'
-import { TextInput } from 'react-native-gesture-handler';
-
 
 
 const index = ({ navigation, route }) => {
 
     const [orientation, setorientation] = useState('');
+    const [selectedId, setselectedId] = useState(null);
+    const [teacherData, setteacherData] = useState([
+        {
+            id: 1,
+            name: 'عبید عبداللہ المدوانی',
+            image: teacherIcon,
+            status: 'مدرس ابتدائی',
+            stars: 0,
+            courseRate: 140,
+            detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
+        },
+        // {
+        //     id: 2,
+        //     name: 'رشاد محمود الحلوانی',
+        //     image: teacherIcon,
+        //     status: 'مقتش عام',
+        //     stars: 1.5,
+        //     courseRate: 150,
+        //     detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
 
-    
+        // },
+        // {
+        //     id: 3,
+        //     name: 'عبید عبداللہ المدوانی',
+        //     image: teacherIcon,
+        //     status: 'مدرس ابتدائی',
+        //     stars: 2.5,
+        //     courseRate: 130,
+        //     detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
+
+        // },
+        // {
+        //     id: 4,
+        //     name: 'رشاد محمود الحلوانی',
+        //     image: teacherIcon,
+        //     status: 'مقتش عام',
+        //     stars: 1,
+        //     courseRate: 160,
+        //     detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
+
+        // }
+    ]);
+
+    const [subjects, setsubjects] = useState([
+        {
+            id: 1,
+            Title: 'ریاضیات',
+            level:'اولی متوسط'
+        },
+        {
+            id: 2,
+            Title: 'ریاضیات متقدمۃ ۔ جبرواحصائ',
+            level:'اولی ثانی'
+        },
+        {
+            id: 3,
+            Title: 'ریاضیات متقدمۃ',
+            level:'ثانی متوسط'
+        },
+        {
+            id: 4,
+            Title: 'جبرواحصائ',
+            level:'ثانی متوسط'
+        }
+       
+
+    ])
+
+
     useEffect(() => {
         getOrientation()
         Dimensions.addEventListener('change', getOrientation);
@@ -71,10 +141,15 @@ const index = ({ navigation, route }) => {
             <StatusBar barStyle={'light-content'} backgroundColor={COLORS.purple} />
             <ImageBackground source={homeHeader} style={orientation == 'portrait' ? styles.portraitHeaderView : styles.landscapeHeaderView}>
 
+                <Pressable onPress={() => navigation.goBack()} style={styles.backButtonView}>
+                    <Image style={styles.backButton} source={backButton} />
+                </Pressable>
+
                 <Pressable onPress={() => alert('Notification')} style={styles.backButtonView}>
                     <Image style={styles.backButton} source={notificationIcon} />
                 </Pressable>
 
+                <Text style={[styles.headerText,{width:orientation=='portrait'? wp(30):'60%'}]}> البحث النصي </Text>
 
                 <Image style={orientation == 'portrait' ? styles.portraitLogo : styles.landscapeLogo} source={landscapeLogo} />
 
@@ -88,18 +163,123 @@ const index = ({ navigation, route }) => {
                         <MaterialCommunity name='filter' size={hp(2)} color={COLORS.white} />
                     </View>
                     <View style={[styles.searchSubView, { width: '65%', backgroundColor: COLORS.white }]}>
-                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%' }} />
                         <Material name='search' size={hp(3)} color={COLORS.purple} />
+                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%' }} />
+                        
                     </View>
                 </View>
 
+                {/* <ScrollView style={{marginTop:hp(2)}} > */}
 
+                    
+                    <View style={[styles.contentTextView,{marginTop:hp(1)}]}>
+                        <Text style={styles.contentText}>  مدرسون </Text>
+                        <Image style={{height:hp(3),width:wp(6),marginRight:wp(2)}} source={onSite} />
+                    </View>
 
-                <ScrollView >
+                    {/* Teacher detail */}
+                <View style={{ height:hp(20),marginTop:hp(1) }}>
+                    <FlatList
+                        data={teacherData}
+                        renderItem={({ item, index }) => (
+                            <View style={[styles.teacherInfoView]}>
+                                <View style={styles.teacherInfoSubView}>
+                                    <View style={styles.courseRateView}>
+                                        <View style={styles.courseRateSubView}>
+                                            <Text style={{ color: COLORS.purple }}> {item.courseRate + " " + "ر۔س"}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={styles.teacherBasicInfo}>
+                                        <Text style={styles.teacherNameText}>{item.name}</Text>
+
+                                        <Pressable onPress={() => ratingStar(item.stars)} style={{ flexDirection: 'row', marginRight: wp(4) }}>
+                                            <View style={styles.starsView}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={styles.starsView}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={styles.starsView}>
+                                                <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={styles.starsView}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={styles.starsView}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                        </Pressable>
+                                        <Text style={[styles.teacherNameText,{ color: COLORS.purple}]}>{item.status}</Text>
+                                    </View>
+                                    <View style={styles.teacherImageView}>
+                                        <View style={{ height: hp(12), width: wp(24) }}>
+                                            <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
+                                        </View>
+                                    </View>
+                                </View>
+                                {selectedId!== item.id ?
+                                    <Pressable 
+                                        onPress={() => {
+                                            setselectedId(item.id)
+                                            }}
+                                        style={styles.moreDetailView}>
+                                        <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
+                                        <Text style={{ color: COLORS.white }}> تفاصیل </Text>
+                                    </Pressable>
+                                    :
+                                    <View style={styles.teacherDetailView}>
+                                        <Text style={styles.teacherDetailText}> {item.detail} </Text>
+                                        <Material 
+                                            name='keyboard-arrow-up'
+                                            onPress={()=>setselectedId(null)} 
+                                            size={hp(3)} 
+                                            color={COLORS.purple} 
+                                            style={{alignSelf:'center'}} />
+                                    </View>}
+                            </View>
+                        )}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                    />
+                   
+                    </View>
+
+                    <View style={[styles.contentTextView]}>
+                        <Text style={styles.contentText}> مواد </Text>
+                        <Image style={{height:hp(2.5),width:Platform.OS==='android'? wp(6.3):wp(6.5),marginRight:wp(2)}} source={bookPurpleIcon} />
+                    </View>
+                    
+                    {/* <View style={{flex:1,marginBottom:hp(1)}}> */}
+
+                    
+                    <FlatList
+                        data={subjects}
+                        renderItem={({ item, index }) => (
+                            <View style={styles.subjectInfoView}>
+                                <View style={styles.subjectInfoSubView}>
+                                    
+                                    <View style={[styles.subjectBasicInfo]}>
+                                        <Text style={styles.subjectTitleText}>{item.Title}</Text>
+
+                                        <Text style={[styles.subjectTitleText,{ color: COLORS.purple}]}>{item.level}</Text>
+                                    </View>
+                                    <View style={styles.subjectImageView}>
+                                        <View style={{ height: hp(10), width: wp(20) }}>
+                                            <Image style={{ height: '100%', width: '100%' }} source={subjectsAvatar} />
+                                        </View>
+                                    </View>
+                                </View>
+                               
+                            </View>
+                        )}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                    />
+                {/* </View> */}
                  
-                 <Text> Hello </Text>
+                    
 
-                </ScrollView>
+                {/* </ScrollView> */}
             </View>
 
             <View style={styles.bottomTabView}>
@@ -151,7 +331,7 @@ const styles = StyleSheet.create({
     },
     portraitHeaderView: {
         width: wp(100),
-        height: hp(30),
+        height:Platform.OS==='android'? hp(18):hp(22),
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
@@ -209,24 +389,11 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         flexDirection: 'row'
     },
-    sliderView: {
-        height: Platform.OS === 'ios' ? hp(20) : hp(22),
-        width: '94%',
-        alignSelf: 'center',
-        marginTop: hp(2),
-        borderRadius: 15
-    },
-    eduTypeHeadingView: {
-        width: '100%',
-        marginTop: hp(1),
-        height: hp(6),
-        justifyContent: 'center',
-        backgroundColor: COLORS.ashewhite,
-    },
     contentTextView: {
         width: '100%',
-        marginTop: hp(1),
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
+        alignItems:'center',
+        flexDirection:'row',
         backgroundColor: COLORS.white,
         elevation: 5,
         height: hp(6),
@@ -237,120 +404,23 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.35,
         shadowRadius: 2.62,
+        marginTop:hp(1),
     },
     contentText: {
-        color: COLORS.black,
+        color: COLORS.purple,
         textAlign: 'right',
         fontSize: 15,
-        marginRight: wp(3)
+        marginRight: wp(0)
     },
-
-    eduTypesView: {
-        height: hp(8),
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
-    },
-
-    eduTypesBtn: {
-        height: hp(6),
-        width: '45%',
-        backgroundColor: COLORS.purple,
-        flexDirection: 'row',
-        borderRadius: 25,
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        elevation: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 2,
-            height: 3,
-        },
-        shadowOpacity: 0.35,
-        shadowRadius: 9.62,
-    },
-    eduTypeText: {
-        color: COLORS.black,
-        width: '40%',
-        textAlign: 'right',
-        marginRight: wp(-3),
-        fontSize: hp(2),
-        marginTop: Platform.OS === 'ios' ? hp(-1) : 0
-    },
-
-    eduStagesView: {
-        height: hp(17),
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-    },
-    eduStagesBtn: {
-        height: hp(13),
-        width: '30%',
-        backgroundColor: COLORS.purple,
-        borderRadius: 25,
-
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 2,
-            height: 3,
-        },
-        shadowOpacity: 0.35,
-        shadowRadius: 9.62,
-    },
-    eduStagesCheckBtn: {
-        borderWidth: .1,
-        borderBottomColor: COLORS.white,
-        backgroundColor: COLORS.white,
-        borderRadius: 20,
-
-        position: 'absolute',
-        top: hp(11.5)
-    },
-    locationMainView: {
-        height: hp(6),
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
-    },
-    locationBtn: {
-        height: hp(6),
-        width: '45%',
-        backgroundColor: COLORS.white,
-        borderRadius: 15,
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        alignItems: 'center',
-        elevation: 20,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 2,
-            height: 3,
-        },
-        shadowOpacity: 0.35,
-        shadowRadius: 9.62,
-    },
-    searchTeacherBtnView: {
-        marginTop: hp(2),
-        marginBottom: hp(2),
-        height: hp(6),
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row'
-    },
-    teacherInfoSubView: {
+    teacherInfoView: {
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        height: hp(18),
-        width: wp(31),
-        marginTop: hp(2),
-        marginLeft: wp(1),
-        marginRight: wp(1),
-        borderRadius: 15,
+        alignSelf: 'center',
+        width: '95%',
+        marginHorizontal:wp(1),
+        marginTop:hp(1),
+        borderRadius: 20,
         elevation: 20,
         shadowColor: '#000',
         shadowOffset: {
@@ -360,54 +430,114 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 9.62,
     },
-    mainModelView: {
-        flex: 1,
-        width: wp(100),
-        height: hp(100),
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-
-
+    teacherInfoSubView:{ 
+        height: hp(14), 
+        width: '95%', 
+        flexDirection: 'row', 
+        borderBottomWidth: 1, 
+        borderBottomColor: COLORS.ashewhite 
     },
-    modalItemContainer: {
-        width: wp(100),
-        height: hp(40),
-        backgroundColor: COLORS.ashewhite,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        paddingVertical: 15,
-        justifyContent: 'space-evenly',
-        alignItems: 'center'
-    },
-    modalCancelBtn: {
-        height: hp(5),
-        width: '40%',
-        backgroundColor: COLORS.white,
+    subjectInfoView:{ 
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'center',
+        width: '95%',
+        marginHorizontal:wp(1),
+        marginTop:hp(1),
         borderRadius: 20,
-        elevation: 2,
+        elevation: 20,
         shadowColor: '#000',
         shadowOffset: {
-            width: 1,
-            height: 1,
+            width: 2,
+            height: 3,
         },
         shadowOpacity: 0.35,
-        shadowRadius: 2.62,
+        shadowRadius: 9.62,
+        borderWidth:1,
+        borderColor:'#C0C0C0'
     },
-    subjectsListBtn: {
-        width: '70%',
-        height: hp(5),
-        borderBottomWidth: 1,
-        borderColor: COLORS.lightgrey,
-        justifyContent: 'center',
-        alignSelf: 'center'
-    },
-    subjectsListText: {
-        color: COLORS.black,
-        textAlign: 'center',
+    subjectInfoSubView:{ 
+        height: hp(12), 
+        width: '100%', 
+        flexDirection: 'row',
+        
 
+    },
+    subjectBasicInfo:{ 
+        width: '70%', 
+        justifyContent: 'center', 
+        alignItems: 'flex-end' ,
+        borderRadius:20
+    },
+    subjectImageView:{
+        width: '30%', 
+        justifyContent: 'center', 
+        alignItems: 'center' ,
+    },
+    subjectTitleText:{ 
+        color: COLORS.black, 
+        textAlign: 'center', 
+        fontSize:hp(2) ,
+        marginTop:Platform.OS==='android'? hp(1):0
+    },
+    courseRateView:{ 
+        width: '30%', 
+        borderTopLeftRadius: 20, 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    courseRateSubView:{ 
+        height: hp(4.8), 
+        width: '80%', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        backgroundColor: COLORS.ashewhite, 
+        borderRadius: 20 
+    },
+    teacherBasicInfo:{ 
+        width: '40%', 
+        justifyContent: 'center', 
+        alignItems: 'flex-end' 
+    },
+    teacherNameText:{ 
+        color: COLORS.black, 
+        textAlign: 'center', 
+        marginRight: wp(4),
+        fontSize:hp(2) ,
+        //marginTop:hp(0)
+    },
+    starsView:{ 
+        height: hp(3), 
+        width: wp(6), 
+        marginRight: wp(-1) 
+    },
+    teacherImageView:{
+        width: '30%', 
+        borderTopRightRadius: 20, 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+    },
+    teacherDetailView:{
+        width: '90%',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        alignItems:'flex-end',
+    },
+    teacherDetailText:{
+        textAlign:'right',
+        color:COLORS.black
+    },
+    moreDetailView: {
+        height: hp(5.5),
+        width: '100%',
+        backgroundColor: COLORS.purple,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
     },
 
 

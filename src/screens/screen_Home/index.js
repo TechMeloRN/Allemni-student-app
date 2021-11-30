@@ -367,7 +367,7 @@ const index = ({ navigation, route }) => {
                             data={teacherData}
                             horizontal={true}
                             renderItem={({ item, index }) => (
-                                <View style={styles.teacherInfoSubView}>
+                                <Pressable onPress={()=>navigation.navigate("TeacherPersonalInfo")} style={styles.teacherInfoSubView}>
                                     <View style={{ height: hp(7), width: wp(14) }}>
                                         <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
                                     </View>
@@ -393,7 +393,7 @@ const index = ({ navigation, route }) => {
                                         </View>
                                     </Pressable>
                                     <Text style={{ color: COLORS.purple, textAlign: 'center' }}>{item.status}</Text>
-                                </View>
+                                </Pressable>
 
                             )}
                             keyExtractor={(item) => item.id}

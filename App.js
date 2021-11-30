@@ -22,7 +22,7 @@ import SignupVerification from './src/screens/screen_SignupVerification'
 import HomeScreen from './src/screens/screen_Home'
 import SearchTeacher from './src/screens/screen_SearchTeacher'
 import TextualSearch from './src/screens/screen_TextualSearch'
-
+import TeacherPersonalInfo from './src/screens/screen_TeacherDetails-PersonalInfo'
 
 //Authentication Test
 import SendAuth from './src/Testapp/AuthFunc'
@@ -51,7 +51,7 @@ function App() {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="SearchTeacher" component={SearchTeacher} />
         <Stack.Screen name="TextualSearch" component={TextualSearch} />
-
+        <Stack.Screen name="TeacherPersonalInfo" component={TeacherPersonalInfo} />
 
         <Stack.Screen name="HomeScreen_Test" component={HomeScreen_Test} />
         <Stack.Screen name="Profile_Test" component={Profile_Test} />
