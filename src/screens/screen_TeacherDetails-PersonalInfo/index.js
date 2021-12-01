@@ -38,7 +38,7 @@ import qualificationIcon from '../../assets/Images/icons/qualificationIcon.png'
 import workHistoryIcon from '../../assets/Images/icons/workHistoryIcon.png'
 import yearOfExpIcon from '../../assets/Images/icons/yearOfExpIcon.png'
 import courseFalseIcon from '../../assets/Images/icons/courseFalseIcon.png'
-
+import blurRectangle from '../../assets/Images/background/blurRectangle.png'
 //BottomTab Icons 
 import moreFalseIcon from '../../assets/Images/icons/moreFalseIcon.png'
 import homeTrueIcon from '../../assets/Images/icons/homeTrueIcon.png'
@@ -128,7 +128,7 @@ const index = ({ navigation, route }) => {
 
     useEffect(() => {
         getOrientation()
-        
+
         Dimensions.addEventListener('change', getOrientation);
     }, []);
 
@@ -157,7 +157,7 @@ const index = ({ navigation, route }) => {
             setrating(COLORS.purple)
         }
     }
-    
+
 
     //Screen Orientation 
     const getOrientation = () => {
@@ -197,9 +197,9 @@ const index = ({ navigation, route }) => {
                 {/* Teacher Detail  */}
                 <View style={styles.teacherInfoSubView}>
                     <View style={styles.courseRateView}>
-                        <View style={styles.courseRateSubView}>
-                            <Text style={{ color: COLORS.purple }}> {'150' + " " + "ر۔س"}</Text>
-                        </View>
+                        <ImageBackground source={blurRectangle} style={styles.courseRateSubView}>
+                            <Text style={{ color: COLORS.white }}> {'150' + " " + "ر۔س"}</Text>
+                        </ImageBackground>
                     </View>
                     <View style={styles.teacherBasicInfo}>
                         <Text style={styles.teacherNameText}> سعود ابراھیم حمندی </Text>
@@ -224,7 +224,7 @@ const index = ({ navigation, route }) => {
                         <Text style={[styles.teacherNameText, { color: COLORS.white }]}> ریاضیات الصف الاول </Text>
                     </View>
                     <View style={styles.teacherImageView}>
-                        <View style={{ height: hp(10), width: wp(22) }}>
+                        <View style={{ height: Platform.OS === 'ios' ? hp(10) : hp(11), width: wp(22) }}>
                             <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
                         </View>
                     </View>
@@ -251,107 +251,136 @@ const index = ({ navigation, route }) => {
 
                 <View style={{ flex: 1, backgroundColor: COLORS.ashewhite }}>
 
-                    <Pressable onPress={() => setqualification(!qualification)} style={[styles.contentTextView]}>
-                        <Material name={qualification ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
-                        <Text style={styles.contentText}> المسارالتعلیمی</Text>
-                        <Image style={{ height: hp(3), width: wp(7), marginRight: wp(2) }} source={qualificationIcon} />
-                    </Pressable>
+                    {selectedMenu === 'expertise' &&
+                        (<>
+                            {/* Expertise Screen */}
+                            <Pressable onPress={() => setqualification(!qualification)} style={[styles.contentTextView]}>
+                                <Material name={qualification ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                                <Text style={styles.contentText}> الموھلات</Text>
+                                <Image style={{ height: Platform.OS === 'ios' ? hp(3) : hp(3.5), width: wp(7), marginRight: wp(2) }} source={qualificationIcon} />
+                            </Pressable>
 
-                    {qualification &&
-                        <View style={{
-                            width: '100%',
-                            backgroundColor: COLORS.ashewhite,
-                            elevation: 20,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 2,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.35,
-                            shadowRadius: 1.62,
-                            marginTop:hp(.1),
-                            justifyContent:'center',
-                         
-                        }}>
-                            <Text style={{height:hp(4),marginTop:hp(1)}}> qualification </Text>
-                        
-                        </View>
+                            {qualification &&
+                                (<View style={{
+                                    width: '100%',
+                                    backgroundColor: COLORS.ashewhite,
+                                    elevation: 20,
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 2,
+                                        height: 3,
+                                    },
+                                    shadowOpacity: 0.35,
+                                    shadowRadius: 1.62,
+                                    marginTop: hp(.1),
+                                    justifyContent: 'center',
+
+                                }}>
+                                    <Text style={{ height: hp(4), marginTop: hp(1), color: COLORS.black }}> qualification </Text>
+
+                                </View>)}
+
+
+
+                            <Pressable onPress={() => setcourse(!course)} style={[styles.contentTextView]}>
+                                <Material name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                                <Text style={styles.contentText}> الدورات</Text>
+                                <Image style={{ height: Platform.OS === 'ios' ? hp(3) : hp(3.5), width: wp(7), marginRight: wp(2) }} source={courseFalseIcon} />
+                            </Pressable>
+
+                            {course &&
+                                <View style={{
+                                    width: '100%',
+                                    backgroundColor: COLORS.ashewhite,
+                                    elevation: 20,
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 2,
+                                        height: 3,
+                                    },
+                                    shadowOpacity: 0.35,
+                                    shadowRadius: 1.62,
+                                    marginTop: hp(.1)
+                                }}>
+                                    <Text style={{ height: hp(4), marginTop: hp(1), color: COLORS.black }}> Course </Text>
+                                </View>
+
+                            }
+
+                            <Pressable onPress={() => setyearOfExp(!yearOfExp)} style={[styles.contentTextView]}>
+                                <Material name={yearOfExp ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                                <Text style={styles.contentText}> سنوات الخبرة</Text>
+                                <Image style={{ height: Platform.OS === 'ios' ? hp(3) : hp(3.5), width: wp(5), marginRight: wp(2) }} source={yearOfExpIcon} />
+                            </Pressable>
+
+                            {yearOfExp &&
+                                <View style={{
+                                    width: '100%',
+                                    backgroundColor: COLORS.ashewhite,
+                                    elevation: 20,
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 2,
+                                        height: 3,
+                                    },
+                                    shadowOpacity: 0.35,
+                                    shadowRadius: 1.62,
+                                    marginTop: hp(.1)
+                                }}>
+                                    <Text style={{ height: hp(4), marginTop: hp(1), color: COLORS.black }}> Year Of Exp </Text>
+                                </View>
+
+                            }
+                            <Pressable onPress={() => setworkHistory(!workHistory)} style={[styles.contentTextView]}>
+                                <Material name={workHistory ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                                <Text style={styles.contentText}>  الخبرات </Text>
+                                <Image style={{ height: Platform.OS === 'ios' ? hp(2.7) : hp(3), width: wp(7), marginRight: wp(2) }} source={workHistoryIcon} />
+                            </Pressable>
+
+                            {workHistory &&
+                                <View style={{
+                                    width: '100%',
+                                    backgroundColor: COLORS.ashewhite,
+                                    elevation: 20,
+                                    shadowColor: '#000',
+                                    shadowOffset: {
+                                        width: 2,
+                                        height: 3,
+                                    },
+                                    shadowOpacity: 0.35,
+                                    shadowRadius: 1.62,
+                                    marginTop: hp(.1)
+                                }}>
+                                    <Text style={{ height: hp(4), marginTop: hp(1), color: COLORS.black }}> Work History </Text>
+                                </View>
+
+                            }
+
+                        </>
+                        )
 
                     }
 
-                    <Pressable onPress={() => setcourse(!course)} style={[styles.contentTextView]}>
-                        <Material name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
-                        <Text style={styles.contentText}> الدورات</Text>
-                        <Image style={{ height: hp(3), width: wp(7), marginRight: wp(2) }} source={courseFalseIcon} />
-                    </Pressable>
-
-                    {course &&
-                        <View style={{
-                            width: '100%',
-                            backgroundColor: COLORS.ashewhite,
-                            elevation: 20,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 2,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.35,
-                            shadowRadius: 1.62,
-                            marginTop:hp(.1)
-                        }}>
-                            <Text style={{height:hp(4),marginTop:hp(1)}}> Course </Text>
+                    {/* personalInfo */}
+                    {selectedMenu === 'personalInfo' &&
+                        <>
+                        <View>
+                            <Text style={{color:COLORS.purple}}> Personal Info </Text>
                         </View>
-
+                        </>
                     }
 
-                    <Pressable onPress={() => setyearOfExp(!yearOfExp)} style={[styles.contentTextView]}>
-                        <Material name={yearOfExp ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
-                        <Text style={styles.contentText}> سنوات الخبرة</Text>
-                        <Image style={{ height: hp(3), width: wp(5), marginRight: wp(2) }} source={yearOfExpIcon} />
-                    </Pressable>
-
-                    {yearOfExp &&
-                        <View style={{
-                            width: '100%',
-                            backgroundColor: COLORS.ashewhite,
-                            elevation: 20,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 2,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.35,
-                            shadowRadius: 1.62,
-                            marginTop:hp(.1)
-                        }}>
-                            <Text style={{height:hp(4),marginTop:hp(1)}}> Year Of Exp </Text>
+                    {/* Rating */}
+                    {selectedMenu === 'rating' &&
+                        <>
+                        <View>
+                            <Text style={{color:COLORS.purple}}> Rating </Text>
                         </View>
-
+                        </>
                     }
-                    <Pressable onPress={() => setworkHistory(!workHistory)} style={[styles.contentTextView]}>
-                        <Material name={workHistory ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
-                        <Text style={styles.contentText}>  الخبرات </Text>
-                        <Image style={{ height: hp(2.7), width: wp(7), marginRight: wp(2) }} source={workHistoryIcon} />
-                    </Pressable>
 
-                    {workHistory &&
-                        <View style={{
-                            width: '100%',
-                            backgroundColor: COLORS.ashewhite,
-                            elevation: 20,
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 2,
-                                height: 3,
-                            },
-                            shadowOpacity: 0.35,
-                            shadowRadius: 1.62,
-                            marginTop:hp(.1)
-                        }}>
-                            <Text style={{height:hp(4),marginTop:hp(1)}}> Work History </Text>
-                        </View>
 
-                    }
+
 
                 </View>
 
@@ -461,12 +490,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     courseRateSubView: {
-        height: hp(4.8),
-        width: '80%',
+        height: hp(4),
+        width: '85%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#eee',
-        borderRadius: 20
+        //backgroundColor: '#eee',
+        // borderRadius: 20
     },
     teacherBasicInfo: {
         width: '45%',
@@ -524,7 +553,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.white,
-        elevation: 20,
+        elevation: 15,
         shadowColor: '#000',
         shadowOffset: {
             width: 2,
