@@ -34,15 +34,10 @@ import landscapeLogo from '../../assets/Images/logo/landscapeIcon.png'
 
 // Home Screen Icons
 import teacherIcon from '../../assets/Images/Image/teacherIcon.png'
-import courseTrueIcon from '../../assets/Images/icons/courseTrueIcon.png'
+import qualificationIcon from '../../assets/Images/icons/qualificationIcon.png'
+import workHistoryIcon from '../../assets/Images/icons/workHistoryIcon.png'
+import yearOfExpIcon from '../../assets/Images/icons/yearOfExpIcon.png'
 import courseFalseIcon from '../../assets/Images/icons/courseFalseIcon.png'
-import universityTrueIcon from '../../assets/Images/icons/universityTrueIcon.png'
-import universityFalseIcon from '../../assets/Images/icons/universityFalseIcon.png'
-import generalTrueIcon from '../../assets/Images/icons/generalTrueIcon.png'
-import generalFalseIcon from '../../assets/Images/icons/generalFalseIcon.png'
-import starFalseIcon from '../../assets/Images/icons/starFalseIcon.png'
-import starTrueIcon from '../../assets/Images/icons/starTrueIcon.png'
-import halfStarIcon from '../../assets/Images/icons/halfStarIcon.png'
 
 //BottomTab Icons 
 import moreFalseIcon from '../../assets/Images/icons/moreFalseIcon.png'
@@ -58,8 +53,14 @@ const index = ({ navigation, route }) => {
     const [orientation, setorientation] = useState('');
     const [rating, setrating] = useState(COLORS.white);
     const [expertise, setexpertise] = useState(COLORS.white);
-    const [personalInfo, setpersonalInfo] = useState(COLORS.purple)
-    const [selectedMenu ,setselectedMenu] = useState('personalInfo')
+    const [personalInfo, setpersonalInfo] = useState(COLORS.purple);
+    const [selectedMenu, setselectedMenu] = useState('personalInfo');
+
+    const [qualification, setqualification] = useState(false);
+    const [course, setcourse] = useState(false);
+    const [yearOfExp, setyearOfExp] = useState(false);
+    const [workHistory, setworkHistory] = useState(false);
+
 
 
 
@@ -127,6 +128,7 @@ const index = ({ navigation, route }) => {
 
     useEffect(() => {
         getOrientation()
+        
         Dimensions.addEventListener('change', getOrientation);
     }, []);
 
@@ -134,17 +136,15 @@ const index = ({ navigation, route }) => {
 
 
 
-    //EducationType Handling 
+    //Teacher Menu Handling 
     const checkMenu = (check) => {
         if (check == 'personalInfo') {
-            //console.log("online");
             setselectedMenu('personalInfo')
             setpersonalInfo(COLORS.purple)
             setexpertise(COLORS.white)
             setrating(COLORS.white)
         }
         else if (check == 'expertise') {
-            //console.log("online");
             setselectedMenu('expertise')
             setpersonalInfo(COLORS.white)
             setexpertise(COLORS.purple)
@@ -157,6 +157,7 @@ const index = ({ navigation, route }) => {
             setrating(COLORS.purple)
         }
     }
+    
 
     //Screen Orientation 
     const getOrientation = () => {
@@ -233,23 +234,127 @@ const index = ({ navigation, route }) => {
                     <Text style={{ color: COLORS.white }}> احجزالآن </Text>
                 </Pressable>
 
-                <View style={{ flex: 1, marginTop: hp(3) }}>
-                    <View style={styles.menuView}>
-                        <Pressable onPress={()=>checkMenu("rating")} style={[styles.menuElements, { backgroundColor: rating,borderRightWidth:selectedMenu=='rating'?wp(1.5):0,borderLeftWidth:selectedMenu=='rating'?wp(1.5):0}]}>
-                            <Text style={{ color:selectedMenu=='rating'?COLORS.white:COLORS.black }}> التقییمات</Text>
-                        </Pressable>
 
-                        <Pressable onPress={()=>checkMenu("expertise")} style={[styles.menuElements, { backgroundColor: expertise,borderRightWidth:selectedMenu=='expertise'?wp(1.5):0,borderLeftWidth:selectedMenu=='expertise'?wp(1.5):0}]}>
-                            <Text style={{ color: selectedMenu=='expertise'?COLORS.white:COLORS.black }}> الخبرات</Text>
-                        </Pressable>
+                <View style={styles.menuView}>
+                    <Pressable onPress={() => checkMenu("rating")} style={[styles.menuElements, { backgroundColor: rating, borderRightWidth: selectedMenu == 'rating' ? wp(1.5) : 0, borderLeftWidth: selectedMenu == 'rating' ? wp(1.5) : 0 }]}>
+                        <Text style={{ color: selectedMenu == 'rating' ? COLORS.white : COLORS.black }}> التقییمات</Text>
+                    </Pressable>
 
-                        <Pressable onPress={()=>checkMenu("personalInfo")} style={[styles.menuElements, { backgroundColor: personalInfo,borderRightWidth:selectedMenu=='personalInfo'?wp(1.5):0,borderLeftWidth:selectedMenu=='personalInfo'?wp(1.5):0 }]}>
-                            <Text style={{ color: selectedMenu=='personalInfo'?COLORS.white:COLORS.black }}> الملف الشخصي</Text>
-                        </Pressable>
-                    </View>
+                    <Pressable onPress={() => checkMenu("expertise")} style={[styles.menuElements, { backgroundColor: expertise, borderRightWidth: selectedMenu == 'expertise' ? wp(1.5) : 0, borderLeftWidth: selectedMenu == 'expertise' ? wp(1.5) : 0 }]}>
+                        <Text style={{ color: selectedMenu == 'expertise' ? COLORS.white : COLORS.black }}> الخبرات</Text>
+                    </Pressable>
 
+                    <Pressable onPress={() => checkMenu("personalInfo")} style={[styles.menuElements, { backgroundColor: personalInfo, borderRightWidth: selectedMenu == 'personalInfo' ? wp(1.5) : 0, borderLeftWidth: selectedMenu == 'personalInfo' ? wp(1.5) : 0 }]}>
+                        <Text style={{ color: selectedMenu == 'personalInfo' ? COLORS.white : COLORS.black }}> الملف الشخصي</Text>
+                    </Pressable>
+                </View>
+
+                <View style={{ flex: 1, backgroundColor: COLORS.ashewhite }}>
+
+                    <Pressable onPress={() => setqualification(!qualification)} style={[styles.contentTextView]}>
+                        <Material name={qualification ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                        <Text style={styles.contentText}> المسارالتعلیمی</Text>
+                        <Image style={{ height: hp(3), width: wp(7), marginRight: wp(2) }} source={qualificationIcon} />
+                    </Pressable>
+
+                    {qualification &&
+                        <View style={{
+                            width: '100%',
+                            backgroundColor: COLORS.ashewhite,
+                            elevation: 20,
+                            shadowColor: '#000',
+                            shadowOffset: {
+                                width: 2,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.35,
+                            shadowRadius: 1.62,
+                            marginTop:hp(.1),
+                            justifyContent:'center',
+                         
+                        }}>
+                            <Text style={{height:hp(4),marginTop:hp(1)}}> qualification </Text>
+                        
+                        </View>
+
+                    }
+
+                    <Pressable onPress={() => setcourse(!course)} style={[styles.contentTextView]}>
+                        <Material name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                        <Text style={styles.contentText}> الدورات</Text>
+                        <Image style={{ height: hp(3), width: wp(7), marginRight: wp(2) }} source={courseFalseIcon} />
+                    </Pressable>
+
+                    {course &&
+                        <View style={{
+                            width: '100%',
+                            backgroundColor: COLORS.ashewhite,
+                            elevation: 20,
+                            shadowColor: '#000',
+                            shadowOffset: {
+                                width: 2,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.35,
+                            shadowRadius: 1.62,
+                            marginTop:hp(.1)
+                        }}>
+                            <Text style={{height:hp(4),marginTop:hp(1)}}> Course </Text>
+                        </View>
+
+                    }
+
+                    <Pressable onPress={() => setyearOfExp(!yearOfExp)} style={[styles.contentTextView]}>
+                        <Material name={yearOfExp ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                        <Text style={styles.contentText}> سنوات الخبرة</Text>
+                        <Image style={{ height: hp(3), width: wp(5), marginRight: wp(2) }} source={yearOfExpIcon} />
+                    </Pressable>
+
+                    {yearOfExp &&
+                        <View style={{
+                            width: '100%',
+                            backgroundColor: COLORS.ashewhite,
+                            elevation: 20,
+                            shadowColor: '#000',
+                            shadowOffset: {
+                                width: 2,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.35,
+                            shadowRadius: 1.62,
+                            marginTop:hp(.1)
+                        }}>
+                            <Text style={{height:hp(4),marginTop:hp(1)}}> Year Of Exp </Text>
+                        </View>
+
+                    }
+                    <Pressable onPress={() => setworkHistory(!workHistory)} style={[styles.contentTextView]}>
+                        <Material name={workHistory ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={hp(3)} color={COLORS.purple} />
+                        <Text style={styles.contentText}>  الخبرات </Text>
+                        <Image style={{ height: hp(2.7), width: wp(7), marginRight: wp(2) }} source={workHistoryIcon} />
+                    </Pressable>
+
+                    {workHistory &&
+                        <View style={{
+                            width: '100%',
+                            backgroundColor: COLORS.ashewhite,
+                            elevation: 20,
+                            shadowColor: '#000',
+                            shadowOffset: {
+                                width: 2,
+                                height: 3,
+                            },
+                            shadowOpacity: 0.35,
+                            shadowRadius: 1.62,
+                            marginTop:hp(.1)
+                        }}>
+                            <Text style={{height:hp(4),marginTop:hp(1)}}> Work History </Text>
+                        </View>
+
+                    }
 
                 </View>
+
             </View>
 
             <View style={styles.bottomTabView}>
@@ -410,7 +515,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.ashewhite,
         width: '100%',
         height: hp(6),
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: hp(2)
     },
     menuElements: {
         width: '32%',
@@ -426,7 +532,31 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.35,
         shadowRadius: 2.62,
-        borderColor:COLORS.yellow
+        borderColor: COLORS.yellow
+    },
+
+    contentTextView: {
+        width: '100%',
+        marginTop: hp(1),
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row',
+        backgroundColor: COLORS.white,
+        elevation: 5,
+        height: hp(6),
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 2.62,
+    },
+    contentText: {
+        width: '75%',
+        color: COLORS.black,
+        textAlign: 'right',
+        fontSize: 15,
     },
 
     bottomTabView: {
