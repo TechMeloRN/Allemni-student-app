@@ -41,7 +41,7 @@ const index = ({ navigation }) => {
     const [hide, sethide] = useState(true);
     const [loaded, setloaded] = useState(false);
 
-    const [phoneNo, setphoneNo] = useState('+923463804151')
+    const [phoneNo, setphoneNo] = useState('')
     const [confirmResult, setconfirmResult] = useState(null)
 
     const validatePhoneNumber = () => {
