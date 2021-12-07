@@ -53,9 +53,9 @@ const index = ({ navigation, route }) => {
     const [teacherData, setteacherData] = useState([
         {
             id: 1,
-            name: 'عبید عبداللہ المدوانی',
+            name: 'عبید عبداللہ المدواني',
             image: teacherIcon,
-            status: 'مدرس ابتدائی',
+            status: 'مدرس ابتدائي',
             stars: 0,
             courseRate: 140,
             detail: 'الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت'
@@ -101,7 +101,7 @@ const index = ({ navigation, route }) => {
         {
             id: 2,
             Title: 'ریاضیات متقدمۃ ۔ جبرواحصائ',
-            level:'اولی ثانی'
+            level:'اولی ثاني'
         },
         {
             id: 3,
@@ -159,12 +159,12 @@ const index = ({ navigation, route }) => {
                 <View style={styles.searchMainView}>
                     <View style={styles.searchSubView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
-                        <Text style={{ color: COLORS.white }}> فلتر </Text>
+                        <Text style={{ color: COLORS.white,fontFamily: 'Cairo-Regular' }}> فلتر </Text>
                         <MaterialCommunity name='filter' size={hp(2)} color={COLORS.white} />
                     </View>
                     <View style={[styles.searchSubView, { width: '65%', backgroundColor: COLORS.white }]}>
                         <Material name='search' size={hp(3)} color={COLORS.purple} />
-                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%' }} />
+                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%',fontFamily: 'Cairo-Regular' }} />
                         
                     </View>
                 </View>
@@ -186,7 +186,7 @@ const index = ({ navigation, route }) => {
                                 <View style={styles.teacherInfoSubView}>
                                     <View style={styles.courseRateView}>
                                         <View style={styles.courseRateSubView}>
-                                            <Text style={{ color: COLORS.purple }}> {item.courseRate + " " + "ر۔س"}</Text>
+                                            <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular' }}> {item.courseRate + " " + "ر۔س"}</Text>
                                         </View>
                                     </View>
                                     <View style={styles.teacherBasicInfo}>
@@ -224,7 +224,7 @@ const index = ({ navigation, route }) => {
                                             }}
                                         style={styles.moreDetailView}>
                                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
-                                        <Text style={{ color: COLORS.white }}> تفاصیل </Text>
+                                        <Text style={{ color: COLORS.white,fontFamily: 'Cairo-Regular' }}> تفاصیل </Text>
                                     </Pressable>
                                     :
                                     <View style={styles.teacherDetailView}>
@@ -287,29 +287,29 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate("MenuScreen")}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreFalseIcon} />
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular' }}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> الرسائل</Text>
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular' }}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7), height: Platform.OS === 'ios' ? hp(4.5) : hp(4), marginTop: hp(1) }]} source={classFalseIcon} />
-                    <Text style={{ color: COLORS.black, marginTop: Platform.OS === 'ios' ? hp(-1) : 0 }}> الدروس</Text>
+                    <Text style={{ color: COLORS.black, marginTop: Platform.OS === 'ios' ? hp(-1) : 0,fontFamily: 'Cairo-Regular' }}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={[styles.bottomIcon]} source={homeTrueIcon} />
-                    <Text style={{ color: COLORS.purple }}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular' }}>الرئیسیة </Text>
                 </Pressable>
             </View>
 
@@ -348,9 +348,10 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: COLORS.white,
-        fontSize: 18,
+        fontSize: Platform.OS==='android'?hp(1.9):hp(1.7),
         textAlign: 'center',
         marginTop: Platform.OS === 'ios' ? hp(6) : hp(3),
+        fontFamily: 'Cairo-SemiBold'
     },
     backButtonView: {
         marginLeft: wp(2),
@@ -404,13 +405,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.35,
         shadowRadius: 2.62,
-        marginTop:hp(1),
+        //marginTop:hp(1),
     },
     contentText: {
         color: COLORS.purple,
         textAlign: 'right',
         fontSize: 15,
-        marginRight: wp(0)
+        marginRight: wp(0),
+        fontFamily: 'Cairo-Regular'
     },
     teacherInfoView: {
         backgroundColor: 'white',
@@ -419,7 +421,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '95%',
         marginHorizontal:wp(1),
-        marginTop:hp(1),
+        marginVertical:hp(1),
+        //marginTop:hp(1),
         borderRadius: 20,
         elevation: 20,
         shadowColor: '#000',
@@ -478,8 +481,9 @@ const styles = StyleSheet.create({
     subjectTitleText:{ 
         color: COLORS.black, 
         textAlign: 'center', 
-        fontSize:hp(2) ,
-        marginTop:Platform.OS==='android'? hp(1):0
+        fontSize:Platform.OS==='android'? hp(1.8):hp(1.6) ,
+        marginTop:Platform.OS==='android'? hp(1):0,
+        fontFamily: 'Cairo-Regular'
     },
     courseRateView:{ 
         width: '30%', 
@@ -504,7 +508,8 @@ const styles = StyleSheet.create({
         color: COLORS.black, 
         textAlign: 'center', 
         marginRight: wp(4),
-        fontSize:hp(2) ,
+        fontSize:Platform.OS==='android'? hp(1.8):hp(1.6) ,
+        fontFamily: 'Cairo-Regular'
         //marginTop:hp(0)
     },
     starsView:{ 
@@ -527,7 +532,8 @@ const styles = StyleSheet.create({
     },
     teacherDetailText:{
         textAlign:'right',
-        color:COLORS.black
+        color:COLORS.black,
+        fontFamily: 'Cairo-Regular'
     },
     moreDetailView: {
         height: hp(5.5),

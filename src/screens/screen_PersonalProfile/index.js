@@ -139,10 +139,10 @@ const index = ({ navigation,route }) => {
                     <Text style={[styles.infoText,{width:'25%'}]}> رقم الجوال </Text>
                </View>
 
-               <View style={styles.infoView}>
+               {/* <View style={styles.infoView}>
                     <Text style={[styles.infoText,{marginRight:wp(5)}]}> {email} </Text>
                     <Text style={[styles.infoText,{width:'25%'}]}> البرید الالکترونی </Text>
-               </View>
+               </View> */}
 
              
 
@@ -153,29 +153,29 @@ const index = ({ navigation,route }) => {
                     onPress={() => navigation.navigate('MenuScreen')}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreFalseIcon} />
-                    <Text style={{ color:COLORS.black }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreFalseIcon} />
+                    <Text style={styles.bottomTabText}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{ color:COLORS.black }} > الرسائل</Text>
+                    <Text style={styles.bottomTabText} > الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7) }]} source={classFalseIcon} />
-                    <Text style={{ color:COLORS.black }}> الدروس</Text>
+                    <Text style={styles.bottomTabText}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={styles.bottomIcon} source={homeFalseIcon} />
-                    <Text style={{ color:COLORS.black }}>الرئیسیة </Text>
+                    <Text style={styles.bottomTabText}>الرئیسیة </Text>
                 </Pressable>
             </View>
 
@@ -200,9 +200,9 @@ const styles = StyleSheet.create({
     },
     headerText:{ 
         color: '#fff', 
-        fontSize: 18, 
+        fontSize:Platform.OS==='android'?hp(1.9):hp(1.7) , 
         textAlign: 'center', 
-     
+        fontFamily: 'Cairo-SemiBold'
     },
     mainContent: {
         flex: 1,
@@ -221,9 +221,9 @@ const styles = StyleSheet.create({
         width:'60%',
         textAlign:'right',
         color:COLORS.purple, 
-        fontWeight:'bold',
         fontSize:hp(1.7),
-        //backgroundColor:'pink'
+        fontFamily: 'Cairo-SemiBold',
+     
     },
    
     backButtonView: {
@@ -241,7 +241,8 @@ const styles = StyleSheet.create({
     },
     bottomTabView: {
         backgroundColor: COLORS.white,
-        height: hp(10),
+        height: hp(8),
+        width:'100%',
         borderTopLeftRadius: hp(3),
         borderTopRightRadius: hp(3),
         elevation: 5,
@@ -260,6 +261,10 @@ const styles = StyleSheet.create({
     bottomIcon: {
         height: hp(4),
         width: Platform.OS === 'ios' ? wp(9.5) : wp(8.5),
+    },
+    bottomTabText:{ 
+        color:COLORS.black,
+        fontFamily: 'Cairo-Regular' 
     },
     teacherImage: {
         height: Platform.OS === 'android' ? hp(9) : hp(8.5),

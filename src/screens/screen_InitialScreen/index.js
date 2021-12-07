@@ -41,8 +41,8 @@ const index = ({ navigation }) => {
             </View>
 
             <View style={styles.contentView}>
-                <Text style={[styles.btnText,{fontSize:hp(2)}]}> مرحبا </Text>
-                <Text style={styles.btnText}> سجل معنا لحجز معلمک </Text>
+                <Text style={[styles.btnText,{fontSize:hp(2.5),fontFamily:'Cairo-SemiBold'}]}> مرحبا </Text>
+                <Text style={[styles.btnText,{fontSize:hp(1.9)}]}> سجل معنا لحجز معلمک </Text>
 
                 <CustomButton 
                     btnText='اُنشی حسابک' 
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     btnText: {
         color: COLORS.white,
         fontSize: hp(1.8),
+        fontFamily:'Cairo-Medium'
     },
 
 

@@ -169,12 +169,12 @@ const index = ({ navigation }) => {
                 </View>
 
                 <View style={styles.contentView}>
-                    <Text style={[styles.btnText, { fontSize: hp(2) }]}> مرحبا </Text>
-                    <Text style={styles.btnText}> یرجی الدخول اِلی الحساب الشخصی </Text>
+                    <Text style={[styles.btnText, {fontSize:hp(2.5),fontFamily:'Cairo-SemiBold'}]}> مرحبا </Text>
+                    <Text style={[styles.btnText,{fontSize:hp(1.9)}]}> یرجی الدخول اِلی الحساب الشخصی </Text>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                         <TextInput
-                            placeholder='الاسم الثانی'
+                            placeholder='الاسم الثاني'
                             placeholderTextColor='#fff'
                             style={styles.nameTextInput}
                             onChangeText={(val) => setlname(val)}
@@ -230,12 +230,12 @@ const index = ({ navigation }) => {
                             <View style={{ width: wp(40) }}></View>
 
                             <Pressable onPress={() => checkHandle('female')} style={{ flexDirection: 'row', width: wp(15), justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ color: COLORS.white, fontSize: 15, }}> اُنثی </Text>
+                                <Text style={styles.genderText}> اُنثی </Text>
                                 <CheckBox name={female} size={30} color={COLORS.yellow} />
                             </Pressable>
 
                             <Pressable onPress={() => checkHandle('male')} style={{ flexDirection: 'row', width: wp(15), justifyContent: 'space-between', marginLeft: wp(10) }}>
-                                <Text style={{ color: COLORS.white, fontSize: 15, }}> ذکر </Text>
+                                <Text style={styles.genderText}> ذکر </Text>
                                 <CheckBox name={male} size={30} color={COLORS.yellow} />
                             </Pressable>
                         </View>
@@ -336,7 +336,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#fff',
         color: '#fff',
-        textAlign: 'right'
+        textAlign: 'right',
+        fontFamily:'Cairo-Regular'
     },
     nameTextInput: {
         height: hp(7),
@@ -344,7 +345,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#fff',
         color: '#fff',
-        textAlign: 'right'
+        textAlign: 'right',
+        fontFamily:'Cairo-Regular'
     },
     passwordInputTextView: {
         flexDirection: 'row',
@@ -392,10 +394,17 @@ const styles = StyleSheet.create({
     btnText: {
         color: '#fff',
         fontSize: Platform.OS === 'android' ? hp(1.6) : hp(1.7),
+        fontFamily:'Cairo-Medium'
     },
     genderMainText: {
         color: COLORS.white,
         alignSelf: 'flex-end',
+        fontFamily:'Cairo-Medium'
+    },
+    genderText:{ 
+        color: COLORS.white, 
+        fontSize: 15,
+        fontFamily:'Cairo-Regular' 
     },
 
 

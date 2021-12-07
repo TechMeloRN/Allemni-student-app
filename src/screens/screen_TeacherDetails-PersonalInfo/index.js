@@ -189,13 +189,14 @@ const index = ({ navigation, route }) => {
                                     : hp(8),
                     },
                 ]}>
+
                 {/* Teacher Detail  */}
                 <View style={[styles.teacherInfoSubView, { height: hp(15), marginTop: Platform.OS === 'android' ? hp(1) : 0 }]}>
                     <View style={styles.courseRateView}>
                         <ImageBackground
                             source={blurRectangle}
                             style={styles.courseRateSubView}>
-                            <Text style={{ color: COLORS.white }}> {'150' + ' ' + 'ر۔س'}</Text>
+                            <Text style={{ color: COLORS.white ,fontFamily: 'Cairo-Regular'}}> {'150' + ' ' + 'ر۔س'}</Text>
                         </ImageBackground>
                     </View>
                     <View style={styles.teacherBasicInfo}>
@@ -260,7 +261,7 @@ const index = ({ navigation, route }) => {
                 </View>
 
                 <Pressable style={styles.bookButton}>
-                    <Text style={{ color: COLORS.white }}> احجزالآن </Text>
+                    <Text style={{ color: COLORS.white, fontFamily: 'Cairo-SemiBold' }}> احجزالآن </Text>
                 </Pressable>
 
                 <View style={styles.menuView}>
@@ -277,6 +278,7 @@ const index = ({ navigation, route }) => {
                         <Text
                             style={{
                                 color: selectedMenu == 'rating' ? COLORS.white : COLORS.black,
+                                fontFamily: 'Cairo-SemiBold'
                             }}>
                             {' '}
                             التقییمات
@@ -295,8 +297,8 @@ const index = ({ navigation, route }) => {
                         ]}>
                         <Text
                             style={{
-                                color:
-                                    selectedMenu == 'expertise' ? COLORS.white : COLORS.black,
+                                color: selectedMenu == 'expertise' ? COLORS.white : COLORS.black,
+                                fontFamily: 'Cairo-SemiBold'
                             }}>
                             {' '}
                             الخبرات
@@ -315,8 +317,8 @@ const index = ({ navigation, route }) => {
                         ]}>
                         <Text
                             style={{
-                                color:
-                                    selectedMenu == 'personalInfo' ? COLORS.white : COLORS.black,
+                                color: selectedMenu == 'personalInfo' ? COLORS.white : COLORS.black,
+                                fontFamily: 'Cairo-SemiBold'
                             }}>
                             {' '}
                             الملف الشخصي
@@ -324,275 +326,346 @@ const index = ({ navigation, route }) => {
                     </Pressable>
                 </View>
 
-                <View style={{ flex: 1, backgroundColor: COLORS.ashewhite }}>
-                    {selectedMenu === 'expertise' && (
-                        <>
-                            {/* Expertise Screen */}
-                            <Pressable
-                                onPress={() => setqualification(!qualification)}
-                                style={[styles.contentTextView]}>
-                                <Material
-                                    name={
-                                        qualification ? 'keyboard-arrow-up' : 'keyboard-arrow-down'
-                                    }
-                                    size={hp(3)}
-                                    color={COLORS.purple}
-                                />
-                                <Text style={styles.contentText}> الموھلات</Text>
-                                <Image
-                                    style={{
-                                        height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
-                                        width: wp(7),
-                                        marginRight: wp(2),
-                                    }}
-                                    source={qualificationIcon}
-                                />
-                            </Pressable>
-
-                            {qualification && (
-                                <View
-                                    style={styles.expertiseDetailsView}>
-                                    <Text
+                {/* Content Detail */}
+                <ScrollView>
+                    <View style={{ flex: 1, backgroundColor: COLORS.ashewhite }}>
+                        {selectedMenu === 'expertise' && (
+                            <>
+                                {/* Expertise Screen */}
+                                <Pressable
+                                    onPress={() => setqualification(!qualification)}
+                                    style={[styles.contentTextView]}>
+                                    <Material
+                                        name={
+                                            qualification ? 'keyboard-arrow-up' : 'keyboard-arrow-down'
+                                        }
+                                        size={hp(3)}
+                                        color={COLORS.purple}
+                                    />
+                                    <Text style={styles.contentText}> الموھلات</Text>
+                                    <Image
                                         style={{
-                                            height: hp(4),
-                                            marginTop: hp(1),
-                                            color: COLORS.black,
-                                        }}>
-                                        {' '}
-                                        qualification{' '}
-                                    </Text>
-                                </View>
-                            )}
+                                            height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
+                                            width: wp(7),
+                                            marginRight: wp(2),
+                                        }}
+                                        source={qualificationIcon}
+                                    />
+                                </Pressable>
 
-                            <Pressable
-                                onPress={() => setcourse(!course)}
-                                style={[styles.contentTextView]}>
-                                <Material
-                                    name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
-                                    size={hp(3)}
-                                    color={COLORS.purple}
-                                />
-                                <Text style={styles.contentText}> الدورات</Text>
-                                <Image
-                                    style={{
-                                        height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
-                                        width: wp(7),
-                                        marginRight: wp(2),
-                                    }}
-                                    source={courseFalseIcon}
-                                />
-                            </Pressable>
-
-                            {course && (
-                                <View
-                                    style={styles.expertiseDetailsView}>
-                                    <Text
-                                        style={{
-                                            height: hp(4),
-                                            marginTop: hp(1),
-                                            color: COLORS.black,
-                                        }}>
-                                        {' '}
-                                        Course{' '}
-                                    </Text>
-                                </View>
-                            )}
-
-                            <Pressable
-                                onPress={() => setyearOfExp(!yearOfExp)}
-                                style={[styles.contentTextView]}>
-                                <Material
-                                    name={yearOfExp ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
-                                    size={hp(3)}
-                                    color={COLORS.purple}
-                                />
-                                <Text style={styles.contentText}> سنوات الخبرة</Text>
-                                <Image
-                                    style={{
-                                        height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
-                                        width: wp(5),
-                                        marginRight: wp(2),
-                                    }}
-                                    source={yearOfExpIcon}
-                                />
-                            </Pressable>
-
-                            {yearOfExp && (
-                                <View
-                                    style={styles.expertiseDetailsView}>
-                                    <Text
-                                        style={{
-                                            height: hp(4),
-                                            marginTop: hp(1),
-                                            color: COLORS.black,
-                                        }}>
-                                        {' '}
-                                        Year Of Exp{' '}
-                                    </Text>
-                                </View>
-                            )}
-                            <Pressable
-                                onPress={() => setworkHistory(!workHistory)}
-                                style={[styles.contentTextView]}>
-                                <Material
-                                    name={
-                                        workHistory ? 'keyboard-arrow-up' : 'keyboard-arrow-down'
-                                    }
-                                    size={hp(3)}
-                                    color={COLORS.purple}
-                                />
-                                <Text style={styles.contentText}> الخبرات </Text>
-                                <Image
-                                    style={{
-                                        height: Platform.OS === 'ios' ? hp(2.7) : hp(3),
-                                        width: wp(7),
-                                        marginRight: wp(2),
-                                    }}
-                                    source={workHistoryIcon}
-                                />
-                            </Pressable>
-
-                            {workHistory && (
-                                <View
-                                    style={styles.expertiseDetailsView}>
-                                    <Text
-                                        style={{
-                                            height: hp(4),
-                                            marginTop: hp(1),
-                                            color: COLORS.black,
-                                        }}>
-                                        {' '}
-                                        Work History{' '}
-                                    </Text>
-                                </View>
-                            )}
-                        </>
-                    )}
-
-                    {/* personalInfo */}
-                    {selectedMenu === 'personalInfo' && (
-                        <>
-                            <View style={styles.personalInfoView}>
-                                <Text style={[styles.personalInfoText,{marginVertical:hp(2)}]}>{detail}</Text>
-                            </View>
-                            <Pressable
-                                onPress={() => setlevel(!level)}
-                                style={[styles.contentTextView]}>
-                                <Material
-                                    name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
-                                    size={hp(3)}
-                                    color={COLORS.purple}
-                                />
-                                <Text style={styles.contentText}> المسارالتعلیمی </Text>
-                                <Image
-                                    style={{
-                                        height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
-                                        width: wp(7),
-                                        marginRight: wp(2),
-                                    }}
-                                    source={courseFalseIcon}
-                                />
-                            </Pressable>
-
-                            {level && (
-                                <View style={styles.expertiseDetailsView}>
-                                    <Text style={styles.personalInfoText}> ۔ الاول الابتدائي</Text>
-                                    <Text style={styles.personalInfoText}> ۔ الاول المتوسط</Text>
-                                </View>
-                            )}
-
-                        </>
-                    )}
-
-                    {/* Rating */}
-                    {selectedMenu === 'rating' && (
-                        <>
-                            <FlatList
-                                data={teacherData}
-                                renderItem={({ item, index }) => (
-                                    <View style={styles.teacherInfoView}>
-                                        <View style={styles.teacherInfoSubView}>
-                                            <View style={styles.courseRateView}>
-                                                <Text style={{ color: COLORS.black }}> {item.time} </Text>
-                                            </View>
-                                            <View style={[styles.teacherBasicInfo, { width: '70%' }]}>
-                                                <Text
-                                                    style={[
-                                                        styles.teacherNameText,
-                                                        { color: COLORS.black },
-                                                    ]}>
-                                                    {' '}
-                                                    {item.name} {' '}
-                                                </Text>
-
-                                                <Pressable
-                                                    onPress={() => ratingStar(item.stars)}
-                                                    style={{ flexDirection: 'row' }}>
-                                                    <View style={styles.starsView}>
-                                                        <MaterialCommunity
-                                                            name={'star'}
-                                                            size={hp(2.5)}
-                                                            color={COLORS.yellow}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.starsView}>
-                                                        <MaterialCommunity
-                                                            name={'star'}
-                                                            size={hp(2.5)}
-                                                            color={COLORS.yellow}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.starsView}>
-                                                        <MaterialCommunity
-                                                            name={'star-half-full'}
-                                                            size={hp(2.5)}
-                                                            color={COLORS.yellow}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.starsView}>
-                                                        <MaterialCommunity
-                                                            name={'star-outline'}
-                                                            size={hp(2.5)}
-                                                            color={COLORS.yellow}
-                                                        />
-                                                    </View>
-                                                    <View style={styles.starsView}>
-                                                        <MaterialCommunity
-                                                            name={'star-outline'}
-                                                            size={hp(2.5)}
-                                                            color={COLORS.yellow}
-                                                        />
-                                                    </View>
-                                                </Pressable>
-                                                <Text
-                                                    style={[
-                                                        styles.teacherNameText,
-                                                        { color: COLORS.black },
-                                                    ]}>
-                                                    {' '}
-                                                    {item.comment} {' '}
-                                                </Text>
-                                            </View>
-                                        </View>
+                                {qualification && (
+                                    <View
+                                        style={styles.expertiseDetailsView}>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                                marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            • بكالريوس تربية من كلية التربية بجامعة جدة {' '}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                                //marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            • ماجستير طرق التربية من كلية التربية بجامعة جدة {' '}
+                                        </Text>
                                     </View>
                                 )}
-                                keyExtractor={item => item.id}
-                            //   extraData={selectedId}
-                            />
-                        </>
-                    )}
-                </View>
+
+                                <Pressable
+                                    onPress={() => setcourse(!course)}
+                                    style={[styles.contentTextView]}>
+                                    <Material
+                                        name={course ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                                        size={hp(3)}
+                                        color={COLORS.purple}
+                                    />
+                                    <Text style={styles.contentText}> الدورات</Text>
+                                    <Image
+                                        style={{
+                                            height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
+                                            width: wp(7),
+                                            marginRight: wp(2),
+                                            fontFamily: 'Cairo-Regular'
+                                        }}
+                                        source={courseFalseIcon}
+                                    />
+                                </Pressable>
+
+                                {course && (
+                                    <View
+                                        style={styles.expertiseDetailsView}>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                                marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            • دورة في سبل تحسين طرق التواصل مع الطلاب بجامعة جدة {' '}
+                                        </Text>
+                                       
+                                    </View>
+                                )}
+
+                                <Pressable
+                                    onPress={() => setyearOfExp(!yearOfExp)}
+                                    style={[styles.contentTextView]}>
+                                    <Material
+                                        name={yearOfExp ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                                        size={hp(3)}
+                                        color={COLORS.purple}
+                                    />
+                                    <Text style={styles.contentText}> سنوات الخبرة</Text>
+                                    <Image
+                                        style={{
+                                            height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
+                                            width: wp(5),
+                                            marginRight: wp(2),
+                                            fontFamily: 'Cairo-Regular'
+                                        }}
+                                        source={yearOfExpIcon}
+                                    />
+                                </Pressable>
+
+                                {yearOfExp && (
+                                    <View
+                                        style={styles.expertiseDetailsView}>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                                marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                           22 •{' '}
+                                        </Text>
+                                    </View>
+                                )}
+                                <Pressable
+                                    onPress={() => setworkHistory(!workHistory)}
+                                    style={[styles.contentTextView]}>
+                                    <Material
+                                        name={
+                                            workHistory ? 'keyboard-arrow-up' : 'keyboard-arrow-down'
+                                        }
+                                        size={hp(3)}
+                                        color={COLORS.purple}
+                                    />
+                                    <Text style={styles.contentText}> الخبرات </Text>
+                                    <Image
+                                        style={{
+                                            height: Platform.OS === 'ios' ? hp(2.7) : hp(3),
+                                            width: wp(7),
+                                            marginRight: wp(2),
+                                        }}
+                                        source={workHistoryIcon}
+                                    />
+                                </Pressable>
+
+                                {workHistory && (
+                                    <View
+                                        style={styles.expertiseDetailsView}>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                                marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%',
+                                               
+                                            }}>
+                                            {' '}
+                                            • مدرس تاريخ وجغرافيا{' '}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                               // marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            مدرسة الملك عبد العزيز الابتدائية بجدة{' '}
+                                        </Text>
+                                        
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                               // marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            1425-1435{' '}
+                                        </Text>
+
+                                        <Text
+                                            style={{
+                                                height: hp(4),
+                                              //  marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign:'right',
+                                                width:'95%'
+                                            }}>
+                                            {' '}
+                                            • مدرس تاريخ وجغرافيا{' '}
+                                        </Text>
+                                        
+                                    </View>
+                                )}
+                            </>
+                        )}
+
+                        {/* personalInfo */}
+                        {selectedMenu === 'personalInfo' && (
+                            <>
+                                <View style={styles.personalInfoView}>
+                                    <Text style={[styles.personalInfoText, { marginVertical: hp(2) }]}>{detail}</Text>
+                                </View>
+                                <Pressable
+                                    onPress={() => setlevel(!level)}
+                                    style={[styles.contentTextView]}>
+                                    <Material
+                                        name={level ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+                                        size={hp(3)}
+                                        color={COLORS.purple}
+                                    />
+                                    <Text style={styles.contentText}> المسارالتعلیمی </Text>
+                                    <Image
+                                        style={{
+                                            height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
+                                            width: wp(7),
+                                            marginRight: wp(2),
+                                        }}
+                                        source={courseFalseIcon}
+                                    />
+                                </Pressable>
+
+                                {level && (
+                                    <View style={styles.expertiseDetailsView}>
+                                        <Text style={styles.personalInfoText}> ۔ الاول الابتدائي</Text>
+                                        <Text style={styles.personalInfoText}> ۔ الاول المتوسط</Text>
+                                    </View>
+                                )}
+
+                            </>
+                        )}
+
+                        {/* Rating */}
+                        {selectedMenu === 'rating' && (
+                            <>
+                                <FlatList
+                                    data={teacherData}
+                                    renderItem={({ item, index }) => (
+                                        <View style={styles.teacherInfoView}>
+                                            <View style={styles.teacherInfoSubView}>
+                                                <View style={styles.courseRateView}>
+                                                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> {item.time} </Text>
+                                                </View>
+                                                <View style={[styles.teacherBasicInfo, { width: '70%' }]}>
+                                                    <Text
+                                                        style={[
+                                                            styles.teacherNameText,
+                                                            { color: COLORS.black },
+                                                        ]}>
+                                                        {' '}
+                                                        {item.name} {' '}
+                                                    </Text>
+
+                                                    <Pressable
+                                                        onPress={() => ratingStar(item.stars)}
+                                                        style={{ flexDirection: 'row' }}>
+                                                        <View style={styles.starsView}>
+                                                            <MaterialCommunity
+                                                                name={'star'}
+                                                                size={hp(2.5)}
+                                                                color={COLORS.yellow}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.starsView}>
+                                                            <MaterialCommunity
+                                                                name={'star'}
+                                                                size={hp(2.5)}
+                                                                color={COLORS.yellow}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.starsView}>
+                                                            <MaterialCommunity
+                                                                name={'star-half-full'}
+                                                                size={hp(2.5)}
+                                                                color={COLORS.yellow}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.starsView}>
+                                                            <MaterialCommunity
+                                                                name={'star-outline'}
+                                                                size={hp(2.5)}
+                                                                color={COLORS.yellow}
+                                                            />
+                                                        </View>
+                                                        <View style={styles.starsView}>
+                                                            <MaterialCommunity
+                                                                name={'star-outline'}
+                                                                size={hp(2.5)}
+                                                                color={COLORS.yellow}
+                                                            />
+                                                        </View>
+                                                    </Pressable>
+                                                    <Text
+                                                        style={[
+                                                            styles.teacherNameText,
+                                                            { color: COLORS.black },
+                                                        ]}>
+                                                        {' '}
+                                                        {item.comment} {' '}
+                                                    </Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    )}
+                                    keyExtractor={item => item.id}
+                                //   extraData={selectedId}
+                                />
+                            </>
+                        )}
+                    </View>
+                </ScrollView>
             </View>
+
 
             <View style={styles.bottomTabView}>
                 <Pressable
                     onPress={() => navigation.navigate('MenuScreen')}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]}>
                     <Image
-                        style={[styles.bottomIcon, { height: hp(1) }]}
+                        style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]}
                         source={moreFalseIcon}
                     />
-                    <Text style={{ color: COLORS.black }}> المزید</Text>
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular' }}> المزید</Text>
                 </Pressable>
 
                 <Pressable
@@ -602,7 +675,7 @@ const index = ({ navigation, route }) => {
                         style={[styles.bottomIcon, { height: hp(3) }]}
                         source={messagesFalseIcon}
                     />
-                    <Text style={{ color: COLORS.black }}> الرسائل</Text>
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular', }}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
@@ -623,6 +696,7 @@ const index = ({ navigation, route }) => {
                         style={{
                             color: COLORS.black,
                             marginTop: Platform.OS === 'ios' ? hp(-1) : 0,
+                            fontFamily: 'Cairo-Regular',
                         }}>
                         {' '}
                         الدروس
@@ -633,7 +707,7 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={[styles.bottomIcon]} source={homeTrueIcon} />
-                    <Text style={{ color: COLORS.purple }}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.purple ,fontFamily: 'Cairo-Regular',}}>الرئیسیة </Text>
                 </Pressable>
             </View>
         </SafeAreaView>
@@ -669,9 +743,10 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: COLORS.white,
-        fontSize: 18,
+        fontSize: Platform.OS === 'android' ? hp(1.9) : hp(1.7),
         textAlign: 'center',
-        marginTop: Platform.OS === 'ios' ? hp(6) : hp(3),
+        marginTop: Platform.OS === 'ios' ? hp(7) : hp(3),
+        fontFamily: 'Cairo-SemiBold'
     },
     backButtonView: {
         marginLeft: wp(2),
@@ -740,6 +815,8 @@ const styles = StyleSheet.create({
     teacherNameText: {
         color: COLORS.white,
         textAlign: 'center',
+        fontFamily: 'Cairo-Regular',
+        fontSize: Platform.OS === 'android' ? hp(1.9) : hp(1.7)
         //marginRight: wp(4)
     },
     starsView: {
@@ -821,7 +898,8 @@ const styles = StyleSheet.create({
         width: '75%',
         color: COLORS.black,
         textAlign: 'right',
-        fontSize: 15,
+        fontSize: Platform.OS === 'android' ? hp(1.8) : hp(1.6),
+        fontFamily: 'Cairo-Regular'
     },
     expertiseDetailsView: {
         width: '100%',
@@ -836,6 +914,8 @@ const styles = StyleSheet.create({
         shadowRadius: 1.62,
         marginTop: hp(0.1),
         justifyContent: 'center',
+        borderBottomWidth:1,
+        borderBottomColor:'#eee'
     },
     personalInfoView: {
 
@@ -854,11 +934,12 @@ const styles = StyleSheet.create({
     },
     personalInfoText: {
         color: COLORS.black,
-       // height:hp(10),
-        fontSize: hp(2),
+        // height:hp(10),
+        fontSize: Platform.OS === 'android' ? hp(1.8) : hp(1.6),
         width: '95%',
         alignSelf: 'center',
-        textAlign: 'right'
+        textAlign: 'right',
+        fontFamily: 'Cairo-Regular',
 
     },
 

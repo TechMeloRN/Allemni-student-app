@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         marginTop: hp(2)
     },
     btnText: {
-        fontSize: Platform.OS === 'android' ? hp(1.6) : hp(1.7),
+        fontSize: Platform.OS === 'android' ? hp(1.9) : hp(1.9),
+        fontFamily:'Cairo-Medium'
     },
 });
 export default CustomButton;

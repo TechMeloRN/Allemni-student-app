@@ -585,9 +585,9 @@ class App extends Component {
                         }>
                         <Image style={[styles.portraitBottomTabIcon, {
                             width: this.state.orientation == 'portrait' ? Platform.OS === 'ios' ? wp(8.5) : wp(8.5) : Platform.OS === 'ios' ? wp(9) : wp(8.3),
-                            height: this.state.orientation == 'portrait' ? hp(1) : hp(1)
+                            height: this.state.orientation == 'portrait' ? hp(1) : hp(1),marginTop:hp(2)
                         }]} source={moreFalseIcon} />
-                        <Text style={{ color: COLORS.lightgrey, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-2) : hp(-2) }}> المزید</Text>
+                        <Text style={{ color: COLORS.black, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-1) : hp(-1),fontFamily: 'Cairo-Regular' }}> المزید</Text>
                     </Pressable>
 
                     <Pressable
@@ -599,7 +599,7 @@ class App extends Component {
                             width: this.state.orientation == 'portrait' ? Platform.OS === 'ios' ? wp(11) : wp(11) : Platform.OS === 'ios' ? wp(10) : wp(9.5),
                             height: this.state.orientation == 'portrait' ? hp(4) : hp(3.5)
                         }]} source={messagesFalseIcon} />
-                        <Text style={{ color: COLORS.lightgrey, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-2) : hp(-2) }} > الرسائل</Text>
+                        <Text style={{ color: COLORS.black, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-1) : hp(-1),fontFamily: 'Cairo-Regular' }} > الرسائل</Text>
                     </Pressable>
 
                     <Pressable
@@ -609,7 +609,7 @@ class App extends Component {
                             width: this.state.orientation == 'portrait' ? Platform.OS === 'ios' ? wp(8) : wp(7) : Platform.OS === 'ios' ? wp(7) : wp(6.2),
                             height: this.state.orientation == 'portrait' ? hp(4) : hp(3.5)
                         }]} source={classTrueIcon} />
-                        <Text style={{ color: COLORS.purple, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-2) : hp(-2) }}> الدروس</Text>
+                        <Text style={{ color: COLORS.purple, fontSize: this.state.orientation == 'portrait' ? 15 : 13, marginTop: Platform.OS === 'android' ? hp(-1) : hp(-1),fontFamily: 'Cairo-Regular' }}> الدروس</Text>
                     </Pressable>
 
                     <Pressable
@@ -625,9 +625,10 @@ class App extends Component {
                             source={homeFalseIcon} />
                         <Text 
                             style={{ 
-                                color: COLORS.lightgrey, 
+                                color: COLORS.black, 
                                 fontSize: this.state.orientation == 'portrait' ? 15 : 13, 
-                                marginTop: Platform.OS === 'android' ? hp(-2) : hp(-2) 
+                                marginTop: Platform.OS === 'android' ? hp(-1) : hp(-1) 
+                                ,fontFamily: 'Cairo-Regular'
                                 }}>
                             الرئیسیة
                         </Text>
@@ -683,10 +684,11 @@ const styles = StyleSheet.create({
     },
     headerText:{ 
         color: '#fff', 
-        fontSize: 18, 
+        fontSize: Platform.OS==='android'?hp(2):hp(1.7), 
         marginTop: hp(3), 
         textAlign: 'center',
         marginTop: Platform.OS === 'ios' ? hp(3) : hp(0), 
+        fontFamily: 'Cairo-SemiBold'
     },
     landscapControllerButtonView: {
         height: hp('8%'),
@@ -885,7 +887,8 @@ const styles = StyleSheet.create({
     },
     portraitBottomTabView: {
         backgroundColor: COLORS.white,
-        height: hp(10),
+        height: hp(8),
+        width:'100%',
         borderTopLeftRadius: hp(3),
         borderTopRightRadius: hp(3),
         elevation: 5,

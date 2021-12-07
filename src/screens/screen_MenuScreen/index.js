@@ -103,42 +103,42 @@ const index = ({ navigation,route }) => {
                 
                 {/* Menu Buttons */}
                 <Pressable style={styles.menuButtonView} onPress={()=>navigation.navigate('PersonalProfile',{data:[]})}>
-                    <Text style={{color:COLORS.black}}> الملف الشخصی </Text>
+                    <Text style={styles.menuButtonText}> الملف الشخصی </Text>
                     <Image style={styles.menuIcon} source={userIcon} />
                 </Pressable>
                 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("المواعید")}>
-                    <Text style={{color:COLORS.black}}> المواعید </Text>
+                    <Text style={styles.menuButtonText}> المواعید </Text>
                     <Image style={[styles.menuIcon,{height:hp(2.6)}]} source={timeIcon} />
                 </Pressable>
 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("الباقات")}> 
-                    <Text style={{color:COLORS.black}}> الباقات </Text>
+                    <Text style={styles.menuButtonText}> الباقات </Text>
                     <Image style={styles.menuIcon} source={offersIcon} />
                 </Pressable>
 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("الادارة المالیة")}>
-                    <Text style={{color:COLORS.black}}> الادارة المالیة </Text>
+                    <Text style={styles.menuButtonText}> الادارة المالیة </Text>
                     <Image style={[styles.menuIcon,{height:hp(2.6)}]} source={manageMoneyIcon} />
                 </Pressable>
 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("تقییم الدروس ")}>
-                    <Text style={{color:COLORS.black}}> تقییم الدروس </Text>
+                    <Text style={styles.menuButtonText}> تقییم الدروس </Text>
                     <Image style={styles.menuIcon} source={starIcon} />
                 </Pressable>
 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("الاشعارات")}>
-                    <Text style={{color:COLORS.black}}> الاشعارات </Text>
+                    <Text style={styles.menuButtonText}> الاشعارات </Text>
                     <Image style={[styles.menuIcon,{height:Platform.OS==='ios'? hp(3):hp(3.3)}]} source={notificationMenuIcon} />
                 </Pressable>
 
                 <Pressable style={styles.menuButtonView} onPress={()=>alert("عنالتطبیق")}>
-                    <Text style={{color:COLORS.black}}> عنالتطبیق </Text>
+                    <Text style={styles.menuButtonText}> عنالتطبیق </Text>
                     <Image style={[styles.menuIcon,{height:hp(2.6)}]} source={infoIcon} />
                 </Pressable>
 
                 <Pressable onPress={()=>signOut()} style={styles.menuButtonView}>
-                    <Text style={{color:COLORS.black}}> تسجیل الخروج </Text>
+                    <Text style={styles.menuButtonText}> تسجیل الخروج </Text>
                     <Image style={[styles.menuIcon,{height:hp(2.6)}]} source={powerIcon} />
                 </Pressable>
             </ScrollView>
@@ -149,29 +149,29 @@ const index = ({ navigation,route }) => {
                     onPress={() => navigation.navigate("MenuScreen")}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreTrueIcon} />
-                    <Text  style={{color:COLORS.purple}}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreTrueIcon} />
+                    <Text  style={{color:COLORS.purple,fontFamily: 'Cairo-Regular'}}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{color:COLORS.black}}> الرسائل</Text>
+                    <Text style={styles.menuButtonText}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7) }]} source={classFalseIcon} />
-                    <Text style={{color:COLORS.black}}> الدروس</Text>
+                    <Text style={styles.menuButtonText}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={styles.bottomIcon} source={homeFalseIcon} />
-                    <Text style={{color:COLORS.black}}>الرئیسیة </Text>
+                    <Text style={styles.menuButtonText}>الرئیسیة </Text>
                 </Pressable>
             </View>
 
@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         textAlign: 'center', 
         marginTop: Platform.OS === 'ios' ? hp(6) : hp(3), 
+        fontFamily: 'Cairo-SemiBold'
     },
     backButtonView: {
         marginLeft:wp(2),
@@ -253,6 +254,10 @@ const styles = StyleSheet.create({
         elevation: 5, 
         shadowOpacity: .2 ,
         marginBottom:hp(1.5)
+    },
+    menuButtonText:{
+        color:COLORS.black ,
+        fontFamily: 'Cairo-Regular'
     },
     bottomTabView: {
         backgroundColor: COLORS.white,

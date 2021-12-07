@@ -214,7 +214,7 @@ const index = ({ navigation, route }) => {
                         <Pressable
                             onPress={() => setsubjectOptionModal(false)}
                             style={styles.modalCancelBtn}>
-                            <Text style={{ color: COLORS.purple }}> إلغاء </Text>
+                            <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}> إلغاء </Text>
                         </Pressable>
                         <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
                             <FlatList
@@ -251,13 +251,13 @@ const index = ({ navigation, route }) => {
 
             <View style={[styles.mainContent, { marginTop: orientation == 'portrait' ? Platform.OS === 'ios' ? hp(13) : hp(18) : Platform.OS === 'ios' ? hp(12) : hp(8) }]}>
                 <View style={styles.searchMainView}>
-                    <Pressable onPress={()=>navigation.navigate("TextualSearch")} style={styles.searchSubView}>
+                    <Pressable onPress={() => navigation.navigate("TextualSearch")} style={styles.searchSubView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
-                        <Text style={{ color: COLORS.white }}> فلتر </Text>
+                        <Text style={{ color: COLORS.white, fontFamily: 'Cairo-Regular' }}> فلتر </Text>
                         <MaterialCommunity name='filter' size={hp(2)} color={COLORS.white} />
                     </Pressable>
                     <View style={[styles.searchSubView, { width: '65%', backgroundColor: COLORS.white }]}>
-                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={{ color: COLORS.purple, textAlign: 'right', width: '85%' }} />
+                        <TextInput placeholder='ابحث ھنا' placeholderTextColor={COLORS.purple} style={styles.searchInputText} />
                         <Material name='search' size={hp(3)} color={COLORS.purple} />
                     </View>
                 </View>
@@ -302,7 +302,7 @@ const index = ({ navigation, route }) => {
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={course} />
                             </View>
-                            <Text style={{ color: eduStage == 'course' ? COLORS.white : COLORS.black }}> دورات </Text>
+                            <Text style={{ color: eduStage == 'course' ? COLORS.white : COLORS.black, fontFamily: 'Cairo-Regular' }}> دورات </Text>
 
                             {eduStage == 'course' &&
                                 <View style={styles.eduStagesCheckBtn}>
@@ -315,7 +315,7 @@ const index = ({ navigation, route }) => {
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={university} />
                             </View>
-                            <Text style={{ color: eduStage == 'university' ? COLORS.white : COLORS.black }}> جامعی </Text>
+                            <Text style={{ color: eduStage == 'university' ? COLORS.white : COLORS.black, fontFamily: 'Cairo-Regular' }}> جامعی </Text>
 
                             {eduStage == 'university' &&
                                 <View style={styles.eduStagesCheckBtn}>
@@ -328,7 +328,7 @@ const index = ({ navigation, route }) => {
                             <View style={{ height: hp(5), width: wp(10) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={general} />
                             </View>
-                            <Text style={{ color: eduStage == 'general' ? COLORS.white : COLORS.black }}> عام </Text>
+                            <Text style={{ color: eduStage == 'general' ? COLORS.white : COLORS.black, fontFamily: 'Cairo-Regular' }}> عام </Text>
                             {eduStage == 'general' &&
                                 <View style={styles.eduStagesCheckBtn}>
                                     <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
@@ -342,57 +342,58 @@ const index = ({ navigation, route }) => {
                             <View style={{ height: Platform.OS === 'android' ? hp(2.2) : hp(2.1), width: wp(3) }}>
                                 <Image style={{ height: '100%', width: '100%' }} source={locationIcon} />
                             </View>
-                            <Text style={{ color: COLORS.black, width: '55%', textAlign: 'right' }}> الموقع </Text>
+                            <Text style={styles.BtnTextSub_Loc}> الموقع </Text>
                         </Pressable>
 
                         <Pressable onPress={() => setsubjectOptionModal(true)} style={styles.locationBtn}>
                             <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.purple} />
-                            <Text style={{ color: COLORS.black, width: '55%', textAlign: 'right' }}> {selectedSubject} </Text>
+                            <Text style={styles.BtnTextSub_Loc}> {selectedSubject} </Text>
                         </Pressable>
 
                     </View>
 
                     <View style={styles.searchTeacherBtnView}>
                         <Pressable onPress={() => navigation.navigate('SearchTeacher')} style={[styles.locationBtn, { backgroundColor: COLORS.purple }]}>
-                            <Text style={{ color: COLORS.white }}> ابحث عن معلمک </Text>
+                            <Text style={{ color: COLORS.white, fontFamily: 'Cairo-Regular' }}> ابحث عن معلمک </Text>
                         </Pressable>
                     </View>
                     <View style={[styles.contentTextView, { backgroundColor: COLORS.white, height: hp(6), marginTop: hp(-.5) }]}>
                         <Text style={styles.contentText}> افضل المعلمین</Text>
                     </View>
-                    <View style={{ height: Platform.OS === 'android' ? hp(21) : hp(22) }}>
 
-
+                    <View>
                         <FlatList
                             data={teacherData}
                             horizontal={true}
                             renderItem={({ item, index }) => (
-                                <Pressable onPress={()=>navigation.navigate("TeacherPersonalInfo")} style={styles.teacherInfoSubView}>
-                                    <View style={{ height: hp(7), width: wp(14) }}>
-                                        <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
-                                    </View>
-                                    <Text style={{ color: COLORS.black, textAlign: 'center' }}>{item.name}</Text>
+                                <Pressable onPress={() => navigation.navigate("TeacherPersonalInfo")} style={styles.teacherInfoSubView}>
+                                    <View style={{ width: '100%', alignItems: 'center', marginVertical: hp(1) }}>
+                                        <View style={{ height: hp(7), width: wp(14) }}>
+                                            <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
+                                        </View>
+                                        <Text style={{ color: COLORS.black, textAlign: 'center', fontFamily: 'Cairo-Regular' }}>{item.name}</Text>
 
-                                    <Pressable
-                                        // onPress={()=>ratingStar(item.stars)}
-                                        style={{ flexDirection: 'row' }}>
-                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
-                                        </View>
-                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
-                                        </View>
-                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
-                                        </View>
-                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
-                                        </View>
-                                        <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
-                                            <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
-                                        </View>
-                                    </Pressable>
-                                    <Text style={{ color: COLORS.purple, textAlign: 'center' }}>{item.status}</Text>
+                                        <Pressable
+                                            // onPress={()=>ratingStar(item.stars)}
+                                            style={{ flexDirection: 'row' }}>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-half-full'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                            <View style={{ height: hp(3), width: wp(6), marginRight: wp(-1) }}>
+                                                <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
+                                            </View>
+                                        </Pressable>
+                                        <Text style={{ color: COLORS.purple, textAlign: 'center', fontFamily: 'Cairo-Regular' }}>{item.status}</Text>
+                                    </View>
                                 </Pressable>
 
                             )}
@@ -414,29 +415,29 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate("MenuScreen")}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2)  }]} source={moreFalseIcon} />
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular'}}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> الرسائل</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7), height: Platform.OS === 'ios' ? hp(4.5) : hp(4), marginTop: hp(1) }]} source={classFalseIcon} />
-                    <Text style={{ color: COLORS.black, marginTop: Platform.OS === 'ios' ? hp(-1) : 0 }}> الدروس</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular', marginTop: Platform.OS === 'ios' ? hp(-1) : 0 }}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={[styles.bottomIcon]} source={homeTrueIcon} />
-                    <Text style={{ color: COLORS.purple }}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}>الرئیسیة </Text>
                 </Pressable>
             </View>
 
@@ -516,6 +517,12 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         flexDirection: 'row'
     },
+    searchInputText: {
+        color: COLORS.purple,
+        textAlign: 'right',
+        width: '85%',
+        fontFamily: 'Cairo-Regular'
+    },
     sliderView: {
         height: Platform.OS === 'ios' ? hp(20) : hp(22),
         width: '94%',
@@ -544,12 +551,14 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.35,
         shadowRadius: 2.62,
+
     },
     contentText: {
         color: COLORS.black,
         textAlign: 'right',
         fontSize: 15,
-        marginRight: wp(3)
+        marginRight: wp(3),
+        fontFamily: 'Cairo-Regular'
     },
 
     eduTypesView: {
@@ -582,7 +591,8 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginRight: wp(-3),
         fontSize: hp(2),
-        marginTop: Platform.OS === 'ios' ? hp(-1) : 0
+        marginTop: Platform.OS === 'ios' ? hp(-1) : 0,
+        fontFamily: 'Cairo-Regular'
     },
 
     eduStagesView: {
@@ -623,6 +633,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         flexDirection: 'row'
     },
+    BtnTextSub_Loc: {
+        color: COLORS.black,
+        width: '55%',
+        textAlign: 'right',
+        fontFamily: 'Cairo-Regular'
+    },
     locationBtn: {
         height: hp(6),
         width: '45%',
@@ -652,9 +668,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        height: hp(18),
+        // height: hp(18),
         width: wp(31),
-        marginTop: hp(2),
+        marginVertical: hp(2),
+        //marginTop: hp(2),
         marginLeft: wp(1),
         marginRight: wp(1),
         borderRadius: 15,

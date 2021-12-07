@@ -144,7 +144,7 @@ const index = ({ navigation, route }) => {
                         <Pressable
                             onPress={() => setorderByModal(false)}
                             style={styles.modalCancelBtn}>
-                            <Text style={{ color: COLORS.purple }}> إلغاء </Text>
+                            <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> إلغاء </Text>
                         </Pressable>
                         <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
                             <FlatList
@@ -192,9 +192,9 @@ const index = ({ navigation, route }) => {
                 <View style={styles.headingView}>
                     <Pressable onPress={()=>setorderByModal(true)} style={styles.orderByView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.purple} />
-                        <Text style={{ color: COLORS.purple }}> {selectedOrder} </Text>
+                        <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> {selectedOrder} </Text>
                     </Pressable>
-                    <Text style={{ color: COLORS.purple }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
+                    <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
                 </View>
 
                 {/* Teacher detail */}
@@ -206,7 +206,7 @@ const index = ({ navigation, route }) => {
                                 <View style={styles.teacherInfoSubView}>
                                     <View style={styles.courseRateView}>
                                         <View style={styles.courseRateSubView}>
-                                            <Text style={{ color: COLORS.purple }}> {item.courseRate + " " + "ر۔س"}</Text>
+                                            <Text style={{ color: COLORS.purple ,fontFamily: 'Cairo-Regular' }}> {item.courseRate + " " + "ر۔س"}</Text>
                                         </View>
                                     </View>
                                     <View style={styles.teacherBasicInfo}>
@@ -245,7 +245,7 @@ const index = ({ navigation, route }) => {
                                             }}
                                         style={styles.moreDetailView}>
                                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
-                                        <Text style={{ color: COLORS.white }}> تفاصیل </Text>
+                                        <Text style={{ color: COLORS.white,fontFamily: 'Cairo-Regular'  }}> تفاصیل </Text>
                                     </Pressable>
                                     :
                                     <View style={styles.teacherDetailView}>
@@ -255,7 +255,7 @@ const index = ({ navigation, route }) => {
                                             onPress={()=>setselectedId(null)} 
                                             size={hp(3)} 
                                             color={COLORS.purple} 
-                                            style={{alignSelf:'center'}} />
+                                            style={{alignSelf:'center',marginTop:hp(-1)}} />
                                     </View>}
                             </View>
                         )}
@@ -270,29 +270,29 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('MenuScreen')}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreFalseIcon} />
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{ color: COLORS.black }} > الرسائل</Text>
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }} > الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7) }]} source={classFalseIcon} />
-                    <Text style={{ color: COLORS.black }}> الدروس</Text>
+                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={styles.bottomIcon} source={homeFalseIcon} />
-                    <Text style={{ color: COLORS.black }}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.black ,fontFamily: 'Cairo-Regular' }}>الرئیسیة </Text>
                 </Pressable>
             </View>
         </SafeAreaView>
@@ -314,6 +314,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         textAlign: 'center',
+        fontFamily: 'Cairo-SemiBold' 
 
     },
     mainContent: {
@@ -388,7 +389,8 @@ const styles = StyleSheet.create({
     teacherNameText:{ 
         color: COLORS.black, 
         textAlign: 'center', 
-        marginRight: wp(4) 
+        marginRight: wp(4) ,
+        fontFamily: 'Cairo-Regular' 
     },
     starsView:{ 
         height: hp(3), 
@@ -411,7 +413,8 @@ const styles = StyleSheet.create({
     },
     teacherDetailText:{
         textAlign:'right',
-        color:COLORS.black
+        color:COLORS.black,
+        fontFamily: 'Cairo-Regular' 
     },
     backButtonView: {
         height: hp(10),
@@ -486,7 +489,7 @@ const styles = StyleSheet.create({
     orderByListText: {
         color: COLORS.black,
         textAlign: 'center',
-
+        fontFamily: 'Cairo-Regular' 
     },
 
     bottomTabView: {

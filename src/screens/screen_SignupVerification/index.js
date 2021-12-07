@@ -126,8 +126,8 @@ const index = ({ navigation,route }) => {
 
 
                 <View style={styles.contentView}>
-                    <Text style={[styles.btnText,{fontSize:hp(2)}]}> من فضلک </Text>
-                    <Text style={styles.btnText}> اٗدخل رمز التحقق الذی اٗرسل اِلی جوالک </Text>
+                    <Text style={[styles.btnText,{fontSize:hp(2.5),fontFamily:'Cairo-SemiBold'}]}> من فضلک </Text>
+                    <Text style={[styles.btnText,{fontSize:hp(1.9)}]}> اٗدخل رمز التحقق الذی اٗرسل اِلی جوالک </Text>
 
                     <View style={styles.verficationView}>
                     <View style={styles.verficationSubView}>
@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
     btnText: {
         color: '#fff',
         fontSize: Platform.OS === 'android' ? hp(1.6) : hp(1.7),
+        fontFamily:'Cairo-Regular'
     },
     verficationView: {
         height: hp(9),

@@ -179,7 +179,7 @@ const ChatComponent = ({ navigation, route }) => {
           <Image style={styles.backButton} source={notificationIcon} />
         </Pressable>
 
-        <Text style={[styles.headerText,{width:orientation=='portrait'? '30%':'60%'}]}> محادثة المعلم </Text>
+        <Text style={[styles.headerText,{width:orientation=='portrait'? '30%':'60%',fontFamily: 'Cairo-SemiBold'}]}> محادثة المعلم </Text>
 
         <Image style={styles.landscapeLogo} source={landscapeLogo} />
 

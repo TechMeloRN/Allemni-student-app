@@ -11,9 +11,16 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		38D37F049C4F4FCDAE1705BB /* Cairo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F8E3D9D3FD4494B70CD02C /* Cairo-Black.ttf */; };
 		632D9CC1D0DA732709D658BA /* libPods-AllemniApp-AllemniAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4C0EC562F5A71C3C35ACB1 /* libPods-AllemniApp-AllemniAppTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		737096A585294F2984B0BCD5 /* Cairo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 068E32C3808046358CF2B8BC /* Cairo-SemiBold.ttf */; };
+		7764A33597ED4062BF19D74A /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3E755DD46FB40C3B412AEC1 /* Cairo-Bold.ttf */; };
 		840AECB863448D98DB36B56D /* libPods-AllemniApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 653FDAFD1158E35E82239682 /* libPods-AllemniApp.a */; };
+		A6A68C8FAFBD4AB19FADFA3F /* Cairo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FC53E38629C4BE4A7AFF40E /* Cairo-Regular.ttf */; };
+		CD12B225EAC84C658C27613A /* Cairo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8669238001144D48AA2755F8 /* Cairo-Light.ttf */; };
+		D2700C9938C6435382A0F403 /* Cairo-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7F0868044E84FCAAABC5BAB /* Cairo-ExtraBold.ttf */; };
+		D6430764C7FF40F499865CB2 /* Cairo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2313EB7A8441A88D0E1F7A /* Cairo-Medium.ttf */; };
+		ED1DC04A2F494F908EB468D1 /* Cairo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21340022B22548F69CD76738 /* Cairo-ExtraLight.ttf */; };
 		F51390912733CCDC009364C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F51390902733CCDC009364C2 /* GoogleService-Info.plist */; };
 		F5C503C4273BCC5E00F9C331 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = F5C503C3273BCC5E00F9C331 /* Fonts */; };
 /* End PBXBuildFile section */
@@ -32,19 +39,42 @@
 		00E356EE1AD99517003FC87E /* AllemniAppAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllemniAppAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* AllemniAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllemniAppTests.m; sourceTree = "<group>"; };
+		068E32C3808046358CF2B8BC /* Cairo-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-SemiBold.ttf"; path = "../src/assets/fonts/Cairo-SemiBold.ttf"; sourceTree = "<group>"; };
+		07ACB306B4604D899747D20F /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AllemniAppApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllemniAppApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AllemniApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AllemniApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AllemniApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AllemniApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AllemniApp/main.m; sourceTree = "<group>"; };
+		15E4F06BA6064B9DA3679A82 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		173093F63ACD4EC7A5ACAE63 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		21340022B22548F69CD76738 /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-ExtraLight.ttf"; path = "../src/assets/fonts/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; };
 		2E6AAFAC9973B788B0006126 /* Pods-AllemniApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllemniApp.release.xcconfig"; path = "Target Support Files/Pods-AllemniApp/Pods-AllemniApp.release.xcconfig"; sourceTree = "<group>"; };
+		3FC53E38629C4BE4A7AFF40E /* Cairo-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-Regular.ttf"; path = "../src/assets/fonts/Cairo-Regular.ttf"; sourceTree = "<group>"; };
 		653FDAFD1158E35E82239682 /* libPods-AllemniApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AllemniApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B7B8E7B47834669B4FB80AE /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		6C897A11B68C426DA93AAAD3 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		6F2313EB7A8441A88D0E1F7A /* Cairo-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-Medium.ttf"; path = "../src/assets/fonts/Cairo-Medium.ttf"; sourceTree = "<group>"; };
+		6F3D06CD090E4CEAB0F4B43F /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		751719DD276244EAAE7357EF /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		7E4C0EC562F5A71C3C35ACB1 /* libPods-AllemniApp-AllemniAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AllemniApp-AllemniAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AllemniApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84C4898C505B487E81E3A64E /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		8669238001144D48AA2755F8 /* Cairo-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-Light.ttf"; path = "../src/assets/fonts/Cairo-Light.ttf"; sourceTree = "<group>"; };
 		9112E9029BE7837D1A1B30CC /* Pods-AllemniApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllemniApp.debug.xcconfig"; path = "Target Support Files/Pods-AllemniApp/Pods-AllemniApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A3E755DD46FB40C3B412AEC1 /* Cairo-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-Bold.ttf"; path = "../src/assets/fonts/Cairo-Bold.ttf"; sourceTree = "<group>"; };
+		B22F7F1502CC4E989CD88EF0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		B7E2EF13D5B64EADA2BED0D3 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		B8712BD38CA5DF7650A4FACB /* Pods-AllemniApp-AllemniAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllemniApp-AllemniAppTests.debug.xcconfig"; path = "Target Support Files/Pods-AllemniApp-AllemniAppTests/Pods-AllemniApp-AllemniAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C5503D70F76C43208BF8CDCD /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		D8F8E3D9D3FD4494B70CD02C /* Cairo-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-Black.ttf"; path = "../src/assets/fonts/Cairo-Black.ttf"; sourceTree = "<group>"; };
+		DEBDB23EDF5F4B5388784B91 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		DEDBFAA104C0495389896623 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		E7F0868044E84FCAAABC5BAB /* Cairo-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cairo-ExtraBold.ttf"; path = "../src/assets/fonts/Cairo-ExtraBold.ttf"; sourceTree = "<group>"; };
+		E92281047761449686DCE9D5 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		EC7639CA9FC140A7A9037221 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED341E91995B4CB7BA8246E7 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		F51390902733CCDC009364C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F5C503C3273BCC5E00F9C331 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../android/app/src/main/assets/Fonts; sourceTree = "<group>"; };
 		FB36067CC62978ECACD6771C /* Pods-AllemniApp-AllemniAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllemniApp-AllemniAppTests.release.xcconfig"; path = "Target Support Files/Pods-AllemniApp-AllemniAppTests/Pods-AllemniApp-AllemniAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,7 +126,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = AllemniApp;
@@ -128,6 +157,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				F2E7AC0B1C52F641E5BA0483 /* Pods */,
+				B1E2759E24E64E6383D7C4D0 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -141,6 +171,37 @@
 				00E356EE1AD99517003FC87E /* AllemniAppAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B1E2759E24E64E6383D7C4D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D8F8E3D9D3FD4494B70CD02C /* Cairo-Black.ttf */,
+				A3E755DD46FB40C3B412AEC1 /* Cairo-Bold.ttf */,
+				E7F0868044E84FCAAABC5BAB /* Cairo-ExtraBold.ttf */,
+				21340022B22548F69CD76738 /* Cairo-ExtraLight.ttf */,
+				8669238001144D48AA2755F8 /* Cairo-Light.ttf */,
+				6F2313EB7A8441A88D0E1F7A /* Cairo-Medium.ttf */,
+				3FC53E38629C4BE4A7AFF40E /* Cairo-Regular.ttf */,
+				068E32C3808046358CF2B8BC /* Cairo-SemiBold.ttf */,
+				E92281047761449686DCE9D5 /* AntDesign.ttf */,
+				84C4898C505B487E81E3A64E /* Entypo.ttf */,
+				EC7639CA9FC140A7A9037221 /* EvilIcons.ttf */,
+				6C897A11B68C426DA93AAAD3 /* Feather.ttf */,
+				173093F63ACD4EC7A5ACAE63 /* FontAwesome.ttf */,
+				6F3D06CD090E4CEAB0F4B43F /* FontAwesome5_Brands.ttf */,
+				07ACB306B4604D899747D20F /* FontAwesome5_Regular.ttf */,
+				6B7B8E7B47834669B4FB80AE /* FontAwesome5_Solid.ttf */,
+				B7E2EF13D5B64EADA2BED0D3 /* Fontisto.ttf */,
+				B22F7F1502CC4E989CD88EF0 /* Foundation.ttf */,
+				751719DD276244EAAE7357EF /* Ionicons.ttf */,
+				C5503D70F76C43208BF8CDCD /* MaterialCommunityIcons.ttf */,
+				DEBDB23EDF5F4B5388784B91 /* MaterialIcons.ttf */,
+				DEDBFAA104C0495389896623 /* Octicons.ttf */,
+				15E4F06BA6064B9DA3679A82 /* SimpleLineIcons.ttf */,
+				ED341E91995B4CB7BA8246E7 /* Zocial.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F2E7AC0B1C52F641E5BA0483 /* Pods */ = {
@@ -249,10 +310,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				F51390912733CCDC009364C2 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F5C503C4273BCC5E00F9C331 /* Fonts in Resources */,
+				38D37F049C4F4FCDAE1705BB /* Cairo-Black.ttf in Resources */,
+				7764A33597ED4062BF19D74A /* Cairo-Bold.ttf in Resources */,
+				D2700C9938C6435382A0F403 /* Cairo-ExtraBold.ttf in Resources */,
+				ED1DC04A2F494F908EB468D1 /* Cairo-ExtraLight.ttf in Resources */,
+				CD12B225EAC84C658C27613A /* Cairo-Light.ttf in Resources */,
+				D6430764C7FF40F499865CB2 /* Cairo-Medium.ttf in Resources */,
+				A6A68C8FAFBD4AB19FADFA3F /* Cairo-Regular.ttf in Resources */,
+				737096A585294F2984B0BCD5 /* Cairo-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

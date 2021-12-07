@@ -108,24 +108,23 @@ const index = ({ navigation }) => {
             });
     };
     return (
-        <View style={styles.mainContainer}>
+        <SafeAreaView style={styles.mainContainer}>
             <StatusBar barStyle={'light-content'} backgroundColor={COLORS.purple} />
 
             {/* Header code*/}
-            <ImageBackground source={headerBackground} style={{ width: '100%', height: Platform.OS === 'ios' ? hp(16) : hp(12), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                {/* back Button */}
+            <ImageBackground source={headerBackground} style={orientation == 'portrait' ? styles.portraitHeaderView : styles.landscapeHeaderView}>
+
                 <Pressable onPress={() => navigation.goBack()} style={styles.backButtonView}>
                     <Image style={styles.backButton} source={backBtnIcon} />
                 </Pressable>
 
-                {/* Notification Button */}
                 <Pressable onPress={() => alert('Notification')} style={styles.backButtonView}>
                     <Image style={styles.backButton} source={notificationIcon} />
                 </Pressable>
 
-                <Text style={{ color: '#fff', fontSize: 18, width:orientation=='portrait'? wp(30):'60%', textAlign: 'center', marginTop: Platform.OS === 'ios' ? hp(3) : hp(0)}}> الرسائل </Text>
+                <Text style={[styles.headerText,{width:orientation=='portrait'? wp(30):'60%'}]}> البحث النصي </Text>
 
-                <Image style={styles.landscapeLogo} source={landscapeLogo} />
+                <Image style={orientation == 'portrait' ? styles.portraitLogo : styles.landscapeLogo} source={landscapeLogo} />
 
             </ImageBackground>
 
@@ -181,36 +180,36 @@ const index = ({ navigation }) => {
                     onPress={() => navigation.navigate("MenuScreen")}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1) }]} source={moreFalseIcon} />
-                    <Text style={{ color:COLORS.black }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreFalseIcon} />
+                    <Text  style={[styles.menuButtonText]}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesTrueIcon} />
-                    <Text style={{ color: COLORS.purple }} > الرسائل</Text>
+                    <Text style={[styles.menuButtonText,{color:COLORS.purple}]}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7) }]} source={classFalseIcon} />
-                    <Text style={{ color:COLORS.black }}> الدروس</Text>
+                    <Text style={styles.menuButtonText}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={styles.bottomIcon} source={homeFalseIcon} />
-                    <Text style={{ color:COLORS.black }}>الرئیسیة </Text>
+                    <Text style={styles.menuButtonText}>الرئیسیة </Text>
                 </Pressable>
             </View>
 
 
 
 
-        </View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
@@ -223,6 +222,52 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
 
+    },
+    portraitHeaderView: {
+        width: wp(100),
+        height:Platform.OS==='android'? hp(10):hp(13),
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        resizeMode: 'stretch'
+    },
+    landscapeHeaderView: {
+        width: '100%',
+        height: Platform.OS === 'ios' ? hp(10) : hp(7),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        position: 'absolute'
+    },
+    headerText: {
+        color: COLORS.white,
+        fontSize: 18,
+        textAlign: 'center',
+        marginTop: Platform.OS === 'ios' ? hp(6) : hp(3),
+        fontFamily: 'Cairo-Regular'
+    },
+    backButtonView: {
+        marginLeft: wp(2),
+        height: hp(10),
+        marginTop: Platform.OS === 'ios' ? hp(6) : hp(2)
+    },
+    backButton: {
+
+        height: hp(6),
+        width: Platform.OS === 'ios' ? wp(13.2) : wp(12.5),
+    },
+
+    landscapeLogo: {
+        height: hp(5),
+        width: wp(30.2),
+        marginRight: wp(2)
+    },
+    portraitLogo: {
+        height: hp(5),
+        marginTop: Platform.OS === 'ios' ? hp(6) : hp(2),
+        width: wp(30.2),
+        marginRight: wp(2)
     },
     contactHeadingView: {
         height: hp(5),
@@ -267,31 +312,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center', marginRight: wp(2)
     },
-    backButtonView: {
-        height: hp(10),
-        marginTop: Platform.OS === 'ios' ? hp(8) : hp(2)
-    },
-    backButton: {
-        height: hp(6),
-        width: Platform.OS === 'ios' ? wp(13.2) : wp(12.5),
-        marginTop: Platform.OS === 'ios' ? hp(0) : hp(1)
-    },
-    landscapeLogo: {
-        height: hp(5),
-        // marginTop: hp(3),
-        marginTop: Platform.OS === 'ios' ? hp(3) : hp(0),
-        width: Platform.OS === 'ios' ? wp(30.2) : wp(30.2),
-    },
+    
     bottomTabView: {
         backgroundColor: COLORS.white,
-        height: hp(10),
+        height: hp(8),
+        width:'100%',
         borderTopLeftRadius: hp(3),
         borderTopRightRadius: hp(3),
         elevation: 5,
         shadowOpacity: .1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+       
     },
     bottomTabButton: {
         backgroundColor: COLORS.white,
@@ -303,6 +336,11 @@ const styles = StyleSheet.create({
     bottomIcon: {
         height: hp(4),
         width: Platform.OS === 'ios' ? wp(9.5) : wp(8.5),
+        marginTop:Platform.OS==='ios'?hp(.5):0
+    },
+    menuButtonText:{
+        color:COLORS.black ,
+        fontFamily: 'Cairo-Regular'
     },
     teacherImage: {
         height: Platform.OS === 'android' ? hp(9) : hp(8.5),

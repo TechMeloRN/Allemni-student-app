@@ -161,8 +161,8 @@ const index = ({ navigation }) => {
 
 
                 <View style={styles.contentView}>
-                    <Text style={[styles.btnText, { fontSize: hp(2) }]}> مرحبا </Text>
-                    <Text style={styles.btnText}> یرجی الدخول اِلی الحساب الشخصی </Text>
+                    <Text style={[styles.btnText, {fontSize:hp(2.5),fontFamily:'Cairo-SemiBold'}]}> مرحبا </Text>
+                    <Text style={[styles.btnText,{fontSize:hp(1.9)}]}> یرجی الدخول اِلی الحساب الشخصی </Text>
 
                     {/* <TextInput
                         placeholder='البرید الالکترونی'
@@ -298,7 +298,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: COLORS.white,
         color: COLORS.white,
-        textAlign: 'right'
+        textAlign: 'right',
+        fontFamily:'Cairo-Regular'
     },
     passwordInputTextView: {
         flexDirection: 'row',
@@ -351,6 +352,7 @@ const styles = StyleSheet.create({
     btnText: {
         color: COLORS.white,
         fontSize: Platform.OS === 'android' ? hp(1.6) : hp(1.7),
+        fontFamily:'Cairo-Regular'
     },
 
 })
