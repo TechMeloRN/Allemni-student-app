@@ -24,6 +24,9 @@ import SearchTeacher from './src/screens/screen_SearchTeacher'
 import TextualSearch from './src/screens/screen_TextualSearch'
 import TeacherPersonalInfo from './src/screens/screen_TeacherDetails-PersonalInfo'
 
+//Phase IV
+import AppointmentsScreen from './src/screens/screen_Appointments'
+
 //Authentication Test
 import SendAuth from './src/Testapp/AuthFunc'
 import ConfirmAuth from './src/Testapp/confirmCode'
@@ -33,12 +36,14 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="HomeScreen">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="MenuScreen">
+        {/* Phase I */}
         <Stack.Screen name="SplashScreen"  component={SplashScreen} />
         <Stack.Screen name="NewInitialScreen"  component={NewInitialScreen} />
         <Stack.Screen name="NewLoginScreen"  component={NewLoginScreen} />
         <Stack.Screen name="LoginVerification"  component={LoginVerification} />
 
+        {/* Phase II */}
         <Stack.Screen name="SignUpScreen"  component={SignUpScreen} />
         <Stack.Screen name="SignupVerification"  component={SignupVerification} />
         <Stack.Screen name="MenuScreen"  component={MenuScreen} />
@@ -53,6 +58,10 @@ function App() {
         <Stack.Screen name="TextualSearch" component={TextualSearch} />
         <Stack.Screen name="TeacherPersonalInfo" component={TeacherPersonalInfo} />
 
+        {/* Phase IV */}
+        <Stack.Screen name="AppointmentsScreen" component={AppointmentsScreen} />
+
+        {/* Test Screens */}
         <Stack.Screen name="HomeScreen_Test" component={HomeScreen_Test} />
         <Stack.Screen name="Profile_Test" component={Profile_Test} />
         <Stack.Screen name="SendAuth" component={SendAuth} />

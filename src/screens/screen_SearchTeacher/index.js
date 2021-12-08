@@ -42,7 +42,7 @@ const index = ({ navigation, route }) => {
 
     const [orientation, setorientation] = useState('');
     const [chkDetail, setchkDetail] = useState(false);
-    const [orderByModal,setorderByModal] = useState(false)
+    const [orderByModal, setorderByModal] = useState(false)
     const [selectedId, setselectedId] = useState(null);
     const [selectedOrder, setselectedOrder] = useState('ترتیب حسب')
     const [rating, setrating] = useState('0')
@@ -64,7 +64,7 @@ const index = ({ navigation, route }) => {
             id: 4,
             Title: 'Status'
         },
-        
+
     ])
 
     const [teacherData, setteacherData] = useState([
@@ -130,21 +130,20 @@ const index = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.mainContainer}>
-        
-    {/* ////////////////////////////////////////////
-    ///////// OrderBy Model ////////////////
-    //////////////////////////////////////////// */}
 
-    <Modal
+    {/* //////////////////////////////////////////
+       ////// OrderBy Model /////////////////////
+      ////////////////////////////////////////// */}
+
+            <Modal
                 transparent={true}
-                visible={orderByModal}
-            >
+                visible={orderByModal}>
                 <View style={styles.mainModelView}>
                     <View style={styles.modalItemContainer}>
                         <Pressable
                             onPress={() => setorderByModal(false)}
                             style={styles.modalCancelBtn}>
-                            <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> إلغاء </Text>
+                            <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}> إلغاء </Text>
                         </Pressable>
                         <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
                             <FlatList
@@ -190,11 +189,11 @@ const index = ({ navigation, route }) => {
             <View style={styles.mainContent}>
 
                 <View style={styles.headingView}>
-                    <Pressable onPress={()=>setorderByModal(true)} style={styles.orderByView}>
+                    <Pressable onPress={() => setorderByModal(true)} style={styles.orderByView}>
                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.purple} />
-                        <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> {selectedOrder} </Text>
+                        <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}> {selectedOrder} </Text>
                     </Pressable>
-                    <Text style={{ color: COLORS.purple,fontFamily: 'Cairo-Regular'  }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
+                    <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}> جامعي ۔ جامعة الملک سعود ۔ اقتصاد </Text>
                 </View>
 
                 {/* Teacher detail */}
@@ -206,7 +205,7 @@ const index = ({ navigation, route }) => {
                                 <View style={styles.teacherInfoSubView}>
                                     <View style={styles.courseRateView}>
                                         <View style={styles.courseRateSubView}>
-                                            <Text style={{ color: COLORS.purple ,fontFamily: 'Cairo-Regular' }}> {item.courseRate + " " + "ر۔س"}</Text>
+                                            <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular' }}> {item.courseRate + " " + "ر۔س"}</Text>
                                         </View>
                                     </View>
                                     <View style={styles.teacherBasicInfo}>
@@ -229,7 +228,7 @@ const index = ({ navigation, route }) => {
                                                 <MaterialCommunity name={'star-outline'} size={hp(2.5)} color={COLORS.yellow} />
                                             </View>
                                         </Pressable>
-                                        <Text style={[styles.teacherNameText,{ color: COLORS.purple}]}>{item.status}</Text>
+                                        <Text style={[styles.teacherNameText, { color: COLORS.purple }]}>{item.status}</Text>
                                     </View>
                                     <View style={styles.teacherImageView}>
                                         <View style={{ height: hp(12), width: wp(24) }}>
@@ -237,25 +236,25 @@ const index = ({ navigation, route }) => {
                                         </View>
                                     </View>
                                 </View>
-                                {selectedId!== item.id ?
-                                    <Pressable 
+                                {selectedId !== item.id ?
+                                    <Pressable
                                         onPress={() => {
                                             setchkDetail(true)
                                             setselectedId(item.id)
-                                            }}
+                                        }}
                                         style={styles.moreDetailView}>
                                         <Material name='keyboard-arrow-down' size={hp(3)} color={COLORS.white} />
-                                        <Text style={{ color: COLORS.white,fontFamily: 'Cairo-Regular'  }}> تفاصیل </Text>
+                                        <Text style={{ color: COLORS.white, fontFamily: 'Cairo-Regular' }}> تفاصیل </Text>
                                     </Pressable>
                                     :
                                     <View style={styles.teacherDetailView}>
                                         <Text style={styles.teacherDetailText}> {item.detail} </Text>
-                                        <Material 
+                                        <Material
                                             name='keyboard-arrow-up'
-                                            onPress={()=>setselectedId(null)} 
-                                            size={hp(3)} 
-                                            color={COLORS.purple} 
-                                            style={{alignSelf:'center',marginTop:hp(-1)}} />
+                                            onPress={() => setselectedId(null)}
+                                            size={hp(3)}
+                                            color={COLORS.purple}
+                                            style={{ alignSelf: 'center', marginTop: hp(-1) }} />
                                     </View>}
                             </View>
                         )}
@@ -270,29 +269,29 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('MenuScreen')}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]
                     }>
-                    <Image style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]} source={moreFalseIcon} />
-                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> المزید</Text>
+                    <Image style={[styles.bottomIcon, { height: hp(1), marginTop: hp(2) }]} source={moreFalseIcon} />
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}> المزید</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('ChatTeacherList')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { height: hp(3) }]} source={messagesFalseIcon} />
-                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }} > الرسائل</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }} > الرسائل</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('NewClassroom')}
                     style={styles.bottomTabButton}>
                     <Image style={[styles.bottomIcon, { width: Platform.OS === 'ios' ? wp(8) : wp(7) }]} source={classFalseIcon} />
-                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> الدروس</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}> الدروس</Text>
                 </Pressable>
 
                 <Pressable
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={styles.bottomIcon} source={homeFalseIcon} />
-                    <Text style={{ color: COLORS.black ,fontFamily: 'Cairo-Regular' }}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}>الرئیسیة </Text>
                 </Pressable>
             </View>
         </SafeAreaView>
@@ -314,7 +313,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         textAlign: 'center',
-        fontFamily: 'Cairo-SemiBold' 
+        fontFamily: 'Cairo-SemiBold'
 
     },
     mainContent: {
@@ -339,8 +338,6 @@ const styles = StyleSheet.create({
         borderColor: COLORS.purple,
         flexDirection: 'row'
     },
-
-
     teacherInfoView: {
         backgroundColor: 'white',
         justifyContent: 'center',
@@ -360,61 +357,61 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 9.62,
     },
-    teacherInfoSubView:{ 
-        height: hp(15), 
-        width: '95%', 
-        flexDirection: 'row', 
-        borderBottomWidth: 1, 
-        borderBottomColor: COLORS.ashewhite 
+    teacherInfoSubView: {
+        height: hp(15),
+        width: '95%',
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.ashewhite
     },
-    courseRateView:{ 
-        width: '30%', 
-        borderTopLeftRadius: 20, 
-        justifyContent: 'center', 
-        alignItems: 'center' 
+    courseRateView: {
+        width: '30%',
+        borderTopLeftRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    courseRateSubView:{ 
-        height: hp(4.8), 
-        width: '80%', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        backgroundColor: COLORS.ashewhite, 
-        borderRadius: 20 
+    courseRateSubView: {
+        height: hp(4.8),
+        width: '80%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: COLORS.ashewhite,
+        borderRadius: 20
     },
-    teacherBasicInfo:{ 
-        width: '40%', 
-        justifyContent: 'center', 
-        alignItems: 'flex-end' 
+    teacherBasicInfo: {
+        width: '40%',
+        justifyContent: 'center',
+        alignItems: 'flex-end'
     },
-    teacherNameText:{ 
-        color: COLORS.black, 
-        textAlign: 'center', 
-        marginRight: wp(4) ,
-        fontFamily: 'Cairo-Regular' 
+    teacherNameText: {
+        color: COLORS.black,
+        textAlign: 'center',
+        marginRight: wp(4),
+        fontFamily: 'Cairo-Regular'
     },
-    starsView:{ 
-        height: hp(3), 
-        width: wp(6), 
-        marginRight: wp(-1) 
+    starsView: {
+        height: hp(3),
+        width: wp(6),
+        marginRight: wp(-1)
     },
-    teacherImageView:{
-        width: '30%', 
-        borderTopRightRadius: 20, 
-        justifyContent: 'center', 
-        alignItems: 'center' 
+    teacherImageView: {
+        width: '30%',
+        borderTopRightRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    teacherDetailView:{
+    teacherDetailView: {
         height: hp(10),
         width: '90%',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         justifyContent: 'center',
-        alignItems:'flex-end',
+        alignItems: 'flex-end',
     },
-    teacherDetailText:{
-        textAlign:'right',
-        color:COLORS.black,
-        fontFamily: 'Cairo-Regular' 
+    teacherDetailText: {
+        textAlign: 'right',
+        color: COLORS.black,
+        fontFamily: 'Cairo-Regular'
     },
     backButtonView: {
         height: hp(10),
@@ -489,7 +486,7 @@ const styles = StyleSheet.create({
     orderByListText: {
         color: COLORS.black,
         textAlign: 'center',
-        fontFamily: 'Cairo-Regular' 
+        fontFamily: 'Cairo-Regular'
     },
 
     bottomTabView: {

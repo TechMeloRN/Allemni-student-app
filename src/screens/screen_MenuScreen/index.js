@@ -107,7 +107,7 @@ const index = ({ navigation,route }) => {
                     <Image style={styles.menuIcon} source={userIcon} />
                 </Pressable>
                 
-                <Pressable style={styles.menuButtonView} onPress={()=>alert("المواعید")}>
+                <Pressable style={styles.menuButtonView} onPress={()=>navigation.navigate('AppointmentsScreen')}>
                     <Text style={styles.menuButtonText}> المواعید </Text>
                     <Image style={[styles.menuIcon,{height:hp(2.6)}]} source={timeIcon} />
                 </Pressable>
