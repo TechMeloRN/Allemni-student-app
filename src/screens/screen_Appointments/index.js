@@ -170,7 +170,7 @@ const index = ({ navigation }) => {
                     <FlatList
                         data={teacherData}
                         renderItem={({ item, index }) => (
-                            <View style={styles.teacherInfoView}>
+                            <Pressable onPress={()=>navigation.navigate("BookingScreen")} style={styles.teacherInfoView}>
                                 <View style={styles.teacherInfoSubView}>
                                     <View style={styles.StatusView}>
 
@@ -230,7 +230,7 @@ const index = ({ navigation }) => {
                                     <Text style={styles.teacherDetailText}> {item.day} {item.date}  </Text>
                                     <Text style={[styles.teacherDetailText, { color: COLORS.purple }]}> {item.time}   </Text>
                                 </View>
-                            </View>
+                            </Pressable>
                         )}
                         keyExtractor={(item) => item.id}
                     />
