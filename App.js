@@ -27,6 +27,7 @@ import TeacherPersonalInfo from './src/screens/screen_TeacherDetails-PersonalInf
 //Phase IV
 import AppointmentsScreen from './src/screens/screen_Appointments'
 import BookingScreen from './src/screens/screen_Booking'
+import ConfirmBookingScreen from './src/screens/screen_ConfirmBooking'
 
 //Authentication Test
 import SendAuth from './src/Testapp/AuthFunc'
@@ -62,6 +63,7 @@ function App() {
         {/* Phase IV */}
         <Stack.Screen name="AppointmentsScreen" component={AppointmentsScreen} />
         <Stack.Screen name="BookingScreen" component={BookingScreen} />
+        <Stack.Screen name="ConfirmBookingScreen" component={ConfirmBookingScreen} />
 
         {/* Test Screens */}
         <Stack.Screen name="HomeScreen_Test" component={HomeScreen_Test} />

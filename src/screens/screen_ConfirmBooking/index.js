@@ -48,7 +48,7 @@ const index = ({ navigation }) => {
     const [orientation, setorientation] = useState('');
     const [selectedDate, setselectedDate] = useState('');
     const [selectedTime, setselectedTime] = useState('');
-    const [index , setindex] = useState(0);
+    const [index, setindex] = useState(0);
     const [teacherData, setteacherData] = useState([
         {
             id: 1,
@@ -172,8 +172,8 @@ const index = ({ navigation }) => {
             time: '08:00 م',
             status: 'booked',
         },
-        
-        
+
+
     ])
 
     useEffect(() => {
@@ -193,15 +193,15 @@ const index = ({ navigation }) => {
         }
     };
 
-    const bookAppointment=()=>{
-        bookTime[index].status='booked'
+    const bookAppointment = () => {
+        bookTime[index].status = 'booked'
         setbookTime(bookTime)
         console.log(bookTime[index].status)
         setselectedTime('')
         setselectedDate('')
     }
 
-    const selectTime =(time,index)=>{
+    const selectTime = (time, index) => {
         setselectedTime(time)
         setindex(index)
     }
@@ -221,141 +221,28 @@ const index = ({ navigation }) => {
                     <Image style={styles.backButton} source={notificationIcon} />
                 </Pressable>
 
-                <Text style={[styles.headerText, { width: orientation == 'portrait' ? wp(30) : '60%' }]}> اختیارالمواعید </Text>
+                <Text style={[styles.headerText, { width: orientation == 'portrait' ? wp(30) : '60%' }]}> اتمام الحجز </Text>
 
                 <Image style={orientation == 'portrait' ? styles.portraitLogo : styles.landscapeLogo} source={landscapeLogo} />
 
             </ImageBackground>
 
             <View style={styles.mainContent}>
-
-                {/* Date View */}
-                <View style={styles.dataView}>
-                    <Pressable onPress={() => alert("Back Date")} style={{ height: hp(4), width: wp(8) }}>
-                        <Image style={{ height: '100%', width: '100%' }} source={backArrowLeft} />
-                    </Pressable>
-
-                    <Text style={styles.dataViewText}>  7 يونيو2021٫ الي 13 يونيو2021٫ </Text>
-
-                    <Pressable onPress={() => navigation.navigate('ConfirmBookingScreen')} style={{ height: hp(4), width: wp(8) }}>
-                        <Image style={{ height: '100%', width: '100%' }} source={backArrowRight} />
-                    </Pressable>
-
-                </View>
-
-
-
-                {/* Days */}
-
-                <View
-                    style={styles.daysMainView}>
-                    <Pressable
-                        style={selectedDate === 'btn1' ? styles.datePressedBtn : styles.dateBtn}
-                        onPress={() => setselectedDate('btn1')}>
-                        <Text style={selectedDate === 'btn1' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            ٱحد
-                        </Text>
-                        <Text style={selectedDate === 'btn1' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            13
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={selectedDate === 'btn2' ? styles.datePressedBtn : styles.dateBtn}
-                        onPress={() => setselectedDate('btn2')}>
-                        <Text style={selectedDate === 'btn2' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            سبت
-                        </Text>
-                        <Text style={selectedDate === 'btn2' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            12
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={selectedDate === 'btn3' ? styles.datePressedBtn : styles.dateBtn}
-                        onPress={() => setselectedDate('btn3')}>
-                        <Text style={selectedDate === 'btn3' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            جمعة
-                        </Text>
-                        <Text style={selectedDate === 'btn3' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            11
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={selectedDate === 'btn4' ? styles.datePressedBtn : styles.dateBtn}
-                        onPress={() => setselectedDate('btn4')}>
-                        <Text style={selectedDate === 'btn4' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            خميس
-                        </Text>
-                        <Text style={selectedDate === 'btn4' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            10
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={[selectedDate === 'btn5' ? styles.datePressedBtn : styles.dateBtn]}
-                        onPress={() => setselectedDate('btn5')}>
-                        <Text style={selectedDate === 'btn5' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            ٱربعاء
-                        </Text>
-                        <Text style={selectedDate === 'btn5' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            9
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={[selectedDate === 'btn6' ? styles.datePressedBtn : styles.dateBtn]}
-                        onPress={() => setselectedDate('btn6')}>
-                        <Text style={selectedDate === 'btn6' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            ثلاثاء
-                        </Text>
-                        <Text style={selectedDate === 'btn6' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            8
-                        </Text>
-                    </Pressable>
-                    <Pressable
-                        style={[selectedDate === 'btn7' ? styles.datePressedBtn : styles.dateBtn]}
-                        onPress={() => setselectedDate('btn7')}>
-                        <Text style={selectedDate === 'btn7' ? styles.datePressedBtnText : styles.dateBtnText}>
-                            اثنين
-                        </Text>
-                        <Text style={[selectedDate === 'btn7' ? styles.datePressedBtnText : styles.dateBtnText]}>
-                            7
-                        </Text>
-                    </Pressable>
-                </View>
-
-                <View style={[styles.contentTextView]}>
-                    <Text style={styles.contentText}> احجزموعدالجلسة</Text>
-                </View>
-
-                {/* Time */}
-
-                <View style={styles.timeMainView}>
-                    <FlatList
-                        data={bookTime}
-                        numColumns={4}
-                        renderItem={({ item, index }) => (
-                            
-                            <Pressable 
-                                onPress={() => selectTime(item.time,index)} 
-                                style={item.status==='booked'?styles.timeBookedBtnView:item.status==='available' && selectedTime===item.time?styles.timePressedBtnView:styles.timeBtnView }>
-                                <Text style={item.status==='available' && selectedTime===item.time?styles.timePressedBtnText: styles.timeBtnText}> {item.status==='available'?item.time:'محجوز'} </Text>
-                                {selectedTime === item.time && item.status=='available' &&
-                                <View style={styles.SelectedTimeCheck}>
-                                    <Material name='check-circle' size={hp(2.5)} color={COLORS.purple} />
-                                </View>
-                            }
-                            </Pressable>
-
-                            
-                            
-                        )}
-                        keyExtractor={(item) => item.id}
-                    />
-
-
-                </View>
-
-                <Pressable onPress={()=>bookAppointment()} style={{height:hp(6),width:'70%',backgroundColor:COLORS.purple,justifyContent:'center',alignItems:'center',alignSelf:'center',marginBottum:hp(2)}}>
-                    <Text style={{color:COLORS.white,fontFamily: 'Cairo-Regular',fontSize:Platform.OS==='android'?hp(1.9):hp(1.7)}}> التالي</Text>
-                </Pressable>
+                <FlatList
+                    data={teacherData}
+                    renderItem={({ item, index }) => (
+                        <Pressable onPress={() => navigation.navigate("BookingScreen")} style={styles.teacherInfoView}>
+                            <View style={styles.eduStagesCheckBtn}>
+                                <OnlineIcon name='screen-desktop' size={hp(3)} color={COLORS.purple} />
+                            </View>
+                            <View style={styles.teacherDetailView}>
+                                <Text style={styles.teacherDetailText}> {item.day} {item.date}  </Text>
+                                <Text style={[styles.teacherDetailText, { color: COLORS.purple }]}> {item.time}   </Text>
+                            </View>
+                        </Pressable>
+                    )}
+                    keyExtractor={(item) => item.id}
+                />
 
             </View>
 
@@ -536,18 +423,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         flexWrap: 'wrap',
-        width:'100%',
-        marginVertical:hp(.5)
-        
+        width: '100%',
+        marginVertical: hp(.5)
+
     },
     timeBtnView: {
-        backgroundColor:COLORS.white,
+        backgroundColor: COLORS.white,
         width: '22.5%',
         height: hp(7),
         borderRadius: 15,
         //marginTop: hp(1),
-        marginVertical:hp(1),
-        marginLeft:wp(2),
+        marginVertical: hp(1),
+        marginLeft: wp(2),
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 5,
@@ -560,12 +447,12 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
     },
     timePressedBtnView: {
-        backgroundColor:COLORS.purple,
+        backgroundColor: COLORS.purple,
         width: '22.5%',
         height: hp(7),
         borderRadius: 15,
-        marginVertical:hp(1),
-        marginLeft:wp(2),
+        marginVertical: hp(1),
+        marginLeft: wp(2),
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 5,
@@ -578,12 +465,12 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
     },
     timeBookedBtnView: {
-        backgroundColor:'#D0D0D0',
+        backgroundColor: '#D0D0D0',
         width: '22.5%',
         height: hp(7),
         borderRadius: 15,
-        marginVertical:hp(1),
-        marginLeft:wp(2),
+        marginVertical: hp(1),
+        marginLeft: wp(2),
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 5,
@@ -602,7 +489,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         position: 'absolute',
         top: hp(5.5),
-        left:wp(9)
+        left: wp(9)
     },
     timeBtnText: {
         color: COLORS.black,
