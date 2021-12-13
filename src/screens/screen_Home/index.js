@@ -19,6 +19,8 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
+import Axios from 'react-native-axios'
+import Url from '../../baseurl.json'
 
 import { COLORS } from '../../assets/Styles/color.js'
 
@@ -77,6 +79,7 @@ const index = ({ navigation, route }) => {
     const [selectedSubject, setselectedSubject] = useState('المادة')
     const [rating, setrating] = useState('0')
 
+    //const [teacherData , setteacherData] = useState([]);
 
 
     const [subjects, setsubjects] = useState([
@@ -142,9 +145,25 @@ const index = ({ navigation, route }) => {
     ]);
 
     useEffect(() => {
+        teacherList()
         getOrientation()
         Dimensions.addEventListener('change', getOrientation);
     }, []);
+
+
+    //Get Teacher Data
+
+    const teacherList = () => {
+        Axios.get(Url.baseUrl + "/teachers-list")
+            .then(function (response) {
+                setteacherData(response.data)
+               // console.log(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+            });
+    }
 
     //EducationType Handling 
     const checkEduType = (check) => {
@@ -366,12 +385,13 @@ const index = ({ navigation, route }) => {
                             data={teacherData}
                             horizontal={true}
                             renderItem={({ item, index }) => (
-                                <Pressable onPress={() => navigation.navigate("TeacherPersonalInfo")} style={styles.teacherInfoSubView}>
+                                item.status==='active'?
+                                <Pressable onPress={() => navigation.navigate("TeacherPersonalInfo",{data:item})} style={styles.teacherInfoSubView}>
                                     <View style={{ width: '100%', alignItems: 'center', marginVertical: hp(1) }}>
                                         <View style={{ height: hp(7), width: wp(14) }}>
                                             <Image style={{ height: '100%', width: '100%' }} source={teacherIcon} />
                                         </View>
-                                        <Text style={{ color: COLORS.black, textAlign: 'center', fontFamily: 'Cairo-Regular' }}>{item.name}</Text>
+                                        <Text style={{ color: COLORS.black, textAlign: 'center', fontFamily: 'Cairo-Regular' }}>{item.firstName} {item.lastName}</Text>
 
                                         <Pressable
                                             // onPress={()=>ratingStar(item.stars)}
@@ -395,6 +415,11 @@ const index = ({ navigation, route }) => {
                                         <Text style={{ color: COLORS.purple, textAlign: 'center', fontFamily: 'Cairo-Regular' }}>{item.status}</Text>
                                     </View>
                                 </Pressable>
+                                :
+                                <View>
+
+                                </View>
+                                
 
                             )}
                             keyExtractor={(item) => item.id}

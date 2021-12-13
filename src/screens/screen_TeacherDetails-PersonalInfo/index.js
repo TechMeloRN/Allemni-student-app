@@ -4,23 +4,29 @@ import {
     View,
     SafeAreaView,
     StatusBar,
-    ScrollView,
+    // ScrollView,
     ImageBackground,
     Image,
     Pressable,
     Text,
     Dimensions,
     Platform,
-    FlatList,
+    LogBox,
     Modal,
 } from 'react-native';
+
+import { FlatList } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import Axios from 'react-native-axios'
+import Url from '../../baseurl.json'
 
 import { COLORS } from '../../assets/Styles/color.js';
+
 
 import Material from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -52,13 +58,18 @@ const index = ({ navigation, route }) => {
     const [personalInfo, setpersonalInfo] = useState(COLORS.purple);
     const [selectedMenu, setselectedMenu] = useState('personalInfo');
 
+    //Design States
     const [qualification, setqualification] = useState(false);
     const [course, setcourse] = useState(false);
     const [yearOfExp, setyearOfExp] = useState(false);
     const [workHistory, setworkHistory] = useState(false);
     const [level, setlevel] = useState(false);
+
+    const [expertiseDetail, setexpertiseDetail] = useState('');
+    const [personalInfoDetail, setpersonalInfoDetail] = useState('');
     const [detail, setdetails] = useState('الأستاذ رشاد مدرس تاريخ وجغرافيا دو خبرة تزيد على العشرين عامافي المرحلتين الابتدائية والإعدادية في أكثر من مدرسة على مستوى المملكة والبحرين والكويت');
 
+    const { data } = route.params;
     const [teacherData, setteacherData] = useState([
         {
             id: 1,
@@ -98,10 +109,54 @@ const index = ({ navigation, route }) => {
 
     useEffect(() => {
         getOrientation();
-
+        personalInfoData();
+        TeacherExpertiseData();
         Dimensions.addEventListener('change', getOrientation);
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     }, []);
 
+    //Teacher PersonalInfoData
+    const personalInfoData = () => {
+
+        Axios.post(Url.baseUrl + "/get-step2-record", {
+            teacherId: data.teacherId
+        })
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                if (response.data !== 'teacher not found') {
+                    setpersonalInfoDetail(response.data)
+                }
+                else {
+                    console.log("Teacher no found!")
+                }
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+    }
+
+    //Teacher ExpertiseData 
+    const TeacherExpertiseData = () => {
+
+        Axios.post(Url.baseUrl + "/get-register-step3-record", {
+            teacherId: data.teacherId
+        })
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+
+                if (response.data.degree !== []) {
+                    setexpertiseDetail(response.data)
+                }
+                else {
+                    console.log("Teacher no found!")
+                }
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+    }
+
+    //alert("Teacher Data: " + JSON.stringify(expertiseDetail.degree))
     //Teacher Menu Handling
     const checkMenu = check => {
         if (check == 'personalInfo') {
@@ -196,11 +251,12 @@ const index = ({ navigation, route }) => {
                         <ImageBackground
                             source={blurRectangle}
                             style={styles.courseRateSubView}>
-                            <Text style={{ color: COLORS.white ,fontFamily: 'Cairo-Regular'}}> {'150' + ' ' + 'ر۔س'}</Text>
+                            <Text style={{ color: COLORS.white, fontFamily: 'Cairo-Regular' }}> {'150' + ' ' + 'ر۔س'}</Text>
                         </ImageBackground>
                     </View>
                     <View style={styles.teacherBasicInfo}>
-                        <Text style={styles.teacherNameText}> سعود ابراھیم حمندی </Text>
+                        {/* <Text style={styles.teacherNameText}> سعود ابراھیم حمندی </Text> */}
+                        <Text style={styles.teacherNameText}> {data.firstName} {data.lastName} </Text>
 
                         <Pressable
                             onPress={() => ratingStar(item.stars)}
@@ -327,7 +383,8 @@ const index = ({ navigation, route }) => {
                 </View>
 
                 {/* Content Detail */}
-                <ScrollView>
+                <ScrollView style={{ flex: 1 }}>
+
                     <View style={{ flex: 1, backgroundColor: COLORS.ashewhite }}>
                         {selectedMenu === 'expertise' && (
                             <>
@@ -356,7 +413,7 @@ const index = ({ navigation, route }) => {
                                 {qualification && (
                                     <View
                                         style={styles.expertiseDetailsView}>
-                                        <Text
+                                        {/* <Text
                                             style={{
                                                 height: hp(4),
                                                 marginTop: hp(1),
@@ -367,19 +424,24 @@ const index = ({ navigation, route }) => {
                                             }}>
                                             {' '}
                                             • بكالريوس تربية من كلية التربية بجامعة جدة {' '}
-                                        </Text>
-                                        <Text
+                                        </Text> */}
+                                        {expertiseDetail.degree.map((item, index) => (
+                                            <View key={index}>
+                                                <Text
                                             style={{
-                                                height: hp(4),
-                                                //marginTop: hp(1),
+                                                height: hp(3),
+                                                marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
                                                 textAlign:'right',
                                                 width:'95%'
                                             }}>
                                             {' '}
-                                            • ماجستير طرق التربية من كلية التربية بجامعة جدة {' '}
+                                             {item.title} • {' '}
                                         </Text>
+                                            </View>
+                                        ))}
+                                        
                                     </View>
                                 )}
 
@@ -397,7 +459,7 @@ const index = ({ navigation, route }) => {
                                             height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
                                             width: wp(7),
                                             marginRight: wp(2),
-                                            fontFamily: 'Cairo-Regular'
+
                                         }}
                                         source={courseFalseIcon}
                                     />
@@ -406,9 +468,23 @@ const index = ({ navigation, route }) => {
                                 {course && (
                                     <View
                                         style={styles.expertiseDetailsView}>
-                                        <Text
+                                        {/* <Text
                                             style={{
                                                 height: hp(4),
+                                                marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign: 'right',
+                                                width: '95%'
+                                            }}>
+                                            {' '}
+                                            • دورة في سبل تحسين طرق التواصل مع الطلاب بجامعة جدة {' '}
+                                        </Text> */}
+                                        {expertiseDetail.teacherCourse.map((item, index) => (
+                                            <View key={index}>
+                                                <Text
+                                            style={{
+                                                height: hp(3),
                                                 marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
@@ -416,9 +492,10 @@ const index = ({ navigation, route }) => {
                                                 width:'95%'
                                             }}>
                                             {' '}
-                                            • دورة في سبل تحسين طرق التواصل مع الطلاب بجامعة جدة {' '}
+                                             {item.title} • {' '}
                                         </Text>
-                                       
+                                            </View>
+                                        ))}
                                     </View>
                                 )}
 
@@ -436,7 +513,7 @@ const index = ({ navigation, route }) => {
                                             height: Platform.OS === 'ios' ? hp(3) : hp(3.5),
                                             width: wp(5),
                                             marginRight: wp(2),
-                                            fontFamily: 'Cairo-Regular'
+
                                         }}
                                         source={yearOfExpIcon}
                                     />
@@ -451,11 +528,12 @@ const index = ({ navigation, route }) => {
                                                 marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
-                                                textAlign:'right',
-                                                width:'95%'
+                                                textAlign: 'right',
+                                                width: '95%',
+                                                fontSize: Platform.OS === 'ios' ? hp(1.7) : hp(1.9)
                                             }}>
                                             {' '}
-                                           22 •{' '}
+                                            {personalInfoDetail.yearOfExp}•{' '}
                                         </Text>
                                     </View>
                                 )}
@@ -483,40 +561,56 @@ const index = ({ navigation, route }) => {
                                 {workHistory && (
                                     <View
                                         style={styles.expertiseDetailsView}>
-                                        <Text
+                                        {/* <Text
                                             style={{
                                                 height: hp(4),
                                                 marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
-                                                textAlign:'right',
-                                                width:'95%',
-                                               
+                                                textAlign: 'right',
+                                                width: '95%',
+
                                             }}>
                                             {' '}
                                             • مدرس تاريخ وجغرافيا{' '}
-                                        </Text>
-                                        <Text
+                                        </Text> */}
+                                        {expertiseDetail.history.map((item, index) => (
+                                            <View key={index}>
+                                                <Text
                                             style={{
-                                                height: hp(4),
-                                               // marginTop: hp(1),
+                                                height: hp(3),
+                                                marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
                                                 textAlign:'right',
                                                 width:'95%'
+                                            }}>
+                                            {' '}
+                                             {item.history} • {' '}
+                                        </Text>
+                                            </View>
+                                        ))}
+                                        {/* <Text
+                                            style={{
+                                                height: hp(4),
+                                                // marginTop: hp(1),
+                                                color: COLORS.black,
+                                                fontFamily: 'Cairo-Regular',
+                                                textAlign: 'right',
+                                                width: '95%'
                                             }}>
                                             {' '}
                                             مدرسة الملك عبد العزيز الابتدائية بجدة{' '}
                                         </Text>
-                                        
+
                                         <Text
                                             style={{
                                                 height: hp(4),
-                                               // marginTop: hp(1),
+                                                // marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
-                                                textAlign:'right',
-                                                width:'95%'
+                                                textAlign: 'right',
+                                                width: '95%'
                                             }}>
                                             {' '}
                                             1425-1435{' '}
@@ -525,16 +619,16 @@ const index = ({ navigation, route }) => {
                                         <Text
                                             style={{
                                                 height: hp(4),
-                                              //  marginTop: hp(1),
+                                                //  marginTop: hp(1),
                                                 color: COLORS.black,
                                                 fontFamily: 'Cairo-Regular',
-                                                textAlign:'right',
-                                                width:'95%'
+                                                textAlign: 'right',
+                                                width: '95%'
                                             }}>
                                             {' '}
                                             • مدرس تاريخ وجغرافيا{' '}
-                                        </Text>
-                                        
+                                        </Text> */}
+
                                     </View>
                                 )}
                             </>
@@ -544,7 +638,7 @@ const index = ({ navigation, route }) => {
                         {selectedMenu === 'personalInfo' && (
                             <>
                                 <View style={styles.personalInfoView}>
-                                    <Text style={[styles.personalInfoText, { marginVertical: hp(2) }]}>{detail}</Text>
+                                    <Text style={[styles.personalInfoText, { marginVertical: hp(2) }]}>{personalInfoDetail.summery}</Text>
                                 </View>
                                 <Pressable
                                     onPress={() => setlevel(!level)}
@@ -578,13 +672,11 @@ const index = ({ navigation, route }) => {
                         {/* Rating */}
                         {selectedMenu === 'rating' && (
                             <>
-                                <FlatList
-                                    data={teacherData}
-                                    renderItem={({ item, index }) => (
-                                        <View style={styles.teacherInfoView}>
+                            {teacherData.map((item, index) => (
+                                <View key={index} style={styles.teacherInfoView}>
                                             <View style={styles.teacherInfoSubView}>
                                                 <View style={styles.courseRateView}>
-                                                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular'  }}> {item.time} </Text>
+                                                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}> {item.time} </Text>
                                                 </View>
                                                 <View style={[styles.teacherBasicInfo, { width: '70%' }]}>
                                                     <Text
@@ -646,10 +738,8 @@ const index = ({ navigation, route }) => {
                                                 </View>
                                             </View>
                                         </View>
-                                    )}
-                                    keyExtractor={item => item.id}
-                                //   extraData={selectedId}
-                                />
+                                        ))}
+                              
                             </>
                         )}
                     </View>
@@ -662,10 +752,10 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('MenuScreen')}
                     style={[styles.bottomTabButton, { borderTopLeftRadius: hp(3) }]}>
                     <Image
-                        style={[styles.bottomIcon, { height: hp(1),marginTop:hp(2) }]}
+                        style={[styles.bottomIcon, { height: hp(1), marginTop: hp(2) }]}
                         source={moreFalseIcon}
                     />
-                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular' }}> المزید</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular' }}> المزید</Text>
                 </Pressable>
 
                 <Pressable
@@ -675,7 +765,7 @@ const index = ({ navigation, route }) => {
                         style={[styles.bottomIcon, { height: hp(3) }]}
                         source={messagesFalseIcon}
                     />
-                    <Text style={{ color: COLORS.black,fontFamily: 'Cairo-Regular', }}> الرسائل</Text>
+                    <Text style={{ color: COLORS.black, fontFamily: 'Cairo-Regular', }}> الرسائل</Text>
                 </Pressable>
 
                 <Pressable
@@ -707,7 +797,7 @@ const index = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('HomeScreen')}
                     style={[styles.bottomTabButton, { borderTopRightRadius: hp(3) }]}>
                     <Image style={[styles.bottomIcon]} source={homeTrueIcon} />
-                    <Text style={{ color: COLORS.purple ,fontFamily: 'Cairo-Regular',}}>الرئیسیة </Text>
+                    <Text style={{ color: COLORS.purple, fontFamily: 'Cairo-Regular', }}>الرئیسیة </Text>
                 </Pressable>
             </View>
         </SafeAreaView>
@@ -914,8 +1004,8 @@ const styles = StyleSheet.create({
         shadowRadius: 1.62,
         marginTop: hp(0.1),
         justifyContent: 'center',
-        borderBottomWidth:1,
-        borderBottomColor:'#eee'
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee'
     },
     personalInfoView: {
 
