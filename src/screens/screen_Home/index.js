@@ -78,9 +78,11 @@ const index = ({ navigation, route }) => {
     const [subjectOptionModal, setsubjectOptionModal] = useState(false)
     const [selectedSubject, setselectedSubject] = useState('المادة')
     const [rating, setrating] = useState('0')
+    
 
-    //const [teacherData , setteacherData] = useState([]);
-
+    const [uniSubjectsList , setuniSubjectsList] = useState([]);
+    const [generalSubjectsList , setgeneralSubjectsList] = useState([]);
+    const [coursesSubjectsList , setcoursesSubjectsList] = useState([]);
 
     const [subjects, setsubjects] = useState([
         {
@@ -147,6 +149,10 @@ const index = ({ navigation, route }) => {
     useEffect(() => {
         teacherList()
         getOrientation()
+        universitySubjects()
+        generalSubjects()
+        coursesSubjects()
+
         Dimensions.addEventListener('change', getOrientation);
     }, []);
 
@@ -157,6 +163,42 @@ const index = ({ navigation, route }) => {
         Axios.get(Url.baseUrl + "/teachers-list")
             .then(function (response) {
                 setteacherData(response.data)
+               // console.log(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+            });
+    }
+
+    //Get Subjects 
+    const universitySubjects = () => {
+        Axios.get(Url.baseUrl + "/all-university-courses")
+            .then(function (response) {
+                setuniSubjectsList(response.data)
+               // console.log(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+            });
+    }
+    const generalSubjects = () => {
+        Axios.get(Url.baseUrl + "/all-general-courses")
+            .then(function (response) {
+                setgeneralSubjectsList(response.data)
+               // console.log(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+            });
+    }
+
+    const coursesSubjects = () => {
+        Axios.get(Url.baseUrl + "/all-category-courses")
+            .then(function (response) {
+                setcoursesSubjectsList(response.data)
                // console.log(JSON.stringify(response));
             })
             .catch(function (error) {
@@ -237,7 +279,7 @@ const index = ({ navigation, route }) => {
                         </Pressable>
                         <View style={{ height: Platform.OS === 'android' ? '75%' : '75%', width: '100%' }}>
                             <FlatList
-                                data={subjects}
+                                data={eduStage=='general'?generalSubjectsList:eduStage=='university'?uniSubjectsList :coursesSubjectsList}
                                 renderItem={({ item, index }) => (
                                     <Pressable
                                         onPress={() => {
@@ -245,7 +287,7 @@ const index = ({ navigation, route }) => {
                                             setsubjectOptionModal(false)
                                         }}
                                         style={styles.subjectsListBtn}>
-                                        <Text style={styles.subjectsListText}>{item.Title}</Text>
+                                        <Text style={styles.subjectsListText}>{eduStage=='general'?item.title: item.courseTitle}</Text>
                                     </Pressable>
                                 )}
                                 keyExtractor={(item) => item.id}

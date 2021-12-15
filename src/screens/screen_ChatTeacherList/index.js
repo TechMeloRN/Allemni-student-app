@@ -220,7 +220,8 @@ const styles = StyleSheet.create({
     },
     mainContent: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop:hp(7)
 
     },
     portraitHeaderView: {

@@ -144,7 +144,7 @@ const index = ({ navigation, route }) => {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
 
-                if (response.data.degree !== []) {
+                if (response.data.degree !=='teacher not found') {
                     setexpertiseDetail(response.data)
                 }
                 else {
